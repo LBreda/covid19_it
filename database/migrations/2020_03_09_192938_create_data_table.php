@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateDataTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('data', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('region_id');
+            $table->dateTime('date');
+            $table->integer('hospitalized_home');
+            $table->integer('hospitalized_light');
+            $table->integer('hospitalized_severe');
+            $table->integer('healed');
+            $table->integer('dead');
+            $table->integer('tested');
+            $table->timestamps();
+        });
+
+        Schema::table('data', function (Blueprint $table) {
+            $table->foreign('region_id')->references('id')->on('regions');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('data', function (Blueprint $table) {
+            $table->dropForeign('data_region_id_foreign');
+        });
+        Schema::dropIfExists('data');
+    }
+}
