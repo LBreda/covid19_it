@@ -64,7 +64,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12"><p>Nota: è presto perché la letalità sia un dato sensato: prendetelo con le pinze (e lavatevi le mani poi).</p></div>
+        <div class="col-md-12"><p>Nota: è presto perché la letalità sia un dato sensato: prendetelo con le pinze (e
+                lavatevi le mani poi).</p></div>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -74,7 +75,7 @@
                 </div>
 
                 <div class="card-body">
-                    <canvas id="ill_healed_dead" width="400" height="100"></canvas>
+                    <canvas id="ill_healed_dead" width="400" height='100'></canvas>
                 </div>
             </div>
         </div>
@@ -95,8 +96,10 @@
     <footer class="row mt-4">
         <div class="col-md-12 text-center" style="font-size: 80%">
             <p>Fonte dati: <a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>.</p>
-            <p>Creato da <a href="https://lbreda.com/">Lorenzo Breda</a> e sostenuto da <a href="https://twobeesolution.com">TwoBeeSolution S.r.l.</a></p>
-            <p>Questo sito è Open Source e <a href="https://github.com/LBreda/covid19_it">disponibile su GitHub</a> - Puoi
+            <p>Creato da <a href="https://lbreda.com/">Lorenzo Breda</a> e sostenuto da <a
+                    href="https://twobeesolution.com">TwoBeeSolution S.r.l.</a></p>
+            <p>Questo sito è Open Source e <a href="https://github.com/LBreda/covid19_it">disponibile su GitHub</a> -
+                Puoi
                 <a href="https://github.com/LBreda/covid19_it/issues">segnalare bug qui</a>.</p>
         </div>
     </footer>
@@ -104,6 +107,11 @@
 
 @section('js')
     <script>
+        let graphOnResize = (chart, size) => {
+            let showLegend = size.width > 800;
+            chart.options.legend.display = showLegend;
+        };
+
         let ill_healed_dead = document.getElementById('ill_healed_dead');
         new Chart(ill_healed_dead, {
             type: 'bar',
@@ -147,17 +155,20 @@
                 ]
             },
             options: {
+                onResize: graphOnResize,
                 scales: {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
                         }
                     }]
+                },
+                legend: {
+                    display: (ill_healed_dead.parentElement.clientWidth > 800)
                 }
             }
         });
-    </script>
-    <script>
+
         let ill_by_severity = document.getElementById('ill_by_severity');
         new Chart(ill_by_severity, {
             type: 'bar',
@@ -188,6 +199,7 @@
                 ]
             },
             options: {
+                onResize: graphOnResize,
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -198,8 +210,12 @@
                     xAxes: [{
                         stacked: true
                     }]
+                },
+                legend: {
+                    display: (ill_by_severity.parentElement.clientWidth > 800)
                 }
             }
         });
     </script>
 @stop
+
