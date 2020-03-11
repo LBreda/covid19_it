@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-plus"></i></span>
+                <span class="info-box-icon bg-red"><i class="fas fa-procedures"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Malati</span>
                     <span class="info-box-number">{{ $total_ill }}</span>
@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-2">
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-smile"></i></span>
+                <span class="info-box-icon bg-green"><i class="fas fa-smile"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Guariti</span>
                     <span class="info-box-number">{{ $total_healed }}</span>
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-2">
             <div class="info-box">
-                <span class="info-box-icon bg-black"><i class="fa fa-plus-square"></i></span>
+                <span class="info-box-icon bg-black"><i class="fas fa-plus-square"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Deceduti</span>
                     <span class="info-box-number">{{ $total_dead }}</span>
@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-2">
             <div class="info-box">
-                <span class="info-box-icon bg-purple"><i class="fa fa-ambulance"></i></span>
+                <span class="info-box-icon bg-purple"><i class="fas fa-ambulance"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Infettati</span>
                     <span class="info-box-number">{{ $total_infected }}</span>
@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-2">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fa fa-user-md"></i></span>
+                <span class="info-box-icon bg-yellow"><i class="fas fa-user-md"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Tamponi</span>
                     <span class="info-box-number">{{ $total_tested }}</span>
@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-2">
             <div class="info-box">
-                <span class="info-box-icon bg-blue"><i class="fa fa-bolt"></i></span>
+                <span class="info-box-icon bg-blue"><i class="fas fa-skull-crossbones"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Letalità</span>
                     <span class="info-box-number">{{ round($letality, 2) }}%</span>
