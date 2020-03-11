@@ -7,6 +7,7 @@ use App\Models\Region;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class UpdateData extends Command
 {
@@ -53,7 +54,13 @@ class UpdateData extends Command
         DB::table('data')->truncate();
 
         foreach ($data as $datum) {
+            $aliases = [
+                'Friuli V. G.' => 'Friuli Venezia Giulia',
+            ];
+            $datum['denominazione_regione'] = trim(str_replace(array_keys($aliases), array_values($aliases), $datum['denominazione_regione']));
+
             $region = Region::where('name', '=', ($datum['denominazione_regione'] == 'Friuli V. G.' ? 'Friuli Venezia Giulia' : $datum['denominazione_regione']))->first();
+
             (new Datum([
                 'region_id'           => $region->id,
                 'date'                => $datum['data'],
