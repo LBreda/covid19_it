@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'COVID-19 IT | ' . $region ? $region->name : 'Dati Nazionali')
+@section('title', 'COVID-19 IT | ' . ($region ? $region->name : 'Dati Nazionali'))
 
 @section('content_header')
     <h1>{{ $region ? $region->name : 'Dati Nazionali' }}</h1>
