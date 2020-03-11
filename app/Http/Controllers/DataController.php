@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Datum;
+use App\Models\Notice;
 use App\Models\Region;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -14,8 +15,10 @@ class DataController extends Controller
     {
         $data = Datum::query();
 
+        $notices = Notice::all();
         if($region) {
             $data->where('region_id', '=', $region->id);
+            $notices = $region->notices;
         }
 
         $data = $data->get()->groupBy('date')->mapWithKeys(function (Collection $group) {
@@ -51,6 +54,6 @@ class DataController extends Controller
         $total_tested = $tested->last();
         $letality = 100 * $total_dead / $total_infected;
 
-        return view('dash', compact('region', 'labels', 'ill', 'healed', 'dead', 'new_cases', 'hospitalized_home', 'hospitalized_light', 'hospitalized_severe', 'total_ill', 'total_healed', 'total_dead', 'total_infected', 'total_tested', 'letality'));
+        return view('dash', compact('region', 'notices', 'labels', 'ill', 'healed', 'dead', 'new_cases', 'hospitalized_home', 'hospitalized_light', 'hospitalized_severe', 'total_ill', 'total_healed', 'total_dead', 'total_infected', 'total_tested', 'letality'));
     }
 }

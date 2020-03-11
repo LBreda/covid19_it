@@ -8,4 +8,8 @@ class Region extends Model
 {
     protected $table = "regions";
     protected $guarded = ['id'];
+
+    public function notices() {
+        return $this->hasMany(Notice::class);
+    }
 }
