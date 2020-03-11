@@ -71,6 +71,15 @@
             </div>
         </div>
     </div>
+    @if($region)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info text-center" role="alert">
+                    Il numero di emergenza per questa regione è: {{ $region->phone }}
+                </div>
+            </div>
+        </div>
+    @endif
     @if($notices->count())
         <div class="row">
             <div class="col-md-12">
