@@ -64,6 +64,9 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12"><p>Nota: è presto perché la letalità sia un dato sensato: prendetelo con le pinze (e lavatevi le mani poi).</p></div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -132,7 +135,7 @@
                         type: 'line'
                     },
                     {
-                        label: 'Nuovi casi',
+                        label: 'Nuovi casi (nuovi positivi meno nuovi dimessi)',
                         data: {!! $new_cases->toJson() !!},
                         backgroundColor: 'rgb(255,182,194)',
                         borderColor: 'rgb(255,182,194)',
