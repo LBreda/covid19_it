@@ -53,7 +53,7 @@ class UpdateData extends Command
         DB::table('data')->truncate();
 
         foreach ($data as $datum) {
-            $region = Region::where('name', '=', $datum['denominazione_regione'])->first();
+            $region = Region::where('name', '=', ($datum['denominazione_regione'] == 'Friuli V. G.' ? 'Friuli Venezia Giulia' : $datum['denominazione_regione']))->first();
             (new Datum([
                 'region_id'           => $region->id,
                 'date'                => $datum['data'],
