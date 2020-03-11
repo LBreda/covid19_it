@@ -64,8 +64,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12"><p>Nota: è presto perché la letalità sia un dato sensato: prendetelo con le pinze (e
-                lavatevi le mani poi).</p></div>
+        <div class="col-md-12">
+            <div class="alert alert-info text-center" role="alert">
+                Nota: è presto perché la letalità sia un dato sensato: prendetelo con le pinze (e
+                lavatevi le mani poi).
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -116,7 +120,7 @@
         };
 
         let switchScale = (chart) => {
-            let type = chart.options.scales.yAxes[0].type === 'linear' ? 'logarithmic' : 'linear' ;
+            let type = chart.options.scales.yAxes[0].type === 'linear' ? 'logarithmic' : 'linear';
             chart.options.scales.yAxes[0] = {
                 type: type
             };
