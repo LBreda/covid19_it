@@ -72,6 +72,9 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Malati, guariti, deceduti</h3>
+                    <div class="card-tools">
+                        <button class="btn btn-xs btn-default scale-button" type="button">Cambia scala</button>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -123,7 +126,8 @@
             s.parentNode.insertBefore(g, s);
         })();
     </script>
-    <noscript><p><img src={{ env('MATOMO_URL') }}/matomo.php?idsite={{ env('MATOMO_SITE_ID') }}&amp;rec=1" style="border:0;" alt=""/></p>
+    <noscript><p><img src={{ env('MATOMO_URL') }}/matomo.php?idsite={{ env('MATOMO_SITE_ID') }}&amp;rec=1"
+                      style="border:0;" alt=""/></p>
     </noscript>
     <!-- End Matomo Code -->
 @stop
@@ -135,8 +139,16 @@
             chart.options.legend.display = showLegend;
         };
 
+        let switchScale = (chart) => {
+            let type = chart.options.scales.yAxes[0].type === 'linear' ? 'logarithmic' : 'linear' ;
+            chart.options.scales.yAxes[0] = {
+                type: type
+            };
+            chart.update();
+        };
+
         let ill_healed_dead = document.getElementById('ill_healed_dead');
-        new Chart(ill_healed_dead, {
+        let ill_healed_dead_chart = new Chart(ill_healed_dead, {
             type: 'bar',
             data: {
                 labels: {!! $labels->toJson() !!},
@@ -190,6 +202,9 @@
                     display: (ill_healed_dead.parentElement.clientWidth > 800)
                 }
             }
+        });
+        ill_healed_dead.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
+            switchScale(ill_healed_dead_chart);
         });
 
         let ill_by_severity = document.getElementById('ill_by_severity');
