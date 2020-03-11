@@ -92,9 +92,12 @@
             </div>
         </div>
     </div>
-    <footer class="row">
-        <div class="col-md-12 text-center">
-            Fonte dati: <a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>
+    <footer class="row mt-4">
+        <div class="col-md-12 text-center" style="font-size: 80%">
+            <p>Fonte dati: <a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>.</p>
+            <p>Creato da <a href="https://lbreda.com/">Lorenzo Breda</a> e sostenuto da <a href="https://twobeesolution.com">TwoBeeSolution S.r.l.</a></p>
+            <p>Questo sito è Open Source e <a href="https://github.com/LBreda/covid19_it">disponibile su GitHub</a> - Puoi
+                <a href="https://github.com/LBreda/covid19_it/issues">segnalare bug qui</a>.</p>
         </div>
     </footer>
 @stop
