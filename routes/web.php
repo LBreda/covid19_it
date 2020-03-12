@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'DataController@dashboard');
-Route::get('/region/{region}', 'DataController@dashboard');
+Route::get('/', 'DataController@dashboard')->name('data.total');
+Route::get('/region/{region}', 'DataController@dashboard')->name('data.region');
