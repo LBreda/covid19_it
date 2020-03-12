@@ -20,7 +20,9 @@ class Controller extends BaseController
             if ($req->input('hl')) {
                 session(['lang' => $req->input('hl')]);
             }
-            App::setLocale(session('lang') ?? config('app.locale'));
+
+            session(['lang' => (session('lang') ?? config('app.locale'))]);
+            App::setLocale(session('lang'));
 
             return $next($req);
         });
