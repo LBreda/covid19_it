@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/', 'DataController@data')->name('api:total');
+Route::get('/region/{region}', 'DataController@data')->name('api:region');

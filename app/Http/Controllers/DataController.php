@@ -20,6 +20,16 @@ class DataController extends Controller
             $data->where('region_id', '=', $region->id);
             $notices = $region->notices;
         }
+        return view('dash', compact('region', 'notices'));
+    }
+
+    public function data(Region $region = null)
+    {
+        $data = Datum::query();
+
+        if($region) {
+            $data->where('region_id', '=', $region->id);
+        }
 
         $data = $data->get()->groupBy('date')->mapWithKeys(function (Collection $group) {
             $dataset = collect([
@@ -35,25 +45,6 @@ class DataController extends Controller
             ];
         });
 
-        $labels = $data->keys()->map(fn($date) => Carbon::parse($date)->format('d/m/Y'));
-        $ill = $data->values()->map(fn(Collection $data) => ($data->get('hospitalized_home') + $data->get('hospitalized_light') + $data->get('hospitalized_severe')));
-        $new_cases = $ill->map(function ($item, $key) use ($ill) {
-            return $key === 0 ? $item : $item - $ill[$key - 1];
-        });
-        $hospitalized_home = $data->values()->map(fn(Collection $data) => $data->get('hospitalized_home'));
-        $hospitalized_light = $data->values()->map(fn(Collection $data) => $data->get('hospitalized_light'));
-        $hospitalized_severe = $data->values()->map(fn(Collection $data) => $data->get('hospitalized_severe'));
-        $healed = $data->values()->map(fn(Collection $data) => $data->get('healed'));
-        $dead = $data->values()->map(fn(Collection $data) => $data->get('dead'));
-        $tested = $data->values()->map(fn(Collection $data) => $data->get('tested'));
-
-        $total_ill = $ill->last();
-        $total_healed = $healed->last();
-        $total_dead = $dead->last();
-        $total_infected = $total_ill + $total_healed + $total_dead;
-        $total_tested = $tested->last();
-        $letality = 100 * $total_dead / $total_infected;
-
-        return view('dash', compact('region', 'notices', 'labels', 'ill', 'healed', 'dead', 'new_cases', 'hospitalized_home', 'hospitalized_light', 'hospitalized_severe', 'total_ill', 'total_healed', 'total_dead', 'total_infected', 'total_tested', 'letality'));
+        return response()->json($data);
     }
 }
