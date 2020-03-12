@@ -100,8 +100,8 @@
             <div class="col-md-12">
                 <div class="alert alert-warning text-center" role="alert">
                     @foreach($notices as $notice)
-                        <p class="m-0"><strong>{{ $notice->date->format('d/m/Y') }}
-                                :</strong> {{ __("dash.notices.{$notice->notice}", ['region' => $notice->region->name]) }}
+                        <p class="m-0"><strong>{{ $notice->date->format('d/m/Y') }}</strong>
+                            - {{ __("dash.notices.{$notice->notice}", ['region' => $notice->region->name]) }}
                         </p>
                     @endforeach
                 </div>
