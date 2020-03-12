@@ -120,6 +120,22 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Andamento malati per tipo di ricovero</h3>
+                    <div class="card-tools">
+                        <button class="btn btn-xs btn-default scale-button" type="button">Cambia scala</button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <canvas id="ill_by_severity_lines" width="400" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="row mt-4">
         <div class="col-md-12 text-center" style="font-size: 80%">
             <p>Fonte dati: <a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>.</p>
@@ -253,6 +269,54 @@
                     display: (ill_by_severity.parentElement.clientWidth > 800)
                 }
             }
+        });
+
+        let ill_by_severity_lines = document.getElementById('ill_by_severity_lines');
+        let ill_by_severity_lines_chart = new Chart(ill_by_severity_lines, {
+            type: 'line',
+            data: {
+                labels: {!! $labels->toJson() !!},
+                datasets: [
+                    {
+                        label: 'Isolamento domestico',
+                        data: {!! $hospitalized_home->toJson() !!},
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor: 'green',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Ospedale - Non T. intensiva',
+                        data: {!! $hospitalized_light->toJson() !!},
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor: 'orange',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Terapia intensiva',
+                        data: {!! $hospitalized_severe->toJson() !!},
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor: 'red',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                onResize: graphOnResize,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                    }],
+                    xAxes: [{}]
+                },
+                legend: {
+                    display: (ill_by_severity_lines.parentElement.clientWidth > 800)
+                }
+            }
+        });
+        ill_by_severity_lines.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
+            switchScale(ill_by_severity_lines_chart);
         });
     </script>
 
