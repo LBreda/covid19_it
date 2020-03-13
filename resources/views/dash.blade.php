@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'COVID-19 IT | ' . ($region ? $region->name : __('dash.national_data')))
+@section('title', config('app.name') . ' | ' . ($region ? $region->name : __('dash.national_data')))
 
 @section('content_header')
     <div class="row">
@@ -435,13 +435,13 @@
 @stop
 
 @section('css')
-    <meta property="og:title" content="COVID-19 IT">
+    <meta property="og:title" content="{{ config('app.name') }}">
     <meta property="og:description" content="Dati italiani sulla COVID-19 - Italian data about COVID-19">
     <meta property="og:image" content="{{ asset('imgs/social.png') }}">
     <meta property="og:url" content="{{ route('data.total') }}">
     <meta property="og:type" content="website">
-    
-    <meta property="twitter:title" content="COVID-19 IT">
+
+    <meta property="twitter:title" content="{{ config('app.name') }}">
     <meta property="twitter:description" content="Dati italiani sulla COVID-19 - Italian data about COVID-19">
     <meta property="twitter:image" content="{{ asset('imgs/social.png') }}">
     <meta property="twitter:url" content="{{ route('data.total') }}">
