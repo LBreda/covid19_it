@@ -3,6 +3,7 @@
 return [
     'national_data'         => 'National data',
     'regions'               => 'Regions',
+    'date'                  => 'Date',
     'ill'                   => 'Ill',
     'healed'                => 'Healed',
     'dead'                  => 'Dead',
@@ -20,6 +21,7 @@ return [
     'change_scale'          => 'Change scale',
     'ill_by_severity'       => 'Ill people grouped by hospitalization',
     'ill_by_severity_lines' => 'Ill people grouped by hospitalization - trend',
+    'data'                  => 'Data',
     'data_source'           => 'Data source: :source.',
     'created_backed'        => 'Created by :created  and backed by :backed.',
     'git_repos'             => 'This is a Open Source website and <a href=":url">it is available on GitHub</a>. You can <a href=":url/issues">report issues here</a>.',

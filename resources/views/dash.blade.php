@@ -187,6 +187,40 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.data') }}</h3>
+                    <div class="card-tools">
+                        <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'csv']) }}"
+                           class="btn btn-primary btn-xs">CSV</a>
+                        <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'json']) }}"
+                           class="btn btn-primary btn-xs">JSON</a>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th>{{ __('dash.date') }}</th>
+                            <th>{{ __('dash.hospitalized_home') }}</th>
+                            <th>{{ __('dash.hospitalized_light') }}</th>
+                            <th>{{ __('dash.hospitalized_severe') }}</th>
+                            <th>{{ __('dash.healed') }}</th>
+                            <th>{{ __('dash.dead') }}</th>
+                            <th>{{ __('dash.tested') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="data-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="row mt-4">
         <div class="col-md-12 text-center" style="font-size: 80%">
             <p>{!! __('dash.data_source', ['source' => '<a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>']) !!}</p>
@@ -282,20 +316,54 @@
             document.getElementById('total-tested').textContent = total_tested.toString();
             document.getElementById('diff-tested').textContent = numberWithSign(total_tested - tested.slice(-2)[0]);
 
+            document.getElementById('lethality').textContent = (Math.round(10000 * total_dead / total_infected) / 100).toString() + '%';
+
             let total_hospitalized_light = hospitalized_light.slice(-1)[0];
             let diff_hospitalized_light = total_hospitalized_light - hospitalized_light.slice(-2)[0];
             document.getElementById('total-hospitalized-light').textContent = total_hospitalized_light.toString();
-            document.getElementById('diff-hospitalized-light').textContent = numberWithSign(diff_hospitalized_light);
 
+            document.getElementById('diff-hospitalized-light').textContent = numberWithSign(diff_hospitalized_light);
             let total_hospitalized_severe = hospitalized_severe.slice(-1)[0];
             let diff_hospitalized_severe = total_hospitalized_severe - hospitalized_severe.slice(-2)[0];
             document.getElementById('total-hospitalized-severe').textContent = total_hospitalized_severe.toString();
-            document.getElementById('diff-hospitalized-severe').textContent = numberWithSign(diff_hospitalized_severe);
 
+            document.getElementById('diff-hospitalized-severe').textContent = numberWithSign(diff_hospitalized_severe);
             document.getElementById('total-hospitalized').textContent = total_hospitalized_light + total_hospitalized_severe;
+
             document.getElementById('diff-hospitalized').textContent = diff_hospitalized_light + diff_hospitalized_severe;
 
-            document.getElementById('lethality').textContent = (Math.round(10000 * total_dead / total_infected) / 100).toString() + '%';
+            for (let k in data) {
+                if (!data.hasOwnProperty(k)) continue;
+                let datum = data[k];
+
+                let tr = document.createElement('tr');
+
+                let td_date = document.createElement('td');
+                td_date.innerText = k.split(' ')[0];
+                let td_hospitalized_home = document.createElement('td');
+                td_hospitalized_home.innerText = datum.hospitalized_home;
+                let td_hospitalized_light = document.createElement('td');
+                td_hospitalized_light.innerText = datum.hospitalized_light;
+                let td_hospitalized_severe = document.createElement('td');
+                td_hospitalized_severe.innerText = datum.hospitalized_severe;
+                let td_healed = document.createElement('td');
+                td_healed.innerText = datum.healed;
+                let td_dead = document.createElement('td');
+                td_dead.innerText = datum.dead;
+                let td_tested = document.createElement('td');
+                td_tested.innerText = datum.tested;
+
+                tr.appendChild(td_date);
+                tr.appendChild(td_hospitalized_home);
+                tr.appendChild(td_hospitalized_light);
+                tr.appendChild(td_hospitalized_severe);
+                tr.appendChild(td_healed);
+                tr.appendChild(td_dead);
+                tr.appendChild(td_tested);
+
+                document.getElementById('data-table').appendChild(tr);
+            }
+
             // Charts
             let ill_healed_dead_chart = new Chart(ill_healed_dead, {
                 type: 'bar',

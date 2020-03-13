@@ -6,15 +6,16 @@ use App\Models\Datum;
 use App\Models\Notice;
 use App\Models\Region;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use function foo\func;
 
 class DataController extends Controller
 {
-    private function getDataObject (Region $region = null) {
+    private function getDataObject(Region $region = null)
+    {
         $data = Datum::query();
 
-        if($region) {
+        if ($region) {
             $data->where('region_id', '=', $region->id);
         }
 
@@ -40,7 +41,7 @@ class DataController extends Controller
         $data = Datum::query();
 
         $notices = Notice::all();
-        if($region) {
+        if ($region) {
             $data->where('region_id', '=', $region->id);
             $notices = $region->notices;
         }
@@ -52,5 +53,28 @@ class DataController extends Controller
         $data = $this->getDataObject($region);
 
         return response()->json($data);
+    }
+
+    public function downloadData(Request $request, Region $region = null)
+    {
+        $format = $request->input('format');
+        $data = $this->getDataObject($region);
+
+        $filename = $region ? $region->name : __('dash.national_data');
+
+        if ($format === 'csv') {
+            $callback = function () use ($data) {
+                $fp = fopen('php://output', 'w');
+
+                fputcsv($fp, ['date', ...$data->first()->keys()->toArray()]);
+                $data->each(function (Collection $datum, $date) use ($fp) {
+                    fputcsv($fp, [Carbon::parse($date)->format('Y-m-d'), ...$datum->values()->toArray()]);
+                });
+                fclose($fp);
+            };
+            return response()->stream($callback, 200, ["Content-type" => "text/csv", "Content-Disposition" => "attachment; filename=\"{$filename}.csv\"",]);
+        } else {
+            return response($this->getDataObject($region)->toJson(), 200, ["Content-type" => "application/json", "Content-Disposition" => "attachment; filename=\"{$filename}.json\"",]);
+        }
     }
 }

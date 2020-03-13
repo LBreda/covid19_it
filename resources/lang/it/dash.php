@@ -3,6 +3,7 @@
 return [
     'national_data'         => 'Dati nazionali',
     'regions'               => 'Regioni',
+    'date'                  => 'Data',
     'ill'                   => 'Malati',
     'healed'                => 'Guariti',
     'dead'                  => 'Deceduti',
@@ -20,6 +21,7 @@ return [
     'change_scale'          => 'Cambia scala',
     'ill_by_severity'       => 'Malati per tipo di ricovero',
     'ill_by_severity_lines' => 'Andamento malati per tipo di ricovero',
+    'data'                  => 'Dati',
     'data_source'           => 'Fonte dei dati: :source.',
     'created_backed'        => 'Creato da :created e sostenuto da :backed.',
     'git_repos'             => 'Questo sito è Open Source e <a href=":url">disponibile su GitHub</a>. Puoi <a href=":url/issues">segnalare un bug qui</a>.',
