@@ -434,3 +434,15 @@
     <!-- End Matomo Code -->
 @stop
 
+@section('css')
+    <meta property="og:title" content="COVID-19 IT">
+    <meta property="og:description" content="Dati italiani sulla COVID-19 - Italian data about COVID-19">
+    <meta property="og:image" content="{{ asset('imgs/social.png') }}">
+    <meta property="og:url" content="{{ route('data.total') }}">
+    <meta property="og:type" content="website">
+    
+    <meta property="twitter:title" content="COVID-19 IT">
+    <meta property="twitter:description" content="Dati italiani sulla COVID-19 - Italian data about COVID-19">
+    <meta property="twitter:image" content="{{ asset('imgs/social.png') }}">
+    <meta property="twitter:url" content="{{ route('data.total') }}">
+@stop
