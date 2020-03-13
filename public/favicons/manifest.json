@@ -1,0 +1,35 @@
+{
+    "name": "COVID-19 Italia",
+    "short_name": "COVID-19 Italia",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "COVID-19 Italian graph and data.",
+    "icons": [
+        {
+            "src": "favicons/apple-icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "favicons/apple-icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "favicons/apple-icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "favicons/apple-icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "favicons/apple-icon-180x180.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}
