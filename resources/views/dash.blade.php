@@ -18,7 +18,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-lg-2 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-red"><i class="fas fa-procedures"></i></span>
                 <div class="info-box-content">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="fas fa-smile"></i></span>
                 <div class="info-box-content">
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-black"><i class="fas fa-plus-square"></i></span>
                 <div class="info-box-content">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-purple"><i class="fas fa-ambulance"></i></span>
                 <div class="info-box-content">
@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-user-md"></i></span>
                 <div class="info-box-content">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-blue"><i class="fas fa-skull-crossbones"></i></span>
                 <div class="info-box-content">
