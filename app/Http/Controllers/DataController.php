@@ -11,20 +11,7 @@ use function foo\func;
 
 class DataController extends Controller
 {
-    public function dashboard(Region $region = null)
-    {
-        $data = Datum::query();
-
-        $notices = Notice::all();
-        if($region) {
-            $data->where('region_id', '=', $region->id);
-            $notices = $region->notices;
-        }
-        return view('dash', compact('region', 'notices'));
-    }
-
-    public function data(Region $region = null)
-    {
+    private function getDataObject (Region $region = null) {
         $data = Datum::query();
 
         if($region) {
@@ -44,6 +31,25 @@ class DataController extends Controller
                 $group->first()->date => $dataset,
             ];
         });
+
+        return $data;
+    }
+
+    public function dashboard(Region $region = null)
+    {
+        $data = Datum::query();
+
+        $notices = Notice::all();
+        if($region) {
+            $data->where('region_id', '=', $region->id);
+            $notices = $region->notices;
+        }
+        return view('dash', compact('region', 'notices'));
+    }
+
+    public function data(Region $region = null)
+    {
+        $data = $this->getDataObject($region);
 
         return response()->json($data);
     }
