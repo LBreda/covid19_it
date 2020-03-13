@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         \JeroenNoten\LaravelAdminLte\AdminLteServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
