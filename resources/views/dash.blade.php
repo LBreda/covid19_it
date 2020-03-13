@@ -80,6 +80,38 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-4 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fas fa-hospital"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.hospitalized_light') }}</span>
+                    <span class="info-box-number" id="total-hospitalized-light"></span>
+                    <small><span class="info-box-number" id="diff-hospitalized-light"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fas fa-hospital"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.hospitalized_severe') }}</span>
+                    <span class="info-box-number" id="total-hospitalized-severe"></span>
+                    <small><span class="info-box-number" id="diff-hospitalized-severe"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-fuchsia"><i class="fas fa-hospital"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.hospitalized') }}</span>
+                    <span class="info-box-number" id="total-hospitalized"></span>
+                    <small><span class="info-box-number" id="diff-hospitalized"></span></small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="alert alert-info text-center" role="alert">
                 {{ __('dash.lethality_note') }}
@@ -249,6 +281,19 @@
             let total_tested = tested.slice(-1)[0];
             document.getElementById('total-tested').textContent = total_tested.toString();
             document.getElementById('diff-tested').textContent = numberWithSign(total_tested - tested.slice(-2)[0]);
+
+            let total_hospitalized_light = hospitalized_light.slice(-1)[0];
+            let diff_hospitalized_light = total_hospitalized_light - hospitalized_light.slice(-2)[0];
+            document.getElementById('total-hospitalized-light').textContent = total_hospitalized_light.toString();
+            document.getElementById('diff-hospitalized-light').textContent = numberWithSign(diff_hospitalized_light);
+
+            let total_hospitalized_severe = hospitalized_severe.slice(-1)[0];
+            let diff_hospitalized_severe = total_hospitalized_severe - hospitalized_severe.slice(-2)[0];
+            document.getElementById('total-hospitalized-severe').textContent = total_hospitalized_severe.toString();
+            document.getElementById('diff-hospitalized-severe').textContent = numberWithSign(diff_hospitalized_severe);
+
+            document.getElementById('total-hospitalized').textContent = total_hospitalized_light + total_hospitalized_severe;
+            document.getElementById('diff-hospitalized').textContent = diff_hospitalized_light + diff_hospitalized_severe;
 
             document.getElementById('lethality').textContent = (Math.round(10000 * total_dead / total_infected) / 100).toString() + '%';
             // Charts

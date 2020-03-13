@@ -8,6 +8,7 @@ return [
     'dead'                  => 'Deceduti',
     'infected'              => 'Infettati',
     'new_cases'             => 'Nuovi casi (nuovi positivi meno nuovi dimessi)',
+    'hospitalized'          => 'In ospedale (totale)',
     'hospitalized_home'     => 'Isolamento domestico',
     'hospitalized_light'    => 'Ospedale (Non T. intensiva)',
     'hospitalized_severe'   => 'Terapia intensiva',

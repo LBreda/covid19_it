@@ -9,6 +9,7 @@ return [
     'infected'              => 'Infected',
     'new_cases'             => 'New cases (new ill minus new healed)',
     'hospitalized_home'     => 'Quarantined at home',
+    'hospitalized'          => 'Hospitalized (total)',
     'hospitalized_light'    => 'Hospitalized (light symptoms)',
     'hospitalized_severe'   => 'Hospitalized (intensive care)',
     'tested'                => 'Tested',
