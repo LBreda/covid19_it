@@ -55,12 +55,14 @@ class UpdateData extends Command
 
         foreach ($data as $datum) {
             $aliases = [
-                'Friuli V. G.' => 'Friuli Venezia Giulia',
+                '/Friuli V. G./' => 'Friuli Venezia Giulia',
+                '/^Bolzano/'     => 'P.A. Bolzano',
+                '/^Trento/'      => 'P.A. Trento',
             ];
-            $datum->denominazione_regione = trim(str_replace(array_keys($aliases), array_values($aliases), $datum->denominazione_regione));
+            $datum->denominazione_regione = trim(preg_replace(array_keys($aliases), array_values($aliases), $datum->denominazione_regione));
 
             $region = Region::where('name', '=', ($datum->denominazione_regione == 'Friuli V. G.' ? 'Friuli Venezia Giulia' : $datum->denominazione_regione))->first();
-
+            if (!$region) dd($datum->denominazione_regione);
             (new Datum([
                 'region_id'           => $region->id,
                 'date'                => $datum->data,
