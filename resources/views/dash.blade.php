@@ -478,6 +478,7 @@
                             data: hospitalized_home,
                             backgroundColor: 'rgba(0,0,0,0)',
                             borderColor: 'green',
+                            lineTension: 0,
                             borderWidth: 1
                         },
                         {
@@ -485,6 +486,7 @@
                             data: hospitalized_light,
                             backgroundColor: 'rgba(0,0,0,0)',
                             borderColor: 'orange',
+                            lineTension: 0,
                             borderWidth: 1
                         },
                         {
@@ -492,6 +494,7 @@
                             data: hospitalized_severe,
                             backgroundColor: 'rgba(0,0,0,0)',
                             borderColor: 'red',
+                            lineTension: 0,
                             borderWidth: 1
                         }
                     ]
