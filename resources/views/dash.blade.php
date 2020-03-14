@@ -197,6 +197,8 @@
                            class="btn btn-primary btn-xs">CSV</a>
                         <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'json']) }}"
                            class="btn btn-primary btn-xs">JSON</a>
+                        <a href="{{ route($region ? 'api:region' : 'api:total', [$region]) }}"
+                           class="btn btn-primary btn-xs">REST</a>
                     </div>
                 </div>
                 <!-- /.card-header -->

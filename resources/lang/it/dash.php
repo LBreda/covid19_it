@@ -28,5 +28,5 @@ return [
     'notices'               => [
         'partial_data' => 'Dati parziali per la regione: :region',
         'no_data'      => 'Nessun dato per la regione: :region',
-    ]
+    ],
 ];
