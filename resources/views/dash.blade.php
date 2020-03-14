@@ -151,8 +151,8 @@
                     </div>
                 </div>
 
-                <div class="card-body">
-                    <canvas id="ill_healed_dead" width="400" height='100'></canvas>
+                <div class="card-body card-chart">
+                    <canvas id="ill_healed_dead"></canvas>
                 </div>
             </div>
         </div>
@@ -164,8 +164,8 @@
                     <h3 class="card-title">{{ __('dash.ill_by_severity') }}</h3>
                 </div>
 
-                <div class="card-body">
-                    <canvas id="ill_by_severity" width="400" height="100"></canvas>
+                <div class="card-body card-chart">
+                    <canvas id="ill_by_severity"></canvas>
                 </div>
             </div>
         </div>
@@ -181,8 +181,8 @@
                     </div>
                 </div>
 
-                <div class="card-body">
-                    <canvas id="ill_by_severity_lines" width="400" height="100"></canvas>
+                <div class="card-body card-chart">
+                    <canvas id="ill_by_severity_lines"></canvas>
                 </div>
             </div>
         </div>
@@ -409,6 +409,7 @@
                     ]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     onResize: chartOnResize,
                     scales: {
                         yAxes: [{
@@ -452,6 +453,7 @@
                     ]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     onResize: chartOnResize,
                     scales: {
                         yAxes: [{
@@ -502,6 +504,7 @@
                     ]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     onResize: chartOnResize,
                     scales: {
                         yAxes: [{
@@ -563,4 +566,11 @@
     <meta property="twitter:description" content="Dati italiani sulla COVID-19 - Italian data about COVID-19">
     <meta property="twitter:image" content="{{ asset('imgs/social.png') }}">
     <meta property="twitter:url" content="{{ route('data.total') }}">
+
+    <style>
+        .card-chart {
+            width: 100%;
+            height: 60vh;
+        }
+    </style>
 @stop
