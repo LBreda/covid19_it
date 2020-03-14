@@ -330,7 +330,7 @@
             document.getElementById('diff-hospitalized-severe').textContent = numberWithSign(diff_hospitalized_severe);
             document.getElementById('total-hospitalized').textContent = total_hospitalized_light + total_hospitalized_severe;
 
-            document.getElementById('diff-hospitalized').textContent = diff_hospitalized_light + diff_hospitalized_severe;
+            document.getElementById('diff-hospitalized').textContent = numberWithSign(diff_hospitalized_light + diff_hospitalized_severe);
 
             for (let k in data) {
                 if (!data.hasOwnProperty(k)) continue;
