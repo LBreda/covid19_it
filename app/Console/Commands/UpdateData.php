@@ -45,7 +45,7 @@ class UpdateData extends Command
         $this->info('Downloading the data...');
 
         $response = Http::get('https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json');
-        $data = $response->json();
+        $data = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()));
 
         $this->info('Downloaded.');
 
@@ -57,19 +57,19 @@ class UpdateData extends Command
             $aliases = [
                 'Friuli V. G.' => 'Friuli Venezia Giulia',
             ];
-            $datum['denominazione_regione'] = trim(str_replace(array_keys($aliases), array_values($aliases), $datum['denominazione_regione']));
+            $datum->denominazione_regione = trim(str_replace(array_keys($aliases), array_values($aliases), $datum->denominazione_regione));
 
-            $region = Region::where('name', '=', ($datum['denominazione_regione'] == 'Friuli V. G.' ? 'Friuli Venezia Giulia' : $datum['denominazione_regione']))->first();
+            $region = Region::where('name', '=', ($datum->denominazione_regione == 'Friuli V. G.' ? 'Friuli Venezia Giulia' : $datum->denominazione_regione))->first();
 
             (new Datum([
                 'region_id'           => $region->id,
-                'date'                => $datum['data'],
-                'hospitalized_home'   => $datum['isolamento_domiciliare'],
-                'hospitalized_light'  => $datum['ricoverati_con_sintomi'],
-                'hospitalized_severe' => $datum['terapia_intensiva'],
-                'healed'              => $datum['dimessi_guariti'],
-                'dead'                => $datum['deceduti'],
-                'tested'              => $datum['tamponi'],
+                'date'                => $datum->data,
+                'hospitalized_home'   => $datum->isolamento_domiciliare,
+                'hospitalized_light'  => $datum->ricoverati_con_sintomi,
+                'hospitalized_severe' => $datum->terapia_intensiva,
+                'healed'              => $datum->dimessi_guariti,
+                'dead'                => $datum->deceduti,
+                'tested'              => $datum->tamponi,
             ]))->save();
         }
     }
