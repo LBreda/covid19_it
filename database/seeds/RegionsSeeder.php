@@ -5,17 +5,20 @@ class RegionsSeeder extends \Illuminate\Database\Seeder
     public function run()
     {
         $handle = fopen(base_path("database/seeds/csv/regions.csv"), "r");
+        $geo = json_decode(file_get_contents(base_path("database/seeds/csv/regions.geojson"), "r"));
 
-        if (($handle !== false)) {
-            $heading = fgetcsv($handle, 1000);
-            while (($row = fgetcsv($handle, 1000)) !== false) {
-                $rowAssoc = array_combine($heading, $row);
-
-                $datum = new \App\Models\Region($rowAssoc);
-                $datum->save();
-
-            }
-            fclose($handle);
+        foreach ($geo->features as $feature) {
+            $region = new \App\Models\Region([
+                'id'         => $feature->properties->DatabaseID,
+                'name'       => $feature->properties->Regione,
+                'code'       => $feature->properties->Code,
+                'latitude'   => $feature->properties->Latitude,
+                'longitude'  => $feature->properties->Longitude,
+                'population' => $feature->properties->Population,
+                'phone'      => $feature->properties->PhoneNumbers,
+                'geometry'   => json_encode($feature->geometry),
+            ]);
+            $region->save();
         }
     }
 }
