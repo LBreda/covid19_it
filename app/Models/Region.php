@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $population
+ * @property mixed|null $geometry
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereGeometry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePopulation($value)
  */
 class Region extends Model
 {
