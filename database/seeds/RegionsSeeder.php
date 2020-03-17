@@ -4,11 +4,11 @@ class RegionsSeeder extends \Illuminate\Database\Seeder
 {
     public function run()
     {
-        $handle = fopen(base_path("database/seeds/csv/regions.csv"), "r");
         $geo = json_decode(file_get_contents(base_path("database/seeds/csv/regions.geojson"), "r"));
 
         foreach ($geo->features as $feature) {
-            $region = new \App\Models\Region([
+            $region = \App\Models\Region::find($feature->properties->DatabaseID);
+            $regionData = [
                 'id'         => $feature->properties->DatabaseID,
                 'name'       => $feature->properties->Regione,
                 'code'       => $feature->properties->Code,
@@ -17,8 +17,13 @@ class RegionsSeeder extends \Illuminate\Database\Seeder
                 'population' => $feature->properties->Population,
                 'phone'      => $feature->properties->PhoneNumbers,
                 'geometry'   => json_encode($feature->geometry),
-            ]);
-            $region->save();
+            ];
+            if(!$region) {
+                $region = new \App\Models\Region();
+                $region->save();
+            } else {
+                $region->update($regionData);
+            }
         }
     }
 }
