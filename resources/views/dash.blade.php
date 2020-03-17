@@ -187,6 +187,40 @@
             </div>
         </div>
     </div>
+    @if(!$region)
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.ill_pro_capite') }}</h3>
+                    </div>
+                    <div id="card-body card-map">
+                        <div id="map_ill" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.infected_pro_capite') }}</h3>
+                    </div>
+                    <div id="card-body card-map">
+                        <div id="map_infected" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.dead_pro_capite') }}</h3>
+                    </div>
+                    <div id="card-body card-map">
+                        <div id="map_dead" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -530,6 +564,104 @@
         };
     </script>
 
+    @if(!$region)
+        <script>
+            function getColor(min, max, value) {
+                let interval = Math.round((max - min) * 100 / 8) / 100;
+                return value > interval * 8 ? '#800026' :
+                    value > interval * 7 ? '#BD0026' :
+                        value > interval * 6 ? '#E31A1C' :
+                            value > interval * 5 ? '#FC4E2A' :
+                                value > interval * 4 ? '#FD8D3C' :
+                                    value > interval * 3 ? '#FEB24C' :
+                                        value > interval * 2 ? '#FED976' :
+                                            '#FFEDA0';
+            }
+
+            // Maps
+            let map_ill = L.map('map_ill', {zoomSnap: 0.2}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+            let map_infected = L.map('map_infected', {zoomSnap: 0.2}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+            let map_dead = L.map('map_dead', {zoomSnap: 0.2}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map_ill);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map_infected);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map_dead);
+
+            let regionsReq = new XMLHttpRequest();
+            regionsReq.open('GET', '{{ asset('data/regions.geojson') }}');
+            regionsReq.responseType = 'json';
+            regionsReq.onload = () => {
+                let mapDataReq = new XMLHttpRequest();
+
+                mapDataReq.open('GET', '{{ route('api:regions.incidence') }}');
+                mapDataReq.responseType = 'json';
+                mapDataReq.onload = () => {
+                    let mapData = mapDataReq.response;
+                    let minIll = Math.min(...Object.keys(mapData).map(key => mapData[key].ill));
+                    let maxIll = Math.max(...Object.keys(mapData).map(key => mapData[key].ill));
+                    let minInfected = Math.min(...Object.keys(mapData).map(key => mapData[key].infected));
+                    let maxInfected = Math.max(...Object.keys(mapData).map(key => mapData[key].infected));
+                    let minDead = Math.min(...Object.keys(mapData).map(key => mapData[key].dead));
+                    let maxDead = Math.max(...Object.keys(mapData).map(key => mapData[key].dead));
+
+                    L.geoJson(regionsReq.response, {
+                        style: (feature) => {
+                            return {
+                                fillColor: getColor(minIll, maxIll, mapData[feature.properties.DatabaseID].ill),
+                                weight: 2,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.7
+                            }
+                        },
+                        onEachFeature: (feature, layer) => {
+                            layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].ill}`)
+                        }
+                    }).addTo(map_ill);
+                    L.geoJson(regionsReq.response, {
+                        style: (feature) => {
+                            return {
+                                fillColor: getColor(minInfected, maxInfected, mapData[feature.properties.DatabaseID].infected),
+                                weight: 2,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.7
+                            }
+                        },
+                        onEachFeature: (feature, layer) => {
+                            layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].infected}`)
+                        }
+                    }).addTo(map_infected);
+                    L.geoJson(regionsReq.response, {
+                        style: (feature) => {
+                            return {
+                                fillColor: getColor(minDead, maxDead, mapData[feature.properties.DatabaseID].dead),
+                                weight: 2,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.7
+                            }
+                        },
+                        onEachFeature: (feature, layer) => {
+                            layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].dead}`)
+                        }
+                    }).addTo(map_dead);
+                };
+                mapDataReq.send();
+            };
+            regionsReq.send();
+
+        </script>
+    @endif
+
     <!-- Matomo -->
     <script type="text/javascript">
         var _paq = window._paq || [];
@@ -567,10 +699,21 @@
     <meta property="twitter:image" content="{{ asset('imgs/social.png') }}">
     <meta property="twitter:url" content="{{ route('data.total') }}">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+
     <style>
         .card-chart {
             width: 100%;
             height: 60vh;
+        }
+
+        .map-container {
+            height: 700px;
         }
     </style>
 @stop

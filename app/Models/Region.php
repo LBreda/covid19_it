@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed|null $geometry
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereGeometry($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePopulation($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Datum[] $data
+ * @property-read int|null $data_count
  */
 class Region extends Model
 {
@@ -41,5 +43,9 @@ class Region extends Model
 
     public function notices() {
         return $this->hasMany(Notice::class);
+    }
+
+    public function data() {
+        return $this->hasMany(Datum::class);
     }
 }

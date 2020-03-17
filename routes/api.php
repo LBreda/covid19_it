@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'DataController@data')->name('api:total');
 Route::get('/region/{region}', 'DataController@data')->name('api:region');
+Route::get('/regions/incidence', 'DataController@regionalIncidence')->name('api:regions.incidence');

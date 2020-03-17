@@ -77,4 +77,23 @@ class DataController extends Controller
             return response($this->getDataObject($region)->toJson(), 200, ["Content-type" => "application/json", "Content-Disposition" => "attachment; filename=\"{$filename}.json\"",]);
         }
     }
+
+    public function regionalIncidence()
+    {
+        $incidence = Region::all()->mapWithKeys(function (Region $region) {
+            $datum = $region->data->sortBy('date')->last();
+            $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
+            $infected = $ill + $datum->dead + $datum->healed;
+
+            return [
+                $region->id => [
+                    'ill'      => round(($ill / $region->population) * 10000, 2),
+                    'dead'     => round(($datum->dead / $region->population) * 10000, 2),
+                    'infected' => round(($infected / $region->population) * 10000, 2),
+                ],
+            ];
+        });
+
+        return response()->json($incidence);
+    }
 }
