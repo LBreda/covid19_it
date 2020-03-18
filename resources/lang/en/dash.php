@@ -18,7 +18,7 @@ return [
     'hospitalized_severe'   => 'Hospitalized (intensive care)',
     'tested'                => 'Tested',
     'lethality'             => 'Lethality',
-    'lethality_note'        => 'Note: is too soon for the lethality being a meaningful number. Handle it with care. And wash your hands after doing it.',
+    'lethality_note'        => 'Note - The lethality depends on the probably underestimated number of infected people. Handle it with care. And wash your hands after doing it.',
     'emergency_phone_note'  => 'The emergency phone number for this region is: :phone',
     'ill_healed_dead'       => 'Ill, healed, dead',
     'ill_healed_dead_note'  => 'New ill people are the new infected people minus the new ill and dead people',

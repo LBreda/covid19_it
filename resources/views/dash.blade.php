@@ -74,7 +74,12 @@
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.lethality') }}</span>
                     <span class="info-box-number" id="lethality"></span>
-                    <small><span class="info-box-number">&nbsp;</span></small>
+                    <small>
+                        <span class="info-box-number">
+                        <i class="ml-1 fas fa-exclamation-triangle text-warning" data-toggle="tooltip"
+                           data-placement="top" title="{{ __('dash.lethality_note') }}"></i>
+                        </span>
+                    </small>
                 </div>
             </div>
         </div>
@@ -108,13 +113,6 @@
                     <span class="info-box-number" id="total-hospitalized"></span>
                     <small><span class="info-box-number" id="diff-hospitalized"></span></small>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-info text-center" role="alert">
-                {{ __('dash.lethality_note') }}
             </div>
         </div>
     </div>
@@ -337,6 +335,7 @@
             padding: 5px;
             font-size: 1.1rem;
         }
+
         .card-chart {
             width: 100%;
             height: 60vh;

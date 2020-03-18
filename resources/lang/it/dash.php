@@ -18,7 +18,7 @@ return [
     'hospitalized_severe'   => 'Terapia intensiva',
     'tested'                => 'Tamponi',
     'lethality'             => 'Letalità',
-    'lethality_note'        => 'Nota: è presto perché la letalità sia un dato sensato: prendetelo con le pinze (e lavatevi le mani poi).',
+    'lethality_note'        => 'Nota - La letalità dipende dal dato sui contagiati, probabilmente sottostimato. Prendetelo con le pinze (e lavatevi le mani poi).',
     'emergency_phone_note'  => 'Il numero di emergenza per questa regione è: :phone',
     'ill_healed_dead'       => 'Malati, guariti, deceduti',
     'ill_healed_dead_note'  => 'I nuovi malati sono le nuove persone infettate meno i nuovi guariti e deceduti',
