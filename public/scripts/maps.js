@@ -1,4 +1,4 @@
-function getColor(min, max, value) {
+function getColorIll(min, max, value) {
     let interval = Math.round((max - min) * 100 / 8) / 100;
     return value > interval * 8 ? '#800026' :
         value > interval * 7 ? '#BD0026' :
@@ -8,6 +8,30 @@ function getColor(min, max, value) {
                         value > interval * 3 ? '#FEB24C' :
                             value > interval * 2 ? '#FED976' :
                                 '#FFEDA0';
+}
+
+function getColorInfected(min, max, value) {
+    let interval = Math.round((max - min) * 100 / 8) / 100;
+    return value > interval * 8 ? '#4a1486' :
+        value > interval * 7 ? '#6a51a3' :
+            value > interval * 6 ? '#807dba' :
+                value > interval * 5 ? '#9e9ac8' :
+                    value > interval * 4 ? '#bcbddc' :
+                        value > interval * 3 ? '#dadaeb' :
+                            value > interval * 2 ? '#efedf5' :
+                                '#fcfbfd';
+}
+
+function getColorDead(min, max, value) {
+    let interval = Math.round((max - min) * 100 / 8) / 100;
+    return value > interval * 8 ? '#252525' :
+        value > interval * 7 ? '#525252' :
+            value > interval * 6 ? '#737373' :
+                value > interval * 5 ? '#969696' :
+                    value > interval * 4 ? '#bdbdbd' :
+                        value > interval * 3 ? '#d9d9d9' :
+                            value > interval * 2 ? '#f0f0f0' :
+                                '#ffffff';
 }
 
 // Maps
@@ -44,7 +68,7 @@ regionsReq.onload = () => {
         L.geoJson(regionsReq.response, {
             style: (feature) => {
                 return {
-                    fillColor: getColor(minIll, maxIll, mapData[feature.properties.DatabaseID].ill),
+                    fillColor: getColorIll(minIll, maxIll, mapData[feature.properties.DatabaseID].ill),
                     weight: 2,
                     opacity: 1,
                     color: 'white',
@@ -59,7 +83,7 @@ regionsReq.onload = () => {
         L.geoJson(regionsReq.response, {
             style: (feature) => {
                 return {
-                    fillColor: getColor(minInfected, maxInfected, mapData[feature.properties.DatabaseID].infected),
+                    fillColor: getColorInfected(minInfected, maxInfected, mapData[feature.properties.DatabaseID].infected),
                     weight: 2,
                     opacity: 1,
                     color: 'white',
@@ -74,7 +98,7 @@ regionsReq.onload = () => {
         L.geoJson(regionsReq.response, {
             style: (feature) => {
                 return {
-                    fillColor: getColor(minDead, maxDead, mapData[feature.properties.DatabaseID].dead),
+                    fillColor: getColorDead(minDead, maxDead, mapData[feature.properties.DatabaseID].dead),
                     weight: 2,
                     opacity: 1,
                     color: 'white',
