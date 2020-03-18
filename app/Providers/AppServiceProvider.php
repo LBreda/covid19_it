@@ -31,14 +31,14 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add([
                 'text'        => __('dash.national_data'),
                 'url'         => route('data.total'),
-                'icon'        => 'fas fa-chart-bar',
+                'icon'        => 'fas fa-analytics',
             ]);
             $event->menu->add(['header' => __('dash.regions')]);
             Region::all()->sortBy('name')->each(function (Region $region) use ($event) {
                 $event->menu->add([
                     'text' => $region->name,
                     'url'  => route('data.region', [$region]),
-                    'icon' => 'fas fa-chart-bar',
+                    'icon' => 'fas fa-analytics',
                 ]);
             });
         });

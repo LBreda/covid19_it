@@ -13,14 +13,13 @@
             @endif
         </div>
     </div>
-
 @stop
 
 @section('content')
     <div class="row">
         <div class="col-lg-2 col-6">
             <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fas fa-procedures"></i></span>
+                <span class="info-box-icon bg-red"><i class="fas fa-fw fa-procedures"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.ill') }}</span>
                     <span class="info-box-number" id="total-ill"></span>
@@ -30,7 +29,7 @@
         </div>
         <div class="col-lg-2 col-6">
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fas fa-smile"></i></span>
+                <span class="info-box-icon bg-green"><i class="fas fa-fw fa-smile"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.healed') }}</span>
                     <span class="info-box-number" id="total-healed"></span>
@@ -40,7 +39,7 @@
         </div>
         <div class="col-lg-2 col-6">
             <div class="info-box">
-                <span class="info-box-icon bg-black"><i class="fas fa-plus-square"></i></span>
+                <span class="info-box-icon bg-black"><i class="fas fa-fw fa-tombstone"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.dead') }}</span>
                     <span class="info-box-number" id="total-dead"></span>
@@ -50,7 +49,7 @@
         </div>
         <div class="col-lg-2 col-6">
             <div class="info-box">
-                <span class="info-box-icon bg-purple"><i class="fas fa-ambulance"></i></span>
+                <span class="info-box-icon bg-purple"><i class="fas fa-fw fa-disease"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.infected') }}</span>
                     <span class="info-box-number" id="total-infected"></span>
@@ -60,7 +59,7 @@
         </div>
         <div class="col-lg-2 col-6">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fas fa-user-md"></i></span>
+                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.tested') }}</span>
                     <span class="info-box-number" id="total-tested"></span>
@@ -87,7 +86,7 @@
     <div class="row">
         <div class="col-lg-4 col-12">
             <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fas fa-hospital"></i></span>
+                <span class="info-box-icon bg-green"><i class="fas fa-fw fa-clinic-medical"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.hospitalized_light') }}</span>
                     <span class="info-box-number" id="total-hospitalized-light"></span>
@@ -97,7 +96,7 @@
         </div>
         <div class="col-lg-4 col-12">
             <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fas fa-hospital"></i></span>
+                <span class="info-box-icon bg-red"><i class="fas fa-fw fa-clinic-medical"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.hospitalized_severe') }}</span>
                     <span class="info-box-number" id="total-hospitalized-severe"></span>
@@ -107,7 +106,7 @@
         </div>
         <div class="col-lg-4 col-12">
             <div class="info-box">
-                <span class="info-box-icon bg-fuchsia"><i class="fas fa-hospital"></i></span>
+                <span class="info-box-icon bg-fuchsia"><i class="fas fa-fw fa-clinic-medical"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.hospitalized') }}</span>
                     <span class="info-box-number" id="total-hospitalized"></span>
