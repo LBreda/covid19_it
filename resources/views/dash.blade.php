@@ -145,6 +145,8 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill_healed_dead') }}</h3>
+                    <i class="ml-1 fas fa-exclamation-triangle text-warning" data-toggle="tooltip" data-placement="top"
+                       title="{{ __('dash.ill_healed_dead_note') }}"></i>
                     <div class="card-tools">
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
@@ -274,10 +276,15 @@
 @stop
 
 @section('js')
-    <script src="{{ asset('scripts/graph_and_boxes.js') }}" id="js-graph-and-boxes" data-data-url="{{ $region ? route('api:region', [$region]) : route('api:total') }}"></script>
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+    <script src="{{ asset('scripts/graph_and_boxes.js') }}" id="js-graph-and-boxes"
+            data-data-url="{{ $region ? route('api:region', [$region]) : route('api:total') }}"></script>
 
     @if(!$region)
-        <script src="{{ asset('scripts/maps.js') }}" id="js-maps" data-geo-url="{{ asset('data/regions.geojson') }}" data-incidence-url="{{ route('api:regions.incidence') }}"></script>
+        <script src="{{ asset('scripts/maps.js') }}" id="js-maps" data-geo-url="{{ asset('data/regions.geojson') }}"
+                data-incidence-url="{{ route('api:regions.incidence') }}"></script>
     @endif
 
     <!-- Matomo -->
