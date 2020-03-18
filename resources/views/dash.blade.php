@@ -332,6 +332,11 @@
             crossorigin=""></script>
 
     <style>
+        .info-box .info-box-icon {
+            width: 40px;
+            padding: 5px;
+            font-size: 1.1rem;
+        }
         .card-chart {
             width: 100%;
             height: 60vh;
