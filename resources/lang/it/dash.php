@@ -8,7 +8,7 @@ return [
     'healed'                => 'Guariti',
     'dead'                  => 'Deceduti',
     'infected'              => 'Infettati',
-    'ill_pro_capite'        => 'Malati ogni 10000 abitanti',
+    'ill_pro_capite'        => 'Malati attuali ogni 10000 abitanti',
     'infected_pro_capite'   => 'Infettati ogni 10000 abitanti',
     'dead_pro_capite'       => 'Deceduti ogni 10000 abitanti',
     'new_cases'             => 'Nuovi malati',

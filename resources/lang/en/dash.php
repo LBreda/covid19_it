@@ -7,7 +7,7 @@ return [
     'ill'                   => 'Currently ill',
     'healed'                => 'Healed',
     'dead'                  => 'Dead',
-    'ill_pro_capite'        => 'Ill per 10000 citizens',
+    'ill_pro_capite'        => 'Currently ill per 10000 citizens',
     'infected_pro_capite'   => 'Infected per 10000 citizens',
     'dead_pro_capite'       => 'Dead per 10000 citizens',
     'infected'              => 'Infected',
