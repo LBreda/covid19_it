@@ -75,8 +75,10 @@
                     <span class="info-box-number" id="lethality"></span>
                     <small>
                         <span class="info-box-number">
-                        <i class="ml-1 fas fa-exclamation-triangle text-warning" data-toggle="tooltip"
-                           data-placement="top" title="{{ __('dash.lethality_note') }}"></i>
+                            <span data-toggle="tooltip"
+                                  data-placement="top" title="{{ __('dash.lethality_note') }}">
+                                <i class="ml-1 fas fa-exclamation-triangle text-warning"></i>
+                            </span>
                         </span>
                     </small>
                 </div>
@@ -142,8 +144,10 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill_healed_dead') }}</h3>
-                    <i class="ml-1 fas fa-exclamation-triangle text-warning" data-toggle="tooltip" data-placement="top"
-                       title="{{ __('dash.ill_healed_dead_note') }}"></i>
+                    <span data-toggle="tooltip" data-placement="top"
+                          title="{{ __('dash.ill_healed_dead_note') }}">
+                        <i class="ml-1 fas fa-exclamation-triangle text-warning"></i>
+                    </span>
                     <div class="card-tools">
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
@@ -285,7 +289,7 @@
     @endif
 
     <!-- Matomo -->
-    <script type="text/javascript">
+    <script>
         var _paq = window._paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
         _paq.push(["disableCookies"]);
