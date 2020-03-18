@@ -62,7 +62,10 @@ class UpdateData extends Command
             $datum->denominazione_regione = trim(preg_replace(array_keys($aliases), array_values($aliases), $datum->denominazione_regione));
 
             $region = Region::where('name', '=', ($datum->denominazione_regione == 'Friuli V. G.' ? 'Friuli Venezia Giulia' : $datum->denominazione_regione))->first();
-            if (!$region) dd($datum->denominazione_regione);
+            if (!$region){
+                $this->error("Skipped {$datum->denominazione_regione}: Region not found");
+                continue;
+            }
             (new Datum([
                 'region_id'           => $region->id,
                 'date'                => $datum->data,
