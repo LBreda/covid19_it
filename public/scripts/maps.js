@@ -35,9 +35,21 @@ function getColorDead(min, max, value) {
 }
 
 // Maps
-let map_ill = L.map('map_ill', {zoomSnap: 0.2}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
-let map_infected = L.map('map_infected', {zoomSnap: 0.2}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
-let map_dead = L.map('map_dead', {zoomSnap: 0.2}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_ill = L.map('map_ill', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_infected = L.map('map_infected', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_dead = L.map('map_dead', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_ill);
