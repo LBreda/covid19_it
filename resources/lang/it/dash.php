@@ -33,4 +33,6 @@ return [
         'partial_data' => 'Dati parziali per la regione: :region',
         'no_data'      => 'Nessun dato per la regione: :region',
     ],
+    'last_update'           => 'Ultimo aggiornamento: :date',
+    'datetime_format'       => 'd/m/Y H:i',
 ];

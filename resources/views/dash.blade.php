@@ -13,6 +13,9 @@
             @endif
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12"><p style="font-size: small">{{ __('dash.last_update', ['date' => $last_update]) }}</p></div>
+    </div>
 @stop
 
 @section('content')

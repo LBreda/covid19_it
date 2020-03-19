@@ -45,7 +45,8 @@ class DataController extends Controller
             $data->where('region_id', '=', $region->id);
             $notices = $region->notices;
         }
-        return view('dash', compact('region', 'notices'));
+        $last_update = Carbon::parse($data->orderBy('date', 'desc')->first()->date)->format(__('dash.datetime_format'));
+        return view('dash', compact('region', 'notices', 'last_update'));
     }
 
     public function data(Region $region = null)
