@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Datum;
 use App\Models\Region;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -68,7 +69,7 @@ class UpdateData extends Command
             }
             (new Datum([
                 'region_id'           => $region->id,
-                'date'                => $datum->data,
+                'date'                => Carbon::parse($datum->data),
                 'hospitalized_home'   => $datum->isolamento_domiciliare,
                 'hospitalized_light'  => $datum->ricoverati_con_sintomi,
                 'hospitalized_severe' => $datum->terapia_intensiva,
