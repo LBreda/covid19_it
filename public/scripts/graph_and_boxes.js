@@ -50,11 +50,15 @@ dataReq.onload = () => {
     let hospitalized_light = values.map(datum => datum.hospitalized_light);
     let hospitalized_severe = values.map(datum => datum.hospitalized_severe);
     let ill = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe));
+    let infected = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe + datum.healed + datum.dead));
     let healed = values.map(datum => datum.healed);
     let dead = values.map(datum => datum.dead);
     let tested = values.map(datum => datum.tested);
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
+    });
+    let new_infected = infected.map((item, key) => {
+        return key === 0 ? item : item - infected[key - 1];
     });
 
     // Number boxes
@@ -168,6 +172,13 @@ dataReq.onload = () => {
                     data: new_ill,
                     backgroundColor: 'rgb(255,182,194)',
                     borderColor: 'rgb(255,182,194)',
+                    borderWidth: 1
+                },
+                {
+                    label: ill_healed_dead.dataset.labelNewInfected,
+                    data: new_infected,
+                    backgroundColor: 'rgba(111,66,193,0.42)',
+                    borderColor: 'rgba(111,66,193,0.42)',
                     borderWidth: 1
                 }
             ]

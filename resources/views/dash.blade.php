@@ -161,7 +161,8 @@
                     <canvas id="ill_healed_dead" data-label-ill="{{ __('dash.ill') }}"
                             data-label-healed="{{ __('dash.healed') }}"
                             data-label-dead="{{ __('dash.dead') }}"
-                            data-label-new-ill="{{ __('dash.new_ill') }}"></canvas>
+                            data-label-new-ill="{{ __('dash.new_ill') }}"
+                            data-label-new-infected="{{ __('dash.new_infected') }}"></canvas>
                 </div>
             </div>
         </div>
