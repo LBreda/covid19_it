@@ -11,7 +11,7 @@ return [
     'infected_pro_capite'   => 'Infected per 10000 citizens',
     'dead_pro_capite'       => 'Dead per 10000 citizens',
     'infected'              => 'Infected',
-    'new_cases'             => 'New ill people',
+    'new_ill'               => 'New ill people',
     'hospitalized_home'     => 'Quarantined at home',
     'hospitalized'          => 'Hospitalized (total)',
     'hospitalized_light'    => 'Hospitalized (light symptoms)',

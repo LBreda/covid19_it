@@ -11,7 +11,7 @@ return [
     'ill_pro_capite'        => 'Malati attuali ogni 10000 abitanti',
     'infected_pro_capite'   => 'Infettati ogni 10000 abitanti',
     'dead_pro_capite'       => 'Deceduti ogni 10000 abitanti',
-    'new_cases'             => 'Nuovi malati',
+    'new_ill'               => 'Nuovi malati',
     'hospitalized'          => 'In ospedale (totale)',
     'hospitalized_home'     => 'Isolamento domestico',
     'hospitalized_light'    => 'Ospedale (Non T. intensiva)',

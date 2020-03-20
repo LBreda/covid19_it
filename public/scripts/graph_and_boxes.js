@@ -53,7 +53,7 @@ dataReq.onload = () => {
     let healed = values.map(datum => datum.healed);
     let dead = values.map(datum => datum.dead);
     let tested = values.map(datum => datum.tested);
-    let new_cases = ill.map((item, key) => {
+    let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
     });
 
@@ -164,8 +164,8 @@ dataReq.onload = () => {
                     type: 'line'
                 },
                 {
-                    label: ill_healed_dead.dataset.labelNewCases,
-                    data: new_cases,
+                    label: ill_healed_dead.dataset.labelNewIll,
+                    data: new_ill,
                     backgroundColor: 'rgb(255,182,194)',
                     borderColor: 'rgb(255,182,194)',
                     borderWidth: 1
