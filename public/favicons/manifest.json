@@ -1,10 +1,18 @@
 {
     "name": "COVID-19 Italia",
     "short_name": "COVID-19 Italia",
-    "start_url": ".",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#fff",
+    "background_color": "#343a40",
     "description": "COVID-19 Italian graph and data.",
+    "theme": {
+        "colors": {
+                "frame": "#dc3545 ",
+                "accent": "#dc3545 "
+                "tab_text": "rgba(255,255,255,.8)",
+                "tab_background_text": "rgba(255,255,255,.8)"
+        }
+    },
     "icons": [
         {
             "src": "favicons/apple-icon-72x72.png",
