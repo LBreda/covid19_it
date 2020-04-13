@@ -7,8 +7,8 @@
     "description": "COVID-19 Italian graph and data.",
     "theme": {
         "colors": {
-                "frame": "#dc3545 ",
-                "accent": "#dc3545 "
+                "frame": "#dc3545",
+                "accent": "#dc3545",
                 "tab_text": "rgba(255,255,255,.8)",
                 "tab_background_text": "rgba(255,255,255,.8)"
         }
