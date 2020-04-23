@@ -90,10 +90,10 @@ class DataController extends Controller
 
             return [
                 $region->id => [
-                    'ill'      => round(($ill / $region->population) * 10000, 2),
-                    'dead'     => round(($datum->dead / $region->population) * 10000, 2),
-                    'infected' => round(($infected / $region->population) * 10000, 2),
-                    'tested'   => round(($tested / $region->population) * 10000, 2),
+                    'ill'      => round(($ill / $region->population) * 1000, 2),
+                    'dead'     => round(($datum->dead / $region->population) * 1000, 2),
+                    'infected' => round(($infected / $region->population) * 1000, 2),
+                    'tested'   => round(($tested / $region->population) * 1000, 2),
                 ],
             ];
         });
