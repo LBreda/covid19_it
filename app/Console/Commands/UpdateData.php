@@ -56,9 +56,10 @@ class UpdateData extends Command
 
         foreach ($data as $datum) {
             $aliases = [
-                '/Friuli V. G./' => 'Friuli Venezia Giulia',
-                '/^Bolzano/'     => 'P.A. Bolzano',
-                '/^Trento/'      => 'P.A. Trento',
+                '/Friuli V. G./'    => 'Friuli Venezia Giulia',
+                '/^Bolzano/'        => 'P.A. Bolzano',
+                '/^Trento/'         => 'P.A. Trento',
+                '/^Emilia-Romagna/' => 'Emilia Romagna',
             ];
             $datum->denominazione_regione = trim(preg_replace(array_keys($aliases), array_values($aliases), $datum->denominazione_regione));
 
