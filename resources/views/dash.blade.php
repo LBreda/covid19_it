@@ -72,6 +72,48 @@
         </div>
         <div class="col-lg-2 col-6">
             <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.tests') }}</span>
+                    <span class="info-box-number" id="total-tests"></span>
+                    <small><span class="info-box-number" id="diff-tests"></span></small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fas fa-fw fa-clinic-medical"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.hospitalized_light') }}</span>
+                    <span class="info-box-number" id="total-hospitalized-light"></span>
+                    <small><span class="info-box-number" id="diff-hospitalized-light"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fas fa-fw fa-clinic-medical"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.hospitalized_severe') }}</span>
+                    <span class="info-box-number" id="total-hospitalized-severe"></span>
+                    <small><span class="info-box-number" id="diff-hospitalized-severe"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-fuchsia"><i class="fas fa-fw fa-clinic-medical"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.hospitalized') }}</span>
+                    <span class="info-box-number" id="total-hospitalized"></span>
+                    <small><span class="info-box-number" id="diff-hospitalized"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="info-box">
                 <span class="info-box-icon bg-blue"><i class="fas fa-skull-crossbones"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.lethality') }}</span>
@@ -84,38 +126,6 @@
                             </span>
                         </span>
                     </small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fas fa-fw fa-clinic-medical"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">{{ __('dash.hospitalized_light') }}</span>
-                    <span class="info-box-number" id="total-hospitalized-light"></span>
-                    <small><span class="info-box-number" id="diff-hospitalized-light"></span></small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fas fa-fw fa-clinic-medical"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">{{ __('dash.hospitalized_severe') }}</span>
-                    <span class="info-box-number" id="total-hospitalized-severe"></span>
-                    <small><span class="info-box-number" id="diff-hospitalized-severe"></span></small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-fuchsia"><i class="fas fa-fw fa-clinic-medical"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">{{ __('dash.hospitalized') }}</span>
-                    <span class="info-box-number" id="total-hospitalized"></span>
-                    <small><span class="info-box-number" id="diff-hospitalized"></span></small>
                 </div>
             </div>
         </div>
@@ -203,7 +213,7 @@
     </div>
     @if(!$region)
         <div class="row">
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-3">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.ill_pro_capite') }}</h3>
@@ -213,7 +223,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-3">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.infected_pro_capite') }}</h3>
@@ -223,13 +233,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-3">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.dead_pro_capite') }}</h3>
                     </div>
                     <div id="card-body card-map">
                         <div id="map_dead" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.tested_pro_capite') }}</h3>
+                    </div>
+                    <div id="card-body card-map">
+                        <div id="map_tested" class="map-container"></div>
                     </div>
                 </div>
             </div>
@@ -261,6 +281,7 @@
                             <th>{{ __('dash.healed') }}</th>
                             <th>{{ __('dash.dead') }}</th>
                             <th>{{ __('dash.tested') }}</th>
+                            <th>{{ __('dash.tests') }}</th>
                         </tr>
                         </thead>
                         <tbody id="data-table">
@@ -349,7 +370,7 @@
         }
 
         .map-container {
-            height: 700px;
+            height: 600px;
         }
     </style>
 @stop

@@ -26,6 +26,7 @@ class DataController extends Controller
                 'hospitalized_severe' => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_severe, 0),
                 'healed'              => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->healed, 0),
                 'dead'                => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
+                'tests'               => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
                 'tested'              => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
             ]);
             return [
@@ -85,12 +86,14 @@ class DataController extends Controller
             $datum = $region->data->sortBy('date')->last();
             $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
             $infected = $ill + $datum->dead + $datum->healed;
+            $tested = $datum->tested;
 
             return [
                 $region->id => [
                     'ill'      => round(($ill / $region->population) * 10000, 2),
                     'dead'     => round(($datum->dead / $region->population) * 10000, 2),
                     'infected' => round(($infected / $region->population) * 10000, 2),
+                    'tested'   => round(($tested / $region->population) * 10000, 2),
                 ],
             ];
         });
