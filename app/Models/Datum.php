@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereTested($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $tests
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereTests($value)
  */
 class Datum extends Model
 {

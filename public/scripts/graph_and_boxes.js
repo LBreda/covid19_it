@@ -55,6 +55,7 @@ dataReq.onload = () => {
     let infected = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe + datum.healed + datum.dead));
     let healed = values.map(datum => datum.healed);
     let dead = values.map(datum => datum.dead);
+    let tests = values.map(datum => datum.tests);
     let tested = values.map(datum => datum.tested);
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
@@ -94,6 +95,10 @@ dataReq.onload = () => {
     document.getElementById('total-tested').textContent = total_tested.toString();
     document.getElementById('diff-tested').textContent = numberWithSign(total_tested - tested.slice(-2)[0]);
 
+    let total_tests = tests.slice(-1)[0];
+    document.getElementById('total-tests').textContent = total_tests.toString();
+    document.getElementById('diff-tests').textContent = numberWithSign(total_tests - tests.slice(-2)[0]);
+
     document.getElementById('lethality').textContent = (Math.round(10000 * total_dead / total_infected) / 100).toString() + '%';
 
     let total_hospitalized_light = hospitalized_light.slice(-1)[0];
@@ -130,6 +135,8 @@ dataReq.onload = () => {
         td_dead.innerText = datum.dead;
         let td_tested = document.createElement('td');
         td_tested.innerText = datum.tested;
+        let td_tests = document.createElement('td');
+        td_tests.innerText = datum.tests;
 
         tr.appendChild(td_date);
         tr.appendChild(td_hospitalized_home);
@@ -138,6 +145,7 @@ dataReq.onload = () => {
         tr.appendChild(td_healed);
         tr.appendChild(td_dead);
         tr.appendChild(td_tested);
+        tr.appendChild(td_tests);
 
         document.getElementById('data-table').appendChild(tr);
     }

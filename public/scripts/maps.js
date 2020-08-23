@@ -34,6 +34,18 @@ function getColorDead(min, max, value) {
                                 '#ffffff';
 }
 
+function getColorTested(min, max, value) {
+    let interval = Math.round((max - min) * 100 / 8) / 100;
+    return value > interval * 8 ? '#005a32' :
+        value > interval * 7 ? '#238b45' :
+            value > interval * 6 ? '#41ab5d' :
+                value > interval * 5 ? '#74c476' :
+                    value > interval * 4 ? '#a1d99b' :
+                        value > interval * 3 ? '#c7e9c0' :
+                            value > interval * 2 ? '#edf8e9' :
+                                '#ffffff';
+}
+
 // Maps
 let map_ill = L.map('map_ill', {
     zoomSnap: 0.2,
@@ -50,6 +62,11 @@ let map_dead = L.map('map_dead', {
     dragging: !L.Browser.mobile,
     tap: !L.Browser.mobile
 }).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_tested = L.map('map_tested', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_ill);
@@ -59,6 +76,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_dead);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map_tested);
 
 let regionsReq = new XMLHttpRequest();
 regionsReq.open('GET', document.getElementById('js-maps').dataset.geoUrl);
@@ -76,6 +96,8 @@ regionsReq.onload = () => {
         let maxInfected = Math.max(...Object.keys(mapData).map(key => mapData[key].infected));
         let minDead = Math.min(...Object.keys(mapData).map(key => mapData[key].dead));
         let maxDead = Math.max(...Object.keys(mapData).map(key => mapData[key].dead));
+        let minTested = Math.min(...Object.keys(mapData).map(key => mapData[key].tested));
+        let maxTested = Math.max(...Object.keys(mapData).map(key => mapData[key].tested));
 
         L.geoJson(regionsReq.response, {
             style: (feature) => {
@@ -122,6 +144,21 @@ regionsReq.onload = () => {
                 layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].dead}`)
             }
         }).addTo(map_dead);
+        L.geoJson(regionsReq.response, {
+            style: (feature) => {
+                return {
+                    fillColor: getColorTested(minTested, maxTested, mapData[feature.properties.DatabaseID].tested),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.7
+                }
+            },
+            onEachFeature: (feature, layer) => {
+                layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].tested}`)
+            }
+        }).addTo(map_tested);
     };
     mapDataReq.send();
 };
