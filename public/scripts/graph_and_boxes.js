@@ -1,6 +1,8 @@
-// Camvases
+// Canvases
 let ill_healed_dead = document.getElementById('ill_healed_dead');
 let ill_by_severity = document.getElementById('ill_by_severity');
+let ill_variations = document.getElementById('ill_variations');
+let ill_weighted_variations = document.getElementById('ill_weighted_variations');
 let ill_by_severity_lines = document.getElementById('ill_by_severity_lines');
 
 // Functions
@@ -59,6 +61,12 @@ dataReq.onload = () => {
     });
     let new_infected = infected.map((item, key) => {
         return key === 0 ? item : item - infected[key - 1];
+    });
+    let new_tested = tested.map((item, key) => {
+        return key === 0 ? item : item - tested[key - 1];
+    });
+    let new_weighted_infected = infected.map((item, key) => {
+        return item / tested[key];
     });
 
     // Number boxes
@@ -166,16 +174,39 @@ dataReq.onload = () => {
                     borderWidth: 1,
                     lineTension: 0,
                     type: 'line'
-                },
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            onResize: chartOnResize,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+            legend: {
+                display: (ill_healed_dead.parentElement.clientWidth > 800)
+            }
+        }
+    });
+
+    let ill_variations_chart = new Chart(ill_variations, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
                 {
-                    label: ill_healed_dead.dataset.labelNewIll,
+                    label: ill_variations.dataset.labelNewIll,
                     data: new_ill,
                     backgroundColor: 'rgb(255,182,194)',
                     borderColor: 'rgb(255,182,194)',
                     borderWidth: 1
                 },
                 {
-                    label: ill_healed_dead.dataset.labelNewInfected,
+                    label: ill_variations.dataset.labelNewInfected,
                     data: new_infected,
                     backgroundColor: 'rgba(111,66,193,0.42)',
                     borderColor: 'rgba(111,66,193,0.42)',
@@ -194,7 +225,37 @@ dataReq.onload = () => {
                 }],
             },
             legend: {
-                display: (ill_healed_dead.parentElement.clientWidth > 800)
+                display: (ill_variations.parentElement.clientWidth > 800)
+            }
+        }
+    });
+
+    let ill_weighted_variations_chart = new Chart(ill_weighted_variations, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: ill_weighted_variations.dataset.labelNewInfected,
+                    data: new_weighted_infected,
+                    backgroundColor: 'rgba(111,66,193,0.42)',
+                    borderColor: 'rgba(111,66,193,0.42)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            onResize: chartOnResize,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+            legend: {
+                display: (ill_variations.parentElement.clientWidth > 800)
             }
         }
     });

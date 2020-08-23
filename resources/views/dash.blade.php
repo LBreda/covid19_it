@@ -134,10 +134,6 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill_healed_dead') }}</h3>
-                    <span data-toggle="tooltip" data-placement="top"
-                          title="{{ __('dash.ill_healed_dead_note') }}">
-                        <i class="ml-1 fas fa-exclamation-triangle text-warning"></i>
-                    </span>
                     <div class="card-tools">
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
@@ -147,9 +143,38 @@
                 <div class="card-body card-chart">
                     <canvas id="ill_healed_dead" data-label-ill="{{ __('dash.ill') }}"
                             data-label-healed="{{ __('dash.healed') }}"
-                            data-label-dead="{{ __('dash.dead') }}"
-                            data-label-new-ill="{{ __('dash.new_ill') }}"
+                            data-label-dead="{{ __('dash.dead') }}"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.ill_variations') }}</h3>
+                    <span data-toggle="tooltip" data-placement="top"
+                          title="{{ __('dash.ill_variations_note') }}">
+                        <i class="ml-1 fas fa-exclamation-triangle text-warning"></i>
+                    </span>
+                </div>
+
+                <div class="card-body card-chart">
+                    <canvas id="ill_variations" data-label-new-ill="{{ __('dash.new_ill') }}"
                             data-label-new-infected="{{ __('dash.new_infected') }}"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.ill_weighted_variations') }}</h3>
+                </div>
+
+                <div class="card-body card-chart">
+                    <canvas id="ill_weighted_variations" data-label-new-infected="{{ __('dash.new_weighted_infected') }}"></canvas>
                 </div>
             </div>
         </div>
