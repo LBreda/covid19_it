@@ -3,7 +3,9 @@
     "short_name": "COVID-19 Italia",
     "start_url": ".",
     "display": "standalone",
+    "orientation": "portrait-primary",
     "background_color": "#fff",
+    "theme_color": "#dc3545",
     "description": "COVID-19 Italian graph and data.",
     "icons": [
         {
