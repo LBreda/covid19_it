@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-3 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-blue"><i class="fas fa-skull-crossbones"></i></span>
                 <div class="info-box-content">
