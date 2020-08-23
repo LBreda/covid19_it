@@ -129,19 +129,6 @@
             </div>
         </div>
     @endif
-    @if($notices->count())
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-warning text-center" role="alert">
-                    @foreach($notices as $notice)
-                        <p class="m-0"><strong>{{ $notice->date->format('d/m/Y') }}</strong>
-                            - {{ __("dash.notices.{$notice->notice}", ['region' => $notice->region->name]) }}
-                        </p>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -270,6 +257,19 @@
             </div>
         </div>
     </div>
+    @if($notices->count())
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning text-center" role="alert">
+                    @foreach($notices as $notice)
+                        <p class="m-0"><strong>{{ $notice->date->format('d/m/Y') }}</strong>
+                            - {{ __("dash.notices.{$notice->notice}", ['region' => $notice->region->name]) }}
+                        </p>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
 
     <footer class="row mt-4">
         <div class="col-md-12 text-center" style="font-size: 80%">
