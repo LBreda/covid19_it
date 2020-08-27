@@ -67,7 +67,7 @@ dataReq.onload = () => {
         return key === 0 ? item : item - tested[key - 1];
     });
     let new_weighted_infected = infected.map((item, key) => {
-        return item / tested[key];
+        return item / new_tested[key];
     });
 
     // Number boxes
