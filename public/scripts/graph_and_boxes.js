@@ -66,7 +66,7 @@ dataReq.onload = () => {
     let new_tested = tested.map((item, key) => {
         return key === 0 ? item : item - tested[key - 1];
     });
-    let new_weighted_infected = infected.map((item, key) => {
+    let new_weighted_infected = new_infected.map((item, key) => {
         return item / new_tested[key];
     });
 
