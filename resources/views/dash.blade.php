@@ -143,7 +143,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ __('dash.ill_healed_dead') }}</h3>
+                    <h3 class="card-title">{{ __('dash.ill') }}</h3>
                     <div class="card-tools">
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
@@ -151,8 +151,24 @@
                 </div>
 
                 <div class="card-body card-chart">
-                    <canvas id="ill_healed_dead" data-label-ill="{{ __('dash.ill') }}"
-                            data-label-healed="{{ __('dash.healed') }}"
+                    <canvas id="ill" data-label-ill="{{ __('dash.ill') }}"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.healed_dead') }}</h3>
+                    <div class="card-tools">
+                        <button class="btn btn-xs btn-default scale-button"
+                                type="button">{{ __('dash.change_scale') }}</button>
+                    </div>
+                </div>
+
+                <div class="card-body card-chart">
+                    <canvas id="healed_dead" data-label-healed="{{ __('dash.healed') }}"
                             data-label-dead="{{ __('dash.dead') }}"></canvas>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 // Canvases
-let ill_healed_dead = document.getElementById('ill_healed_dead');
+let healed_dead = document.getElementById('healed_dead');
+let ill_box = document.getElementById('ill');
 let ill_by_severity = document.getElementById('ill_by_severity');
 let ill_variations = document.getElementById('ill_variations');
 let ill_weighted_variations = document.getElementById('ill_weighted_variations');
@@ -151,22 +152,45 @@ dataReq.onload = () => {
     }
 
     // Charts
-    let ill_healed_dead_chart = new Chart(ill_healed_dead, {
+    let ill_chart = new Chart(ill_box, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [
                 {
-                    label: ill_healed_dead.dataset.labelIll,
+                    label: ill_box.dataset.labelIll,
                     data: ill,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'red',
                     borderWidth: 1,
                     lineTension: 0,
                     type: 'line'
-                },
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            onResize: chartOnResize,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+            legend: {
+                display: (ill_box.parentElement.clientWidth > 800)
+            }
+        }
+    });
+
+    let healed_dead_chart = new Chart(healed_dead, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
                 {
-                    label: ill_healed_dead.dataset.labelHealed,
+                    label: healed_dead.dataset.labelHealed,
                     data: healed,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'green',
@@ -175,7 +199,7 @@ dataReq.onload = () => {
                     type: 'line'
                 },
                 {
-                    label: ill_healed_dead.dataset.labelDead,
+                    label: healed_dead.dataset.labelDead,
                     data: dead,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'black',
@@ -196,7 +220,7 @@ dataReq.onload = () => {
                 }],
             },
             legend: {
-                display: (ill_healed_dead.parentElement.clientWidth > 800)
+                display: (healed_dead.parentElement.clientWidth > 800)
             }
         }
     });
@@ -365,8 +389,11 @@ dataReq.onload = () => {
     });
 
     // Switch buttons
-    ill_healed_dead.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
-        switchScale(ill_healed_dead_chart);
+    ill_box.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
+        switchScale(ill_chart);
+    });
+    healed_dead.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
+        switchScale(healed_dead_chart);
     });
     ill_by_severity_lines.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
         switchScale(ill_by_severity_lines_chart);
