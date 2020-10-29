@@ -14,7 +14,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12"><p style="font-size: small">{{ __('dash.last_update', ['date' => $last_update]) }}</p></div>
+        <div class="col-md-12"><p style="font-size: small">{{ __('dash.last_update', ['date' => $last_update]) }}</p>
+        </div>
     </div>
 @stop
 
@@ -130,6 +131,17 @@
             </div>
         </div>
     </div>
+    @if(App::isLocale('it'))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" role="alert">
+                    <div class="card-body text-center">
+                        <a href="https://www.immuni.italia.it/download.html"><img src="{{ asset('imgs/scarica_immuni_logo.svg') }}" style="height: 2.5em; display: inline-flex; align-self: baseline" alt="Immuni"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     @if($region)
         <div class="row">
             <div class="col-md-12">
@@ -200,7 +212,8 @@
                 </div>
 
                 <div class="card-body card-chart">
-                    <canvas id="ill_weighted_variations" data-label-new-infected="{{ __('dash.new_weighted_infected') }}"></canvas>
+                    <canvas id="ill_weighted_variations"
+                            data-label-new-infected="{{ __('dash.new_weighted_infected') }}"></canvas>
                 </div>
             </div>
         </div>
