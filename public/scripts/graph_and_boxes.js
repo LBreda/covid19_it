@@ -5,6 +5,7 @@ let ill_by_severity = document.getElementById('ill_by_severity');
 let ill_variations = document.getElementById('ill_variations');
 let ill_weighted_variations = document.getElementById('ill_weighted_variations');
 let ill_by_severity_lines = document.getElementById('ill_by_severity_lines');
+let immuni_downloads_lines = document.getElementById('immuni_downloads_lines') || null;
 
 // Functions
 /**
@@ -39,7 +40,7 @@ let numberWithSign = (number) => {
     return (number > 0 ? '+' : '') + number.toString();
 };
 
-// Gets data
+// Gets DPC data
 let dataReq = new XMLHttpRequest();
 dataReq.open('GET', document.getElementById('js-graph-and-boxes').dataset.dataUrl);
 dataReq.responseType = 'json';
@@ -364,3 +365,54 @@ dataReq.onload = () => {
         switchScale(ill_by_severity_lines_chart);
     });
 };
+
+// Gets Immuni downloads data
+if (document.getElementById('js-graph-and-boxes').dataset.immuniDlUrl) {
+    let immuniDlReq = new XMLHttpRequest();
+    immuniDlReq.open('GET', document.getElementById('js-graph-and-boxes').dataset.immuniDlUrl);
+    immuniDlReq.responseType = 'json';
+    immuniDlReq.send();
+
+    immuniDlReq.onload = () => {
+        let immuniDlData = immuniDlReq.response;
+
+        let immuni_downloads_chart = new Chart(immuni_downloads_lines, {
+            type: 'bar',
+            data: {
+                labels: [...Object.keys(immuniDlData)],
+                datasets: [
+                    {
+                        label: immuni_downloads_lines.dataset.labelAndroid,
+                        data: [...Object.keys(immuniDlData)].map((k => immuniDlData[k].android_downloads)),
+                        backgroundColor: '#3DDC84',
+                        borderColor: '#3DDC84',
+                    },
+                    {
+                        label: immuni_downloads_lines.dataset.labelIos,
+                        data: [...Object.keys(immuniDlData)].map((k => immuniDlData[k].ios_downloads)),
+                        backgroundColor: '#147efb',
+                        borderColor: '#147efb',
+                    },
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                onResize: chartOnResize,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        stacked: true
+                    }],
+                    xAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: {
+                    display: (ill_box.parentElement.clientWidth > 800)
+                }
+            }
+        });
+    }
+}
