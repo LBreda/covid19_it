@@ -1,12 +1,15 @@
 {
-    "name": "laravel/laravel",
+    "name": "LBreda/covid19_it",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "COVID-19 Italian graphs and data.",
     "keywords": [
-        "framework",
-        "laravel"
+        "covid-19",
+        "covid19",
+        "sars-cov-2",
+        "italy",
+        "immuni"
     ],
-    "license": "MIT",
+    "license": "GPL-3.0-only",
     "require": {
         "php": "^7.4",
         "fideloper/proxy": "^4.2",

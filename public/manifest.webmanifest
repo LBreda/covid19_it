@@ -6,6 +6,7 @@
     "orientation": "portrait-primary",
     "background_color": "#343a40",
     "theme_color": "#dc3545",
+    "description": "COVID-19 Italian graphs and data.",
     "icons": [
         {
             "src": "/favicons/16.png",
