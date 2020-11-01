@@ -8,8 +8,18 @@
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
         @yield('title', config('adminlte.title', 'AdminLTE 3'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
+    <script src="https://kit.fontawesome.com/3fbc50dc3b.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @include('adminlte::plugins', ['type' => 'css'])
+
+    @yield('adminlte_css_pre')
+
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+
+    @yield('adminlte_css')
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     @yield('meta_tags')
 
