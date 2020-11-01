@@ -301,33 +301,15 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.data') }}</h3>
-                    <div class="card-tools">
-                        <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'csv']) }}"
-                           class="btn btn-primary btn-xs">CSV</a>
-                        <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'json']) }}"
-                           class="btn btn-primary btn-xs">JSON</a>
-                        <a href="{{ route($region ? 'api:region' : 'api:total', [$region]) }}"
-                           class="btn btn-primary btn-xs">REST</a>
-                    </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0 table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                        <tr>
-                            <th>{{ __('dash.date') }}</th>
-                            <th>{{ __('dash.hospitalized_home') }}</th>
-                            <th>{{ __('dash.hospitalized_light') }}</th>
-                            <th>{{ __('dash.hospitalized_severe') }}</th>
-                            <th>{{ __('dash.healed') }}</th>
-                            <th>{{ __('dash.dead') }}</th>
-                            <th>{{ __('dash.tested') }}</th>
-                            <th>{{ __('dash.tests') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody id="data-table">
-                        </tbody>
-                    </table>
+                <div class="card-body text-center">
+                    <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'csv']) }}"
+                       class="btn btn-primary"><i class="fas fa-file-csv"></i> CSV</a>
+                    <a href="{{ route($region ? 'data.region_download' : 'data.total_download', [$region, 'format' => 'json']) }}"
+                       class="btn btn-primary"><i class="fas fa-file-code"></i> JSON</a>
+                    <a href="{{ route($region ? 'api:region' : 'api:total', [$region]) }}"
+                       class="btn btn-primary"><i class="fas fa-file-code"></i> REST</a>
                 </div>
             </div>
         </div>

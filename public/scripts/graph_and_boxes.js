@@ -116,41 +116,6 @@ dataReq.onload = () => {
 
     document.getElementById('diff-hospitalized').textContent = numberWithSign(diff_hospitalized_light + diff_hospitalized_severe);
 
-    for (let k in data) {
-        if (!data.hasOwnProperty(k)) continue;
-        let datum = data[k];
-
-        let tr = document.createElement('tr');
-
-        let td_date = document.createElement('td');
-        td_date.innerText = k.split(' ')[0];
-        let td_hospitalized_home = document.createElement('td');
-        td_hospitalized_home.innerText = datum.hospitalized_home;
-        let td_hospitalized_light = document.createElement('td');
-        td_hospitalized_light.innerText = datum.hospitalized_light;
-        let td_hospitalized_severe = document.createElement('td');
-        td_hospitalized_severe.innerText = datum.hospitalized_severe;
-        let td_healed = document.createElement('td');
-        td_healed.innerText = datum.healed;
-        let td_dead = document.createElement('td');
-        td_dead.innerText = datum.dead;
-        let td_tested = document.createElement('td');
-        td_tested.innerText = datum.tested;
-        let td_tests = document.createElement('td');
-        td_tests.innerText = datum.tests;
-
-        tr.appendChild(td_date);
-        tr.appendChild(td_hospitalized_home);
-        tr.appendChild(td_hospitalized_light);
-        tr.appendChild(td_hospitalized_severe);
-        tr.appendChild(td_healed);
-        tr.appendChild(td_dead);
-        tr.appendChild(td_tested);
-        tr.appendChild(td_tests);
-
-        document.getElementById('data-table').appendChild(tr);
-    }
-
     // Charts
     let ill_chart = new Chart(ill_box, {
         type: 'bar',
