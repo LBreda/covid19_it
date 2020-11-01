@@ -24,7 +24,7 @@ class UpdateData extends Command
      *
      * @var string
      */
-    protected $description = 'Updates the data from the Protezione Civile Nazionale public dataset';
+    protected $description = 'Updates all the datasets';
 
     /**
      * Create a new command instance.
@@ -43,42 +43,7 @@ class UpdateData extends Command
      */
     public function handle()
     {
-        $this->info('Downloading the data...');
-
-        $response = Http::get('https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json');
-        $data = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()));
-
-        $this->info('Downloaded.');
-
-        $this->info('Populating the datatable...');
-
-        DB::table('data')->truncate();
-
-        foreach ($data as $datum) {
-            $aliases = [
-                '/Friuli V. G./'    => 'Friuli Venezia Giulia',
-                '/^Bolzano/'        => 'P.A. Bolzano',
-                '/^Trento/'         => 'P.A. Trento',
-                '/^Emilia-Romagna/' => 'Emilia Romagna',
-            ];
-            $datum->denominazione_regione = trim(preg_replace(array_keys($aliases), array_values($aliases), $datum->denominazione_regione));
-
-            $region = Region::where('name', '=', $datum->denominazione_regione)->first();
-            if (!$region) {
-                $this->error("Skipped {$datum->denominazione_regione}: Region not found");
-                continue;
-            }
-            (new Datum([
-                'region_id'           => $region->id,
-                'date'                => Carbon::parse($datum->data),
-                'hospitalized_home'   => $datum->isolamento_domiciliare,
-                'hospitalized_light'  => $datum->ricoverati_con_sintomi,
-                'hospitalized_severe' => $datum->terapia_intensiva,
-                'healed'              => $datum->dimessi_guariti,
-                'dead'                => $datum->deceduti,
-                'tests'               => $datum->tamponi,
-                'tested'              => $datum->casi_testati,
-            ]))->save();
-        }
+        $this->call('covid:update-dpc');
+        $this->call('covid:update-immuni');
     }
 }
