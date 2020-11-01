@@ -6,39 +6,75 @@
     "orientation": "portrait-primary",
     "background_color": "#343a40",
     "theme_color": "#dc3545",
-    "description": "COVID-19 Italian graph and data.",
-    "theme": {
-        "colors": {
-                "frame": "#dc3545",
-                "accent": "#dc3545",
-                "tab_text": "rgba(255,255,255,.8)",
-                "tab_background_text": "rgba(255,255,255,.8)"
-        }
-    },
     "icons": [
         {
-            "src": "/favicons/apple-icon-72x72.png",
+            "src": "/favicons/16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/57.png",
+            "sizes": "57x57",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/60.png",
+            "sizes": "60x60",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/72.png",
             "sizes": "72x72",
             "type": "image/png"
         },
         {
-            "src": "/favicons/favicon-96x96.png",
+            "src": "/favicons/76.png",
+            "sizes": "76x76",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/96.png",
             "sizes": "96x96",
             "type": "image/png"
         },
         {
-            "src": "/favicons/apple-icon-144x144.png",
+            "src": "/favicons/114.png",
+            "sizes": "114x114",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/120.png",
+            "sizes": "120x120",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/144.png",
             "sizes": "144x144",
             "type": "image/png"
         },
         {
-            "src": "/favicons/apple-icon-152x152.png",
+            "src": "/favicons/152.png",
             "sizes": "152x152",
             "type": "image/png"
         },
         {
-            "src": "/favicons/apple-icon-180x180.png",
+            "src": "/favicons/180.png",
             "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]
