@@ -31,8 +31,9 @@ return [
     'change_scale'            => 'Cambia scala',
     'ill_by_severity'         => 'Infetti per tipo di ricovero',
     'ill_by_severity_lines'   => 'Andamento infetti per tipo di ricovero',
+    'immuni_downloads'        => 'Downloads dell\'app Immuni',
     'data'                    => 'Dati',
-    'data_source'             => 'Fonte dei dati: :source.',
+    'data_source'             => 'Fonti dei dati: :source_dpc e :source_immuni.',
     'created_backed'          => 'Creato da :created e sostenuto da :backed.',
     'git_repos'               => 'Questo sito è Open Source e <a href=":url">disponibile su GitHub</a>. Puoi <a href=":url/issues">segnalare un bug qui</a>.',
     'notices'                 => [

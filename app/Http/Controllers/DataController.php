@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Datum;
+use App\Models\ImmuniDownload;
 use App\Models\Notice;
 use App\Models\Region;
 use Carbon\Carbon;
@@ -54,6 +55,20 @@ class DataController extends Controller
     {
         $data = $this->getDataObject($region);
 
+        return response()->json($data);
+    }
+
+    public function immuniDownloadsData(Region $region = null)
+    {
+        $data = ImmuniDownload::all()->mapWithKeys(function (ImmuniDownload $download) {
+            return [
+                $download->date => [
+                    'ios_downloads'     => $download->ios_downloads,
+                    'android_downloads' => $download->android_downloads,
+                    'total_downloads'   => $download->total_downloads,
+                ]
+            ];
+        });
         return response()->json($data);
     }
 

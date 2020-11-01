@@ -136,7 +136,9 @@
             <div class="col-md-12">
                 <div class="card" role="alert">
                     <div class="card-body text-center">
-                        <a href="https://www.immuni.italia.it/download.html"><img src="{{ asset('imgs/scarica_immuni_logo.svg') }}" style="height: 2.5em; display: inline-flex; align-self: baseline" alt="Immuni"></a>
+                        <a href="https://www.immuni.italia.it/download.html"><img
+                                src="{{ asset('imgs/scarica_immuni_logo.svg') }}"
+                                style="height: 2.5em; display: inline-flex; align-self: baseline" alt="Immuni"></a>
                     </div>
                 </div>
             </div>
@@ -296,6 +298,23 @@
             </div>
         </div>
     @endif
+    @if(!$region)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.immuni_downloads') }}</h3>
+                    </div>
+
+                    <div class="card-body card-chart">
+                        <canvas id="immuni_downloads_lines"
+                                data-label-android="Android"
+                                data-label-ios="iOS"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -348,7 +367,7 @@
 
     <footer class="row mt-4">
         <div class="col-md-12 text-center" style="font-size: 80%">
-            <p>{!! __('dash.data_source', ['source' => '<a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>']) !!}</p>
+            <p>{!! __('dash.data_source', ['source_dpc' => '<a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>', 'source_immuni' => '<a href="https://github.com/immuni-app/immuni-dashboard-data">Immuni</a>']) !!}</p>
             <p>{!! __('dash.created_backed', ['created' => '<a href="https://lbreda.com/">Lorenzo Breda</a>', 'backed' => '<a href="https://twobeesolution.com">TwoBeeSolution S.r.l.</a>']) !!}</p>
             <p>{!! __('dash.git_repos', ['url' => 'https://github.com/LBreda/covid19_it']) !!}</p>
         </div>
@@ -360,7 +379,8 @@
         $('[data-toggle="tooltip"]').tooltip();
     </script>
     <script src="{{ asset('scripts/graph_and_boxes.js') }}" id="js-graph-and-boxes"
-            data-data-url="{{ $region ? route('api:region', [$region]) : route('api:total') }}"></script>
+            data-data-url="{{ $region ? route('api:region', [$region]) : route('api:total') }}"
+            data-immuni-dl-url="{{ $region ? '' : route('api:immuni_downloads_total') }}"></script>
 
     @if(!$region)
         <script src="{{ asset('scripts/maps.js') }}" id="js-maps" data-geo-url="{{ asset('data/regions.geojson') }}"

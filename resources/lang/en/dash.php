@@ -31,8 +31,9 @@ return [
     'change_scale'            => 'Change scale',
     'ill_by_severity'         => 'Infected people grouped by hospitalization',
     'ill_by_severity_lines'   => 'Infected people grouped by hospitalization - trend',
+    'immuni_downloads'        => 'Immuni (contact tracking app) downloads',
     'data'                    => 'Data',
-    'data_source'             => 'Data source: :source.',
+    'data_source'             => 'Data sources: :source_dpc and :source_immuni.',
     'created_backed'          => 'Created by :created  and backed by :backed.',
     'git_repos'               => 'This is a Open Source website and <a href=":url">it is available on GitHub</a>. You can <a href=":url/issues">report issues here</a>.',
     'notices'                 => [
