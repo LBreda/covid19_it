@@ -24,7 +24,7 @@ return [
     'tested'                  => 'Tested cases',
     'lethality'               => 'Lethality',
     'lethality_note'          => 'Note - The lethality depends on the probably underestimated number of infected people. Handle it with care. And wash your hands after doing it.',
-    'emergency_phone_note'    => 'The emergency phone number for this region is: :phone',
+    'emergency_phone_note'    => 'Infoline: :phone - Emergency phone number: 112',
     'healed_dead'             => 'Healed, dead',
     'ill_variations'          => 'Variations',
     'ill_variations_note'     => 'New currently infected people are the new infected people minus the new infected and dead people',

@@ -24,7 +24,7 @@ return [
     'tested'                  => 'Casi testati',
     'lethality'               => 'Letalità',
     'lethality_note'          => 'Nota - La letalità dipende dal dato sui contagiati, probabilmente sottostimato. Prendetelo con le pinze (e lavatevi le mani poi).',
-    'emergency_phone_note'    => 'Il numero di emergenza per questa regione è: :phone',
+    'emergency_phone_note'    => 'Numero verde per informazioni: :phone - numero di emergenza: 112',
     'healed_dead'             => 'Guariti, deceduti',
     'ill_variations'          => 'Variazioni',
     'ill_variations_note'     => 'I nuovi infetti sono le nuove persone infettate meno i nuovi guariti e deceduti',
