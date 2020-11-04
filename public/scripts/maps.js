@@ -198,7 +198,7 @@ regionsReq.onload = () => {
                 }
             },
             onEachFeature: (feature, layer) => {
-                layer.bindTooltip(`${feature.properties.Regione}}`)
+                layer.bindTooltip(`${feature.properties.Regione}`)
             }
         }).addTo(map_restrictions);
     };
