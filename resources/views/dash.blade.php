@@ -4,7 +4,12 @@
 
 @section('content_header')
     <div class="row">
-        <div class="col-md-9"><h1>{{ $region ? $region->name : __('dash.national_data') }}</h1></div>
+        <div class="col-md-9">
+            <h1>{{ $region ? $region->name : __('dash.national_data') }}</h1>
+            @if($region)
+                <span class="badge severity-zone-{{$region->severity}}">{{ __("dash.severity_zones.{$region->severity}") }}</span>
+            @endif
+        </div>
         <div class="col-md-3 text-right">
             @if(session('lang') == 'it')
                 <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-link">English version</a>
@@ -256,7 +261,17 @@
     </div>
     @if(!$region)
         <div class="row">
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.restrictions') }}</h3>
+                    </div>
+                    <div id="card-body card-map">
+                        <div id="map_restrictions" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.ill_pro_capite') }}</h3>
@@ -266,7 +281,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.infected_pro_capite') }}</h3>
@@ -276,7 +291,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.dead_pro_capite') }}</h3>
@@ -286,7 +301,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.tested_pro_capite') }}</h3>
@@ -427,6 +442,16 @@
 
         .map-container {
             height: 600px;
+        }
+
+        .severity-zone-1, .severity-zone-2 {
+            background-color: #fff59d;
+        }
+        .severity-zone-3 {
+            background-color: #ff9800;
+        }
+        .severity-zone-4 {
+            background-color: #CC0000;
         }
     </style>
 @stop

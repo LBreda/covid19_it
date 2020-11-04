@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePopulation($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Datum[] $data
  * @property-read int|null $data_count
+ * @property int $severity
+ * @method static \Illuminate\Database\Eloquent\Builder|Region whereSeverity($value)
  */
 class Region extends Model
 {

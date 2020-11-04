@@ -12,6 +12,7 @@ return [
     'infected_pro_capite'     => 'Infettati totali ogni 1000 abitanti',
     'dead_pro_capite'         => 'Deceduti ogni 1000 abitanti',
     'tested_pro_capite'       => 'Casi testati ogni 1000 abitanti',
+    'restrictions'            => 'Aree per restrizioni',
     'new_ill'                 => 'Nuovi attualmente infetti',
     'new_infected'            => 'Nuovi infettati',
     'new_weighted_infected'   => 'Nuovi infettati per test',
@@ -42,4 +43,10 @@ return [
     ],
     'last_update'             => 'Ultimo aggiornamento: :date',
     'datetime_format'         => 'd/m/Y H:i',
+    'severity_zones' => [
+        1 => 'Zona gialla',
+        2 => 'Zona gialla',
+        3 => 'Zona arancione',
+        4 => 'Zona rossa',
+    ],
 ];

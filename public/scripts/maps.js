@@ -46,6 +46,25 @@ function getColorTested(min, max, value) {
                                 '#ffffff';
 }
 
+function getColorSeverity(value) {
+    let color = 'white';
+    switch (value) {
+        case 1:
+        case 2:
+            color = '#fff59d';
+            break;
+        case 3:
+            color = '#ff9800';
+            break;
+        case 4:
+            color = '#CC0000'
+            break;
+        default:
+            color = 'white';
+    }
+    return color;
+}
+
 // Maps
 let map_ill = L.map('map_ill', {
     zoomSnap: 0.2,
@@ -67,6 +86,11 @@ let map_tested = L.map('map_tested', {
     dragging: !L.Browser.mobile,
     tap: !L.Browser.mobile
 }).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_restrictions = L.map('map_restrictions', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_ill);
@@ -79,6 +103,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_tested);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map_restrictions);
 
 let regionsReq = new XMLHttpRequest();
 regionsReq.open('GET', document.getElementById('js-maps').dataset.geoUrl);
@@ -159,6 +186,21 @@ regionsReq.onload = () => {
                 layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].tested}`)
             }
         }).addTo(map_tested);
+        L.geoJson(regionsReq.response, {
+            style: (feature) => {
+                return {
+                    fillColor: getColorSeverity(mapData[feature.properties.DatabaseID].severity),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.9
+                }
+            },
+            onEachFeature: (feature, layer) => {
+                layer.bindTooltip(`${feature.properties.Regione}}`)
+            }
+        }).addTo(map_restrictions);
     };
     mapDataReq.send();
 };

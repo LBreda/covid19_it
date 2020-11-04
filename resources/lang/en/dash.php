@@ -11,6 +11,7 @@ return [
     'infected_pro_capite'     => 'Infected per 10000 citizens',
     'dead_pro_capite'         => 'Dead per 10000 citizens',
     'tested_pro_capite'       => 'Tested cases per 10000 citizens',
+    'restrictions'            => 'Areas by restriction level',
     'infected'                => 'Infected (tot.)',
     'new_ill'                 => 'New currently infected people',
     'new_infected'            => 'New infected people',
@@ -42,4 +43,10 @@ return [
     ],
     'last_update'             => 'Last update: :date',
     'datetime_format'         => 'm/d/Y H:i',
+    'severity_zones' => [
+        1 => 'Yellow zone',
+        2 => 'Yellow zone',
+        3 => 'Orange zone',
+        4 => 'Red zone',
+    ],
 ];
