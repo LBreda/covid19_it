@@ -51,13 +51,13 @@ function getColorSeverity(value) {
     switch (value) {
         case 1:
         case 2:
-            color = '#fff59d';
+            color = '#e5c802';
             break;
         case 3:
-            color = '#ff9800';
+            color = '#f8871f';
             break;
         case 4:
-            color = '#CC0000'
+            color = '#c2272d'
             break;
         default:
             color = 'white';

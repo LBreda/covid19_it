@@ -445,13 +445,13 @@
         }
 
         .severity-zone-1, .severity-zone-2 {
-            background-color: #fff59d;
+            background-color: #e5c802;
         }
         .severity-zone-3 {
-            background-color: #ff9800;
+            background-color: #f8871f;
         }
         .severity-zone-4 {
-            background-color: #CC0000;
+            background-color: #c2272d;
         }
     </style>
 @stop
