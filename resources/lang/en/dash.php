@@ -43,10 +43,11 @@ return [
     ],
     'last_update'             => 'Last update: :date',
     'datetime_format'         => 'm/d/Y H:i',
-    'severity_zones' => [
+    'severity_zones'          => [
         1 => 'Yellow zone',
         2 => 'Yellow zone',
         3 => 'Orange zone',
         4 => 'Red zone',
     ],
+    'support'                 => "Support me on Ko-fi",
 ];

@@ -43,10 +43,11 @@ return [
     ],
     'last_update'             => 'Ultimo aggiornamento: :date',
     'datetime_format'         => 'd/m/Y H:i',
-    'severity_zones' => [
+    'severity_zones'          => [
         1 => 'Zona gialla',
         2 => 'Zona gialla',
         3 => 'Zona arancione',
         4 => 'Zona rossa',
     ],
+    'support'                 => 'Supportami su Ko-fi',
 ];

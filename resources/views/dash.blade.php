@@ -4,18 +4,19 @@
 
 @section('content_header')
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-5">
             <h1>{{ $region ? $region->name : __('dash.national_data') }}</h1>
             @if($region)
                 <span class="badge severity-zone-{{$region->severity}}">{{ __("dash.severity_zones.{$region->severity}") }}</span>
             @endif
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-md-7 text-right">
             @if(session('lang') == 'it')
-                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-link">English version</a>
+                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-primary"><i class="fas fa-language"></i> English version</a>
             @elseif(session('lang') == 'en')
-                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'it']) }}" class="btn btn-link">Versione italiana</a>
+                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'it']) }}" class="btn btn-primary"><i class="fas fa-language"></i> Versione italiana</a>
             @endif
+                <a href="https://ko-fi.com/lbreda" class="btn btn-primary"><img alt="Ko-fi" style="width: 1.25em" src="{{ asset('imgs/ko-fi_logo.svg') }}"> {{ __('dash.support') }}</a>
         </div>
     </div>
     <div class="row">
