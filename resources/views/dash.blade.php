@@ -4,19 +4,19 @@
 
 @section('content_header')
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-8 col-xl-6">
             <h1>{{ $region ? $region->name : __('dash.national_data') }}</h1>
             @if($region)
                 <span class="badge severity-zone-{{$region->severity}}">{{ __("dash.severity_zones.{$region->severity}") }}</span>
             @endif
         </div>
-        <div class="col-md-7 text-right">
+        <div class="col-4 col-xl-6 text-right">
             @if(session('lang') == 'it')
-                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-primary"><i class="fas fa-language"></i> English version</a>
+                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-primary" title="English version"><i class="fas fa-language"></i><span class="d-none d-lg-inline"> English version</span></a>
             @elseif(session('lang') == 'en')
-                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'it']) }}" class="btn btn-primary"><i class="fas fa-language"></i> Versione italiana</a>
+                        <a href="{{ Request::fullUrlWithQuery(['hl' =>  'it']) }}" class="btn btn-primary" title="Versione italiana"><i class="fas fa-language"></i><span class="d-none d-lg-inline"> Versione italiana</span></a>
             @endif
-                <a href="https://ko-fi.com/lbreda" class="btn btn-primary"><img alt="Ko-fi" style="width: 1.25em" src="{{ asset('imgs/ko-fi_logo.svg') }}"> {{ __('dash.support') }}</a>
+                <a href="https://ko-fi.com/lbreda" class="btn btn-primary" title="{{ __('dash.support') }}"><img alt="Ko-fi" style="width: 1.25em" src="{{ asset('imgs/ko-fi_logo.svg') }}"><span class="d-none d-lg-inline"> {{ __('dash.support') }}</span></a>
         </div>
     </div>
     <div class="row">
