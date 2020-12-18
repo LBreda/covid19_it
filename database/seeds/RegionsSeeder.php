@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 class RegionsSeeder extends \Illuminate\Database\Seeder
 {
