@@ -7,7 +7,7 @@
         <div class="col-8 col-xl-6">
             <h1>{{ $region ? $region->name : __('dash.national_data') }}</h1>
             @if($region)
-                <span class="badge severity-zone-{{$region->severity}}">{{ __("dash.severity_zones.{$region->severity}") }}</span>
+                <span class="badge" style="background-color: {{ $region->severity['color'] }}">{{ __("dash.severity_zones.{$region->severity['level']}") }}</span>
             @endif
         </div>
         <div class="col-4 col-xl-6 text-right">
@@ -439,20 +439,6 @@
         .card-chart {
             width: 100%;
             height: 60vh;
-        }
-
-        .map-container {
-            height: 600px;
-        }
-
-        .severity-zone-1, .severity-zone-2 {
-            background-color: #e5c802;
-        }
-        .severity-zone-3 {
-            background-color: #f8871f;
-        }
-        .severity-zone-4 {
-            background-color: #c2272d;
         }
     </style>
 @stop
