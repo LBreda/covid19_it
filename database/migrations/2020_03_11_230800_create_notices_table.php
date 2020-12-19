@@ -33,7 +33,7 @@ class CreateNoticesTable extends Migration
      */
     public function down()
     {
-        Schema::table('data', function (Blueprint $table) {
+        Schema::table('notices', function (Blueprint $table) {
             $table->dropForeign('notices_region_id_foreign');
         });
         Schema::dropIfExists('notices');

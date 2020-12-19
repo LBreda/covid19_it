@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Region
@@ -35,19 +39,39 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePopulation($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Datum[] $data
  * @property-read int|null $data_count
- * @property int $severity
+ * @property array $severity
  * @method static \Illuminate\Database\Eloquent\Builder|Region whereSeverity($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Restriction[] $restrictions
+ * @property-read int|null $restrictions_count
  */
 class Region extends Model
 {
     protected $table = "regions";
     protected $guarded = ['id'];
 
-    public function notices() {
+    public function notices(): HasMany
+    {
         return $this->hasMany(Notice::class);
     }
 
-    public function data() {
+    public function data(): HasMany
+    {
         return $this->hasMany(Datum::class);
+    }
+
+    public function restrictions(): HasMany
+    {
+        return $this->hasMany(Restriction::class);
+    }
+
+    public function getSeverityAttribute(): array
+    {
+        return $this->restrictions
+            ->where('since', '<=', Carbon::now()->startOfDay())
+            ->filter(function (Restriction $r) {
+                return $r->until === null
+                    or $r->until->greaterThan(Carbon::now()->startOfDay());
+            })->map(fn (Restriction $r) => ['level' => $r->restriction_type->id, 'color' => $r->restriction_type->color])
+            ->last() ?: ['level' => 0, 'color' => 'ffffff'];
     }
 }

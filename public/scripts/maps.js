@@ -46,25 +46,6 @@ function getColorTested(min, max, value) {
                                 '#ffffff';
 }
 
-function getColorSeverity(value) {
-    let color = 'white';
-    switch (value) {
-        case 1:
-        case 2:
-            color = '#e5c802';
-            break;
-        case 3:
-            color = '#f8871f';
-            break;
-        case 4:
-            color = '#c2272d'
-            break;
-        default:
-            color = 'white';
-    }
-    return color;
-}
-
 // Maps
 let map_ill = L.map('map_ill', {
     zoomSnap: 0.2,
@@ -189,7 +170,7 @@ regionsReq.onload = () => {
         L.geoJson(regionsReq.response, {
             style: (feature) => {
                 return {
-                    fillColor: getColorSeverity(mapData[feature.properties.DatabaseID].severity),
+                    fillColor: mapData[feature.properties.DatabaseID].severity.color,
                     weight: 2,
                     opacity: 1,
                     color: 'white',
