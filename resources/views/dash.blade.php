@@ -267,7 +267,7 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.restrictions') }}</h3>
                     </div>
-                    <div id="card-body card-map">
+                    <div class="card-body card-map">
                         <div id="map_restrictions" class="map-container"></div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.ill_pro_capite') }}</h3>
                     </div>
-                    <div id="card-body card-map">
+                    <div class="card-body card-map">
                         <div id="map_ill" class="map-container"></div>
                     </div>
                 </div>
@@ -287,7 +287,7 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.infected_pro_capite') }}</h3>
                     </div>
-                    <div id="card-body card-map">
+                    <div class="card-body card-map">
                         <div id="map_infected" class="map-container"></div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.dead_pro_capite') }}</h3>
                     </div>
-                    <div id="card-body card-map">
+                    <div class="card-body card-map">
                         <div id="map_dead" class="map-container"></div>
                     </div>
                 </div>
@@ -307,7 +307,7 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.tested_pro_capite') }}</h3>
                     </div>
-                    <div id="card-body card-map">
+                    <div class="card-body card-map">
                         <div id="map_tested" class="map-container"></div>
                     </div>
                 </div>
@@ -404,7 +404,7 @@
             s.parentNode.insertBefore(g, s);
         })();
     </script>
-    <noscript><p><img src={{ env('MATOMO_URL') }}/matomo.php?idsite={{ env('MATOMO_SITE_ID') }}&amp;rec=1"
+    <noscript><p><img src="{{ env('MATOMO_URL') }}/matomo.php?idsite={{ env('MATOMO_SITE_ID') }}&amp;rec=1"
                       style="border:0;" alt=""/></p>
     </noscript>
     <!-- End Matomo Code -->
@@ -439,6 +439,10 @@
         .card-chart {
             width: 100%;
             height: 60vh;
+        }
+
+        .map-container {
+            height: 600px;
         }
     </style>
 @stop
