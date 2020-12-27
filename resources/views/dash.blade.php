@@ -153,7 +153,7 @@
                     <div class="card-body text-center">
                         <a href="https://info.vaccinicovid.gov.it/"><img
                                 src="{{ asset('imgs/vaccinazione_logo.png') }}"
-                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline" alt="Immuni"></a>
+                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline" alt="Campagna di vaccinazione"></a>
                     </div>
                 </div>
             </div>
