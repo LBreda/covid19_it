@@ -139,12 +139,21 @@
     </div>
     @if(App::isLocale('it'))
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card" role="alert">
                     <div class="card-body text-center">
                         <a href="https://www.immuni.italia.it/download.html"><img
                                 src="{{ asset('imgs/scarica_immuni_logo.svg') }}"
-                                style="height: 2.5em; display: inline-flex; align-self: baseline" alt="Immuni"></a>
+                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline" alt="Immuni"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" role="alert">
+                    <div class="card-body text-center">
+                        <a href="https://info.vaccinicovid.gov.it/"><img
+                                src="{{ asset('imgs/vaccinazione_logo.png') }}"
+                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline" alt="Immuni"></a>
                     </div>
                 </div>
             </div>
