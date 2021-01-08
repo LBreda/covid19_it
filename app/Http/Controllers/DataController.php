@@ -117,7 +117,7 @@ class DataController extends Controller
                     'infected'         => round(($infected / $region->population) * 1000, 2),
                     'tested'           => round(($tested / $region->population) * 1000, 2),
                     'severity'         => $region->severity,
-                    'daily_vaccinated' => $daily_vaccinated,
+                    'daily_vaccinated' => round(($daily_vaccinated / $region->population) * 1000, 2),
                 ],
             ];
         });
