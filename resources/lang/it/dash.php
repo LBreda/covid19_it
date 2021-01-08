@@ -37,7 +37,7 @@ return [
     'immuni_downloads'        => 'Downloads dell\'app Immuni',
     'vaccinations'            => 'Vaccinazioni',
     'data'                    => 'Dati',
-    'data_source'             => 'Fonti dei dati: :source_dpc e :source_immuni.',
+    'data_source'             => 'Fonti dei dati: :source_vaccini, :source_dpc e :source_immuni.',
     'created_backed'          => 'Creato da :created e sostenuto da :backed.',
     'git_repos'               => 'Questo sito è Open Source e <a href=":url">disponibile su GitHub</a>. Puoi <a href=":url/issues">segnalare un bug qui</a>.',
     'notices'                 => [

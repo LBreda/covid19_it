@@ -419,7 +419,7 @@
 
     <footer class="row mt-4">
         <div class="col-md-12 text-center" style="font-size: 80%">
-            <p>{!! __('dash.data_source', ['source_dpc' => '<a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>', 'source_immuni' => '<a href="https://github.com/immuni-app/immuni-dashboard-data">Immuni</a>']) !!}</p>
+            <p>{!! __('dash.data_source', ['source_dpc' => '<a href="https://github.com/pcm-dpc/COVID-19">Protezione Civile Nazionale</a>', 'source_immuni' => '<a href="https://github.com/immuni-app/immuni-dashboard-data">Immuni</a>', 'source_vaccini' => '<a href="https://github.com/italia/covid19-opendata-vaccini">Governo Italiano</a>']) !!}</p>
             <p>{!! __('dash.created_backed', ['created' => '<a href="https://lbreda.com/">Lorenzo Breda</a>', 'backed' => '<a href="https://twobeesolution.com">TwoBeeSolution S.r.l.</a>']) !!}</p>
             <p>{!! __('dash.git_repos', ['url' => 'https://github.com/LBreda/covid19_it']) !!}</p>
         </div>
