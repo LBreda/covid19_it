@@ -7,16 +7,22 @@
         <div class="col-8 col-xl-6">
             <h1>{{ $region ? $region->name : __('dash.national_data') }}</h1>
             @if($region)
-                <span class="badge" style="background-color: {{ $region->severity['color'] }}">{{ __("dash.severity_zones.{$region->severity['level']}") }}</span>
+                <span class="badge"
+                      style="background-color: {{ $region->severity['color'] }}">{{ __("dash.severity_zones.{$region->severity['level']}") }}</span>
             @endif
         </div>
         <div class="col-4 col-xl-6 text-right">
             @if(session('lang') == 'it')
-                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-primary" title="English version"><i class="fas fa-language"></i><span class="d-none d-lg-inline"> English version</span></a>
+                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'en']) }}" class="btn btn-primary"
+                   title="English version"><i class="fas fa-language"></i><span class="d-none d-lg-inline"> English version</span></a>
             @elseif(session('lang') == 'en')
-                        <a href="{{ Request::fullUrlWithQuery(['hl' =>  'it']) }}" class="btn btn-primary" title="Versione italiana"><i class="fas fa-language"></i><span class="d-none d-lg-inline"> Versione italiana</span></a>
+                <a href="{{ Request::fullUrlWithQuery(['hl' =>  'it']) }}" class="btn btn-primary"
+                   title="Versione italiana"><i class="fas fa-language"></i><span class="d-none d-lg-inline"> Versione italiana</span></a>
             @endif
-                <a href="https://ko-fi.com/lbreda" class="btn btn-primary" title="{{ __('dash.support') }}"><img alt="Ko-fi" style="width: 1.25em" src="{{ asset('imgs/ko-fi_logo.svg') }}"><span class="d-none d-lg-inline"> {{ __('dash.support') }}</span></a>
+            <a href="https://ko-fi.com/lbreda" class="btn btn-primary" title="{{ __('dash.support') }}"><img alt="Ko-fi"
+                                                                                                             style="width: 1.25em"
+                                                                                                             src="{{ asset('imgs/ko-fi_logo.svg') }}"><span
+                    class="d-none d-lg-inline"> {{ __('dash.support') }}</span></a>
         </div>
     </div>
     <div class="row">
@@ -27,7 +33,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-2 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-red"><i class="fas fa-fw fa-procedures"></i></span>
                 <div class="info-box-content">
@@ -37,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="fas fa-fw fa-smile"></i></span>
                 <div class="info-box-content">
@@ -47,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-black"><i class="fas fa-fw fa-tombstone"></i></span>
                 <div class="info-box-content">
@@ -57,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-purple"><i class="fas fa-fw fa-disease"></i></span>
                 <div class="info-box-content">
@@ -67,7 +73,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-6">
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -77,13 +85,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-6">
+        <div class="col-lg-4 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.tests') }}</span>
                     <span class="info-box-number" id="total-tests"></span>
                     <small><span class="info-box-number" id="diff-tests"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-6">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.vaccinations') }}</span>
+                    <span class="info-box-number" id="total-vaccinations"></span>
+                    <small><span class="info-box-number" id="diff-vaccinations"></span></small>
                 </div>
             </div>
         </div>
@@ -144,7 +162,8 @@
                     <div class="card-body text-center">
                         <a href="https://www.immuni.italia.it/download.html"><img
                                 src="{{ asset('imgs/scarica_immuni_logo.svg') }}"
-                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline" alt="Immuni"></a>
+                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                alt="Immuni"></a>
                     </div>
                 </div>
             </div>
@@ -153,7 +172,8 @@
                     <div class="card-body text-center">
                         <a href="https://info.vaccinicovid.gov.it/"><img
                                 src="{{ asset('imgs/vaccinazione_logo.png') }}"
-                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline" alt="Campagna di vaccinazione"></a>
+                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                alt="Campagna di vaccinazione"></a>
                     </div>
                 </div>
             </div>
@@ -269,6 +289,19 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.daily_vaccinations') }}</h3>
+                </div>
+
+                <div class="card-body card-chart">
+                    <canvas id="daily_vaccinations_lines" data-label-vaccinations="{{ __('dash.vaccinations') }}"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
     @if(!$region)
         <div class="row">
             <div class="col-12 col-lg">
@@ -301,6 +334,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
@@ -318,6 +353,16 @@
                     </div>
                     <div class="card-body card-map">
                         <div id="map_tested" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.vaccinated_pro_capite') }}</h3>
+                    </div>
+                    <div class="card-body card-map">
+                        <div id="map_vaccinated" class="map-container"></div>
                     </div>
                 </div>
             </div>

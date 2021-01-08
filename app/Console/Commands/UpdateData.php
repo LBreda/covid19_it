@@ -45,5 +45,6 @@ class UpdateData extends Command
     {
         $this->call('covid:update-dpc');
         $this->call('covid:update-immuni');
+        $this->call('covid:update-vaccinations');
     }
 }

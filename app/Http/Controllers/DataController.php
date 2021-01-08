@@ -6,7 +6,9 @@ use App\Models\Datum;
 use App\Models\ImmuniDownload;
 use App\Models\Notice;
 use App\Models\Region;
+use App\Models\Vaccination;
 use Carbon\Carbon;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -14,13 +16,16 @@ class DataController extends Controller
 {
     private function getDataObject(Region $region = null)
     {
-        $data = Datum::query();
+        $data = Datum::query()->leftJoin('vaccinations', function (JoinClause $join) {
+            $join->on(\DB::raw('DATE(data.date)'), '=', \DB::raw('DATE(vaccinations.date)'));
+            $join->on('data.region_id', '=', 'vaccinations.region_id');
+        });
 
         if ($region) {
-            $data->where('region_id', '=', $region->id);
+            $data->where('data.region_id', '=', $region->id);
         }
 
-        $data = $data->get()->groupBy('date')->mapWithKeys(function (Collection $group) {
+        $data = $data->get(['data.*', 'vaccinations.daily_vaccinated'])->groupBy('date')->mapWithKeys(function (Collection $group) {
             $dataset = collect([
                 'hospitalized_home'   => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_home, 0),
                 'hospitalized_light'  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_light, 0),
@@ -29,6 +34,7 @@ class DataController extends Controller
                 'dead'                => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
                 'tests'               => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
                 'tested'              => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
+                'daily_vaccinated'    => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_vaccinated, 0),
             ]);
             return [
                 $group->first()->date => $dataset,
@@ -102,14 +108,16 @@ class DataController extends Controller
             $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
             $infected = $ill + $datum->dead + $datum->healed;
             $tested = $datum->tested;
+            $daily_vaccinated = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_vaccinated, 0);
 
             return [
                 $region->id => [
-                    'ill'      => round(($ill / $region->population) * 1000, 2),
-                    'dead'     => round(($datum->dead / $region->population) * 1000, 2),
-                    'infected' => round(($infected / $region->population) * 1000, 2),
-                    'tested'   => round(($tested / $region->population) * 1000, 2),
-                    'severity' => $region->severity,
+                    'ill'              => round(($ill / $region->population) * 1000, 2),
+                    'dead'             => round(($datum->dead / $region->population) * 1000, 2),
+                    'infected'         => round(($infected / $region->population) * 1000, 2),
+                    'tested'           => round(($tested / $region->population) * 1000, 2),
+                    'severity'         => $region->severity,
+                    'daily_vaccinated' => $daily_vaccinated,
                 ],
             ];
         });

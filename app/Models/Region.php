@@ -43,6 +43,8 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder|Region whereSeverity($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Restriction[] $restrictions
  * @property-read int|null $restrictions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Vaccination[] $vaccinations
+ * @property-read int|null $vaccinations_count
  */
 class Region extends Model
 {
@@ -57,6 +59,11 @@ class Region extends Model
     public function data(): HasMany
     {
         return $this->hasMany(Datum::class);
+    }
+
+    public function vaccinations(): HasMany
+    {
+        return $this->hasMany(Vaccination::class);
     }
 
     public function restrictions(): HasMany

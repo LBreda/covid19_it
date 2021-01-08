@@ -5,6 +5,7 @@ let ill_by_severity = document.getElementById('ill_by_severity');
 let ill_variations = document.getElementById('ill_variations');
 let ill_weighted_variations = document.getElementById('ill_weighted_variations');
 let ill_by_severity_lines = document.getElementById('ill_by_severity_lines');
+let daily_vaccinations_lines = document.getElementById('daily_vaccinations_lines');
 let immuni_downloads_lines = document.getElementById('immuni_downloads_lines') || null;
 
 // Functions
@@ -59,6 +60,7 @@ dataReq.onload = () => {
     let dead = values.map(datum => datum.dead);
     let tests = values.map(datum => datum.tests);
     let tested = values.map(datum => datum.tested);
+    let daily_vaccinated = values.map(datum => datum.daily_vaccinated);
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
     });
@@ -116,6 +118,10 @@ dataReq.onload = () => {
     document.getElementById('total-hospitalized').textContent = total_hospitalized_light + total_hospitalized_severe;
 
     document.getElementById('diff-hospitalized').textContent = numberWithSign(diff_hospitalized_light + diff_hospitalized_severe);
+
+    let total_vaccinated = daily_vaccinated.reduce((a, c) => a+c, 0);
+    document.getElementById('total-vaccinations').textContent = total_vaccinated.toString();
+    document.getElementById('diff-vaccinations').textContent = numberWithSign(daily_vaccinated.slice(-1)[0]);
 
     // Charts
     let ill_chart = new Chart(ill_box, {
@@ -350,6 +356,37 @@ dataReq.onload = () => {
             },
             legend: {
                 display: (ill_by_severity_lines.parentElement.clientWidth > 800)
+            }
+        }
+    });
+
+    let daily_vaccinations_lines_chart = new Chart(daily_vaccinations_lines, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: daily_vaccinations_lines.dataset.labelVaccinations,
+                    data: daily_vaccinated,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#C71585',
+                    borderWidth: 1
+                },
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            onResize: chartOnResize,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                }],
+                xAxes: [{}]
+            },
+            legend: {
+                display: (daily_vaccinations_lines.parentElement.clientWidth > 800)
             }
         }
     });

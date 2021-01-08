@@ -46,6 +46,18 @@ function getColorTested(min, max, value) {
                                 '#ffffff';
 }
 
+function getColorVaccinated(min, max, value) {
+    let interval = Math.round((max - min) * 100 / 8) / 100;
+    return value > interval * 8 ? '#C71585' :
+        value > interval * 7 ? '#CF3696' :
+            value > interval * 6 ? '#D758A8' :
+                value > interval * 5 ? '#DF79B9' :
+                    value > interval * 4 ? '#E79BCB' :
+                        value > interval * 3 ? '#EFBCDC' :
+                            value > interval * 2 ? '#F7DEEE' :
+                                '#ffffff';
+}
+
 // Maps
 let map_ill = L.map('map_ill', {
     zoomSnap: 0.2,
@@ -72,6 +84,11 @@ let map_restrictions = L.map('map_restrictions', {
     dragging: !L.Browser.mobile,
     tap: !L.Browser.mobile
 }).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_vaccinated = L.map('map_vaccinated', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_ill);
@@ -87,6 +104,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_restrictions);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map_vaccinated);
 
 let regionsReq = new XMLHttpRequest();
 regionsReq.open('GET', document.getElementById('js-maps').dataset.geoUrl);
@@ -106,6 +126,8 @@ regionsReq.onload = () => {
         let maxDead = Math.max(...Object.keys(mapData).map(key => mapData[key].dead));
         let minTested = Math.min(...Object.keys(mapData).map(key => mapData[key].tested));
         let maxTested = Math.max(...Object.keys(mapData).map(key => mapData[key].tested));
+        let minVaccinated = Math.min(...Object.keys(mapData).map(key => mapData[key].daily_vaccinated));
+        let maxVaccinated = Math.max(...Object.keys(mapData).map(key => mapData[key].daily_vaccinated));
 
         L.geoJson(regionsReq.response, {
             style: (feature) => {
@@ -182,6 +204,21 @@ regionsReq.onload = () => {
                 layer.bindTooltip(`${feature.properties.Regione}`)
             }
         }).addTo(map_restrictions);
+        L.geoJson(regionsReq.response, {
+            style: (feature) => {
+                return {
+                    fillColor: getColorVaccinated(minVaccinated, maxVaccinated, mapData[feature.properties.DatabaseID].daily_vaccinated),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.9
+                }
+            },
+            onEachFeature: (feature, layer) => {
+                layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].daily_vaccinated}`)
+            }
+        }).addTo(map_vaccinated);
     };
     mapDataReq.send();
 };
