@@ -53,8 +53,9 @@ class DataController extends Controller
             $data->where('region_id', '=', $region->id);
             $notices = $region->notices;
         }
-        $last_update = Carbon::parse($data->orderBy('date', 'desc')->first()->date)->format(__('dash.datetime_format'));
-        return view('dash', compact('region', 'notices', 'last_update'));
+        $last_update_infections = Carbon::parse($data->orderBy('date', 'desc')->first()->date)->format(__('dash.datetime_format'));
+        $last_update_vaccinations = Carbon::parse(Vaccination::orderBy('updated_at', 'desc')->first()->updated_at)->format(__('dash.datetime_format'));
+        return view('dash', compact('region', 'notices', 'last_update_infections', 'last_update_vaccinations'));
     }
 
     public function data(Region $region = null)

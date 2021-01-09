@@ -37,10 +37,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereTests($value)
  * @property int $vaccinated
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereVaccinated($value)
+ * @property int $daily_vaccinated
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyVaccinated($value)
  */
 class Vaccination extends Model
 {
     protected $table = 'vaccinations';
     protected $guarded = ['id'];
-    protected $dates = ['date'];
+    protected $dates = ['date','created_at', 'updated_at'];
 }

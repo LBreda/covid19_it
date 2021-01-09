@@ -74,6 +74,7 @@ class UpdateVaccinationsData extends Command
         $this->info('Downloading the vaccines data...');
 
         $response = Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.json');
+        $last_update = json_decode(Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json')->body())->ultimo_aggiornamento;
         $vaccines_raw = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()), true);
 
         $this->info('Downloaded.');
@@ -100,6 +101,8 @@ class UpdateVaccinationsData extends Command
                     'date'             => Carbon::parse($date),
                     'region_id'        => self::$regions_ids[$region],
                     'daily_vaccinated' => $datum,
+                    'updated_at'       => $last_update,
+                    'created_at'       => $last_update,
                 ]))->save();
             }
         }

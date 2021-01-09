@@ -26,7 +26,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12"><p style="font-size: small">{{ __('dash.last_update', ['date' => $last_update]) }}</p>
+        <div class="col-md-12">
+            <p style="font-size: small">
+                {{ __('dash.last_update_infections', ['date' => $last_update_infections]) }}<br>
+                {{ __('dash.last_update_vaccinations', ['date' => $last_update_vaccinations]) }}
+            </p>
         </div>
     </div>
 @stop
