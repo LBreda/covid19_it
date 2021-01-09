@@ -71,7 +71,7 @@ class UpdateVaccinationsData extends Command
      */
     public function handle()
     {
-        $this->info('Downloading the vaccines data...');
+        $this->info('Downloading the vaccinations data...');
 
         $response = Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.json');
         $last_update = json_decode(Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json')->body())->ultimo_aggiornamento;
@@ -106,5 +106,40 @@ class UpdateVaccinationsData extends Command
                 ]))->save();
             }
         }
+
+        $this->info('Downloading the vaccines shipments data...');
+
+        $response = Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/consegne-vaccini-latest.json');
+        $vaccines_shipments_raw = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()), true);
+
+        $this->info('Downloaded.');
+        $this->info('Preparing the dataset...');
+
+        $vaccines_shipments = collect($vaccines_shipments_raw['data'])
+            ->sortBy('data_consegna')
+            ->groupBy('data_consegna')->map(function (Collection $date) {
+                return $date->groupBy('area')->map(function (Collection $area) {
+                    return $area->reduce(function (int $c, array $d) {
+                        return $c + $d['numero_dosi'];
+                    }, 0);
+                });
+            });
+
+        $this->info('Populating the datatables...');
+
+        foreach ($vaccines_shipments as $date => $regions) {
+            foreach ($regions as $region => $datum) {
+                Vaccination::updateOrInsert([
+                    'date'      => Carbon::parse($date),
+                    'region_id' => self::$regions_ids[$region],
+                ],
+                    [
+                        'date'          => Carbon::parse($date),
+                        'region_id'     => self::$regions_ids[$region],
+                        'daily_shipped' => $datum,
+                    ]);
+            }
+        }
+
     }
 }

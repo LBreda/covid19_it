@@ -6,6 +6,7 @@ let ill_variations = document.getElementById('ill_variations');
 let ill_weighted_variations = document.getElementById('ill_weighted_variations');
 let ill_by_severity_lines = document.getElementById('ill_by_severity_lines');
 let daily_vaccinations_lines = document.getElementById('daily_vaccinations_lines');
+let vaccinations_and_shipments_lines = document.getElementById('vaccinations_and_shipments_lines');
 let immuni_downloads_lines = document.getElementById('immuni_downloads_lines') || null;
 
 // Functions
@@ -61,6 +62,9 @@ dataReq.onload = () => {
     let tests = values.map(datum => datum.tests);
     let tested = values.map(datum => datum.tested);
     let daily_vaccinated = values.map(datum => datum.daily_vaccinated);
+    let vaccinated = daily_vaccinated.map((datum, i) => daily_vaccinated.slice(0, i + 1).reduce((a, b) => a + b));
+    let daily_vaccine_shipments = values.map(datum => datum.daily_vaccine_shipments);
+    let vaccine_shipments = daily_vaccine_shipments.map((datum, i) => daily_vaccine_shipments.slice(0, i + 1).reduce((a, b) => a + b));
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
     });
@@ -119,9 +123,13 @@ dataReq.onload = () => {
 
     document.getElementById('diff-hospitalized').textContent = numberWithSign(diff_hospitalized_light + diff_hospitalized_severe);
 
-    let total_vaccinated = daily_vaccinated.reduce((a, c) => a+c, 0);
+    let total_vaccinated = daily_vaccinated.reduce((a, c) => a + c, 0);
     document.getElementById('total-vaccinations').textContent = total_vaccinated.toString();
     document.getElementById('diff-vaccinations').textContent = numberWithSign(daily_vaccinated.slice(-1)[0]);
+
+    let total_vaccine_shipments = daily_vaccine_shipments.reduce((a, c) => a + c, 0);
+    document.getElementById('total-vaccine-shipments').textContent = total_vaccine_shipments.toString();
+    document.getElementById('diff-vaccine-shipments').textContent = numberWithSign(daily_vaccine_shipments.slice(-1)[0]);
 
     // Charts
     let ill_chart = new Chart(ill_box, {
@@ -370,6 +378,44 @@ dataReq.onload = () => {
                     data: daily_vaccinated,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: '#C71585',
+                    borderWidth: 1
+                },
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            onResize: chartOnResize,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                }],
+                xAxes: [{}]
+            },
+            legend: {
+                display: (daily_vaccinations_lines.parentElement.clientWidth > 800)
+            }
+        }
+    });
+
+    let vaccinations_and_shipments_chart = new Chart(vaccinations_and_shipments_lines, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: vaccinations_and_shipments_lines.dataset.labelVaccinations,
+                    data: vaccinated,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#C71585',
+                    borderWidth: 1,
+                },
+                {
+                    label: vaccinations_and_shipments_lines.dataset.labelShipments,
+                    data: vaccine_shipments,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#152dc7',
                     borderWidth: 1
                 },
             ]

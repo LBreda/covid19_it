@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -99,13 +99,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-3 col-6">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.vaccinations') }}</span>
                     <span class="info-box-number" id="total-vaccinations"></span>
                     <small><span class="info-box-number" id="diff-vaccinations"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-shipping-fast"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.vaccine_shipments') }}</span>
+                    <span class="info-box-number" id="total-vaccine-shipments"></span>
+                    <small><span class="info-box-number" id="diff-vaccine-shipments"></span></small>
                 </div>
             </div>
         </div>
@@ -301,7 +311,22 @@
                 </div>
 
                 <div class="card-body card-chart">
-                    <canvas id="daily_vaccinations_lines" data-label-vaccinations="{{ __('dash.vaccinations') }}"></canvas>
+                    <canvas id="daily_vaccinations_lines"
+                            data-label-vaccinations="{{ __('dash.vaccinations') }}"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.vaccinations_and_shipments') }}</h3>
+                </div>
+
+                <div class="card-body card-chart">
+                    <canvas id="vaccinations_and_shipments_lines" data-label-vaccinations="{{ __('dash.vaccinations') }}"
+                            data-label-shipments="{{ __('dash.vaccine_shipments') }}"></canvas>
                 </div>
             </div>
         </div>

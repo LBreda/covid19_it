@@ -39,6 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereVaccinated($value)
  * @property int $daily_vaccinated
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyVaccinated($value)
+ * @property int $daily_shipped
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyShipped($value)
  */
 class Vaccination extends Model
 {
