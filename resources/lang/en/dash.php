@@ -11,7 +11,7 @@ return [
     'infected_pro_capite'        => 'Infected per 1000 citizens',
     'dead_pro_capite'            => 'Dead per 1000 citizens',
     'tested_pro_capite'          => 'Tested cases per 1000 citizens',
-    'vaccinated_pro_capite'      => 'Used vaccine doses people per 1000 citizens',
+    'vaccinated_pro_capite'      => 'Used doses per 1000 citizens',
     'restrictions'               => 'Areas by restriction level',
     'infected'                   => 'Infected (tot.)',
     'new_ill'                    => 'New currently infected people',
