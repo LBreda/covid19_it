@@ -101,8 +101,8 @@ class UpdateVaccinationsData extends Command
                     'date'             => Carbon::parse($date),
                     'region_id'        => self::$regions_ids[$region],
                     'daily_vaccinated' => $datum,
-                    'updated_at'       => $last_update,
-                    'created_at'       => $last_update,
+                    'updated_at'       => substr($last_update, 0, 20),
+                    'created_at'       => substr($last_update, 0, 20),
                 ]))->save();
             }
         }
