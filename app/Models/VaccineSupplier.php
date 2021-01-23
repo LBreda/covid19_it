@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Datum
@@ -42,35 +42,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyVaccinated($value)
  * @property int $daily_shipped
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyShipped($value)
- * @property int $daily_first_doses
- * @property int $daily_second_doses
- * @property-read int $daily_vaccinations
- * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyFirstDoses($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailySecondDoses($value)
- * @property int|null $vaccine_supplier_id
- * @property-read \App\Models\VaccineSupplier|null $vaccine_supplier
- * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereVaccineSupplierId($value)
+ * @property string $name
+ * @property int $doses_needed
+ * @method static \Illuminate\Database\Eloquent\Builder|VaccineSupplier whereDosesNeeded($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VaccineSupplier whereName($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Vaccination[] $vaccinations
+ * @property-read int|null $vaccinations_count
  */
-class Vaccination extends Model
+class VaccineSupplier extends Model
 {
-    protected $table = 'vaccinations';
+    protected $table = 'vaccine_suppliers';
     protected $guarded = ['id'];
-    protected $dates = ['date', 'created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
 
-    /**
-     * @return BelongsTo
-     */
-    public function vaccine_supplier(): BelongsTo
+    public function vaccinations(): HasMany
     {
-        return $this->belongsTo(VaccineSupplier::class, 'vaccine_supplier_id');
-    }
-
-    /**
-     * Total daily vaccinations
-     * @return int
-     */
-    public function getDailyVaccinationsAttribute(): int
-    {
-        return $this->daily_first_doses + $this->daily_second_doses;
+        return $this->hasMany(Vaccination::class, 'vaccine_supplier_id');
     }
 }

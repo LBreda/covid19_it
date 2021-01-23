@@ -6,6 +6,7 @@ use App\Models\Datum;
 use App\Models\ImmuniDownload;
 use App\Models\Region;
 use App\Models\Vaccination;
+use App\Models\VaccineSupplier;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -73,6 +74,8 @@ class UpdateVaccinationsData extends Command
     {
         $this->info('Downloading the vaccinations data...');
 
+        $vaccine_suppliers_ids = VaccineSupplier::pluck('id', 'name')->toArray();
+
         $response = Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.json');
         $last_update = json_decode(Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json')->body())->ultimo_aggiornamento;
         $vaccines_raw = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()), true);
@@ -85,9 +88,14 @@ class UpdateVaccinationsData extends Command
             ->sortBy('data_somministrazione')
             ->groupBy('data_somministrazione')->map(function (Collection $date) {
                 return $date->groupBy('area')->map(function (Collection $area) {
-                    return $area->reduce(function (int $c, array $d) {
-                        return $c + $d['sesso_maschile'] + $d['sesso_femminile'];
-                    }, 0);
+                    return $area->groupBy('fornitore')->map(function (Collection $fornitore) {
+                        return $fornitore->reduce(function (array $c, array $d) {
+                            return [
+                                'first'  => $c['first'] + $d['prima_dose'],
+                                'second' => $c['second'] + $d['seconda_dose']
+                            ];
+                        }, ['first' => 0, 'second' => 0]);
+                    });
                 });
             });
 
@@ -96,14 +104,18 @@ class UpdateVaccinationsData extends Command
         DB::table('vaccinations')->truncate();
 
         foreach ($vaccines as $date => $regions) {
-            foreach ($regions as $region => $datum) {
-                (new Vaccination([
-                    'date'             => Carbon::parse($date),
-                    'region_id'        => self::$regions_ids[$region],
-                    'daily_vaccinated' => $datum,
-                    'updated_at'       => substr($last_update, 0, 20),
-                    'created_at'       => substr($last_update, 0, 20),
-                ]))->save();
+            foreach ($regions as $region => $suppliers) {
+                foreach ($suppliers as $supplier => $datum) {
+                    (new Vaccination([
+                        'date'                => Carbon::parse($date),
+                        'region_id'           => self::$regions_ids[$region],
+                        'vaccine_supplier_id' => $vaccine_suppliers_ids[$supplier],
+                        'daily_first_doses'   => $datum['first'],
+                        'daily_second_doses'  => $datum['second'],
+                        'updated_at'          => substr($last_update, 0, 20),
+                        'created_at'          => substr($last_update, 0, 20),
+                    ]))->save();
+                }
             }
         }
 

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class DataController extends Controller
 {
@@ -25,23 +26,27 @@ class DataController extends Controller
             $data->where('data.region_id', '=', $region->id);
         }
 
-        $data = $data->get(['data.*', 'vaccinations.daily_vaccinated', 'vaccinations.daily_shipped'])
-            ->groupBy('date')->mapWithKeys(function (Collection $group) {
-                $dataset = collect([
-                    'hospitalized_home'      => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_home, 0),
-                    'hospitalized_light'     => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_light, 0),
-                    'hospitalized_severe'    => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_severe, 0),
-                    'healed'                 => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->healed, 0),
-                    'dead'                   => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
-                    'tests'                  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
-                    'tested'                 => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
-                    'daily_vaccinated'       => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_vaccinated, 0),
-                    'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
-                ]);
-                return [
-                    $group->first()->date => $dataset,
-                ];
-            });
+        $data = $data->get([
+            'data.*',
+            'vaccinations.daily_first_doses',
+            'vaccinations.daily_second_doses',
+            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_vaccinations')
+        ])->groupBy('date')->mapWithKeys(function (Collection $group) {
+            $dataset = collect([
+                'hospitalized_home'       => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_home, 0),
+                'hospitalized_light'      => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_light, 0),
+                'hospitalized_severe'     => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_severe, 0),
+                'healed'                  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->healed, 0),
+                'dead'                    => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
+                'tests'                   => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
+                'tested'                  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
+                'daily_vaccinated'        => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_vaccinated, 0),
+                'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
+            ]);
+            return [
+                $group->first()->date => $dataset,
+            ];
+        });
 
         return $data;
     }
@@ -116,12 +121,12 @@ class DataController extends Controller
 
             return [
                 $region->id => [
-                    'ill'                    => round(($ill / $region->population) * 1000, 2),
-                    'dead'                   => round(($datum->dead / $region->population) * 1000, 2),
-                    'infected'               => round(($infected / $region->population) * 1000, 2),
-                    'tested'                 => round(($tested / $region->population) * 1000, 2),
-                    'severity'               => $region->severity,
-                    'daily_vaccinated'       => round(($daily_vaccinated / $region->population) * 1000, 2),
+                    'ill'                     => round(($ill / $region->population) * 1000, 2),
+                    'dead'                    => round(($datum->dead / $region->population) * 1000, 2),
+                    'infected'                => round(($infected / $region->population) * 1000, 2),
+                    'tested'                  => round(($tested / $region->population) * 1000, 2),
+                    'severity'                => $region->severity,
+                    'daily_vaccinated'        => round(($daily_vaccinated / $region->population) * 1000, 2),
                     'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $region->population) * 1000, 2),
                 ],
             ];
