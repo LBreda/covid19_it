@@ -6,50 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * App\Models\Datum
+ * App\Models\Vaccination
  *
  * @property int $id
  * @property int $region_id
- * @property string $date
- * @property int $hospitalized_home
- * @property int $hospitalized_light
- * @property int $hospitalized_severe
- * @property int $healed
- * @property int $dead
- * @property int $tested
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereDead($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereHealed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereHospitalizedHome($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereHospitalizedLight($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereHospitalizedSevere($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereRegionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereTested($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereUpdatedAt($value)
- * @mixin \Eloquent
- * @property int $tests
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Datum whereTests($value)
- * @property int $vaccinated
- * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereVaccinated($value)
- * @property int $daily_vaccinated
- * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyVaccinated($value)
- * @property int $daily_shipped
- * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyShipped($value)
+ * @property int|null $vaccine_supplier_id
+ * @property \Illuminate\Support\Carbon $date
  * @property int $daily_first_doses
  * @property int $daily_second_doses
- * @property-read int $daily_vaccinations
+ * @property int $daily_shipped
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read int $daily_vaccinated
+ * @property-read \App\Models\VaccineSupplier|null $vaccine_supplier
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyFirstDoses($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailySecondDoses($value)
- * @property int|null $vaccine_supplier_id
- * @property-read \App\Models\VaccineSupplier|null $vaccine_supplier
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyShipped($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereRegionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereVaccineSupplierId($value)
+ * @mixin \Eloquent
  */
 class Vaccination extends Model
 {
