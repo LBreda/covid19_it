@@ -12,7 +12,6 @@
     "license": "GPL-3.0-only",
     "require": {
         "php": "^7.4|^8.0",
-        "ext-http": "*",
         "ext-json": "*",
         "fakerphp/faker": "^1.13",
         "fideloper/proxy": "^4.2",
