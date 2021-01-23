@@ -12,7 +12,7 @@ return [
     'infected_pro_capite'        => 'Infettati totali ogni 1000 abitanti',
     'dead_pro_capite'            => 'Deceduti ogni 1000 abitanti',
     'tested_pro_capite'          => 'Casi testati ogni 1000 abitanti',
-    'vaccinated_pro_capite'      => 'Dosi utilizzate ogni 1000 abitanti',
+    'doses_pro_capite'           => 'Dosi utilizzate ogni 1000 abitanti',
     'restrictions'               => 'Aree per restrizioni',
     'new_ill'                    => 'Nuovi attualmente infetti',
     'new_infected'               => 'Nuovi infettati',

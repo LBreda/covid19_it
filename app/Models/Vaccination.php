@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $daily_shipped
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read int $daily_vaccinated
+ * @property-read int $daily_doses
  * @property-read \App\Models\VaccineSupplier|null $vaccine_supplier
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination newQuery()
@@ -51,7 +51,7 @@ class Vaccination extends Model
      * Total daily vaccinations
      * @return int
      */
-    public function getDailyVaccinatedAttribute(): int
+    public function getDailyDosesAttribute(): int
     {
         return $this->daily_first_doses + $this->daily_second_doses;
     }

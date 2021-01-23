@@ -388,10 +388,10 @@
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('dash.vaccinated_pro_capite') }}</h3>
+                        <h3 class="card-title">{{ __('dash.doses_pro_capite') }}</h3>
                     </div>
                     <div class="card-body card-map">
-                        <div id="map_vaccinated" class="map-container"></div>
+                        <div id="map_doses" class="map-container"></div>
                     </div>
                 </div>
             </div>

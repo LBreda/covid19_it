@@ -61,8 +61,8 @@ dataReq.onload = () => {
     let dead = values.map(datum => datum.dead);
     let tests = values.map(datum => datum.tests);
     let tested = values.map(datum => datum.tested);
-    let daily_vaccinated = values.map(datum => datum.daily_vaccinated);
-    let vaccinated = daily_vaccinated.map((datum, i) => daily_vaccinated.slice(0, i + 1).reduce((a, b) => a + b));
+    let daily_doses = values.map(datum => datum.daily_doses);
+    let doses = daily_doses.map((datum, i) => daily_doses.slice(0, i + 1).reduce((a, b) => a + b));
     let daily_vaccine_shipments = values.map(datum => datum.daily_vaccine_shipments);
     let vaccine_shipments = daily_vaccine_shipments.map((datum, i) => daily_vaccine_shipments.slice(0, i + 1).reduce((a, b) => a + b));
     let new_ill = ill.map((item, key) => {
@@ -123,9 +123,9 @@ dataReq.onload = () => {
 
     document.getElementById('diff-hospitalized').textContent = numberWithSign(diff_hospitalized_light + diff_hospitalized_severe);
 
-    let total_vaccinated = daily_vaccinated.reduce((a, c) => a + c, 0);
-    document.getElementById('total-vaccinations').textContent = total_vaccinated.toString();
-    document.getElementById('diff-vaccinations').textContent = numberWithSign(daily_vaccinated.slice(-1)[0]);
+    let total_doses = daily_doses.reduce((a, c) => a + c, 0);
+    document.getElementById('total-vaccinations').textContent = total_doses.toString();
+    document.getElementById('diff-vaccinations').textContent = numberWithSign(daily_doses.slice(-1)[0]);
 
     let total_vaccine_shipments = daily_vaccine_shipments.reduce((a, c) => a + c, 0);
     document.getElementById('total-vaccine-shipments').textContent = total_vaccine_shipments.toString();
@@ -375,7 +375,7 @@ dataReq.onload = () => {
             datasets: [
                 {
                     label: daily_vaccinations_lines.dataset.labelVaccinations,
-                    data: daily_vaccinated,
+                    data: daily_doses,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: '#C71585',
                     borderWidth: 1
@@ -406,7 +406,7 @@ dataReq.onload = () => {
             datasets: [
                 {
                     label: vaccinations_and_shipments_lines.dataset.labelVaccinations,
-                    data: vaccinated,
+                    data: doses,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: '#C71585',
                     borderWidth: 1,

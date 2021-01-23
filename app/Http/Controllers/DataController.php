@@ -30,7 +30,7 @@ class DataController extends Controller
             'data.*',
             'vaccinations.daily_first_doses',
             'vaccinations.daily_second_doses',
-            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_vaccinated'),
+            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_doses'),
             'vaccinations.daily_shipped'
         ])->groupBy('date')->mapWithKeys(function (Collection $group) {
             $dataset = collect([
@@ -41,7 +41,7 @@ class DataController extends Controller
                 'dead'                    => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
                 'tests'                   => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
                 'tested'                  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
-                'daily_vaccinated'        => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_vaccinated, 0),
+                'daily_doses'             => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_doses, 0),
                 'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
             ]);
             return [
@@ -117,7 +117,7 @@ class DataController extends Controller
             $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
             $infected = $ill + $datum->dead + $datum->healed;
             $tested = $datum->tested;
-            $daily_vaccinated = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_vaccinated, 0);
+            $daily_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_doses, 0);
             $daily_vaccine_shipments = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_shipped, 0);
 
             return [
@@ -127,7 +127,7 @@ class DataController extends Controller
                     'infected'                => round(($infected / $region->population) * 1000, 2),
                     'tested'                  => round(($tested / $region->population) * 1000, 2),
                     'severity'                => $region->severity,
-                    'daily_vaccinated'        => round(($daily_vaccinated / $region->population) * 1000, 2),
+                    'daily_doses'             => round(($daily_doses / $region->population) * 1000, 2),
                     'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $region->population) * 1000, 2),
                 ],
             ];
