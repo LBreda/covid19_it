@@ -30,7 +30,7 @@ class DataController extends Controller
             'data.*',
             'vaccinations.daily_first_doses',
             'vaccinations.daily_second_doses',
-            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_vaccinations')
+            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_vaccinated')
         ])->groupBy('date')->mapWithKeys(function (Collection $group) {
             $dataset = collect([
                 'hospitalized_home'       => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_home, 0),

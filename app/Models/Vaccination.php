@@ -69,7 +69,7 @@ class Vaccination extends Model
      * Total daily vaccinations
      * @return int
      */
-    public function getDailyVaccinationsAttribute(): int
+    public function getDailyVaccinatedAttribute(): int
     {
         return $this->daily_first_doses + $this->daily_second_doses;
     }
