@@ -52,15 +52,15 @@ dataReq.onload = () => {
     let data = dataReq.response;
     let labels = Object.keys(data).map(label => label.split(' ')[0]);
     let values = Object.values(data);
-    let hospitalized_home = values.map(datum => datum.hospitalized_home).filter(datum => datum !== 0);
-    let hospitalized_light = values.map(datum => datum.hospitalized_light).filter(datum => datum !== 0);
-    let hospitalized_severe = values.map(datum => datum.hospitalized_severe).filter(datum => datum !== 0);
-    let ill = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)).filter(datum => datum !== 0);
-    let infected = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe + datum.healed + datum.dead)).filter(datum => datum !== 0);
-    let healed = values.map(datum => datum.healed).filter(datum => datum !== 0);
-    let dead = values.map(datum => datum.dead).filter(datum => datum !== 0);
-    let tests = values.map(datum => datum.tests).filter(datum => datum !== 0);
-    let tested = values.map(datum => datum.tested).filter(datum => datum !== 0);
+    let hospitalized_home = values.map(datum => datum.hospitalized_home);
+    let hospitalized_light = values.map(datum => datum.hospitalized_light);
+    let hospitalized_severe = values.map(datum => datum.hospitalized_severe);
+    let ill = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe));
+    let infected = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe + datum.healed + datum.dead));
+    let healed = values.map(datum => datum.healed);
+    let dead = values.map(datum => datum.dead);
+    let tests = values.map(datum => datum.tests);
+    let tested = values.map(datum => datum.tested);
     let daily_doses = values.map(datum => datum.daily_doses);
     let doses = daily_doses.map((datum, i) => daily_doses.slice(0, i + 1).reduce((a, b) => a + b));
     let daily_final_doses = values.map(datum => datum.daily_final_doses);
@@ -69,13 +69,13 @@ dataReq.onload = () => {
     let vaccine_shipments = daily_vaccine_shipments.map((datum, i) => daily_vaccine_shipments.slice(0, i + 1).reduce((a, b) => a + b));
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
-    }).filter(datum => datum !== 0);
+    });
     let new_infected = infected.map((item, key) => {
         return key === 0 ? item : item - infected[key - 1];
-    }).filter(datum => datum !== 0);
+    });
     let new_tested = tested.map((item, key) => {
         return key === 0 ? item : item - tested[key - 1];
-    }).filter(datum => datum !== 0);
+    });
     let new_weighted_infected = new_infected.map((item, key) => {
         return item / new_tested[key];
     });
