@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -99,17 +99,27 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">{{ __('dash.vaccinations') }}</span>
-                    <span class="info-box-number" id="total-vaccinations"></span>
-                    <small><span class="info-box-number" id="diff-vaccinations"></span></small>
+                    <span class="info-box-text">{{ __('dash.vaccine_doses') }}</span>
+                    <span class="info-box-number" id="total-vaccine_doses"></span>
+                    <small><span class="info-box-number" id="diff-vaccine_doses"></span></small>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.final_vaccine_doses') }}</span>
+                    <span class="info-box-number" id="total-final_vaccine_doses"></span>
+                    <small><span class="info-box-number" id="diff-final_vaccine_doses"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-shipping-fast"></i></span>
                 <div class="info-box-content">
