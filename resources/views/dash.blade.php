@@ -373,8 +373,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
@@ -385,6 +383,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
@@ -402,6 +402,26 @@
                     </div>
                     <div class="card-body card-map">
                         <div id="map_doses" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.final_doses_pro_capite') }}</h3>
+                    </div>
+                    <div class="card-body card-map">
+                        <div id="map_final_doses" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.vaccine_shipments_pro_capite') }}</h3>
+                    </div>
+                    <div class="card-body card-map">
+                        <div id="map_vaccine_shipments" class="map-container"></div>
                     </div>
                 </div>
             </div>

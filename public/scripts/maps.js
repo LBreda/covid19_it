@@ -89,6 +89,17 @@ let map_doses = L.map('map_doses', {
     dragging: !L.Browser.mobile,
     tap: !L.Browser.mobile
 }).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_final_doses = L.map('map_final_doses', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+let map_vaccine_shipments = L.map('map_vaccine_shipments', {
+    zoomSnap: 0.2,
+    dragging: !L.Browser.mobile,
+    tap: !L.Browser.mobile
+}).setView([41.893056, 12.482778], 5).fitBounds([[47.0727778, 6.6255556], [35.49, 18.5216667]]);
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_ill);
@@ -107,6 +118,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map_doses);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map_final_doses);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map_vaccine_shipments);
 
 let regionsReq = new XMLHttpRequest();
 regionsReq.open('GET', document.getElementById('js-maps').dataset.geoUrl);
@@ -128,6 +145,10 @@ regionsReq.onload = () => {
         let maxTested = Math.max(...Object.keys(mapData).map(key => mapData[key].tested));
         let minDoses = Math.min(...Object.keys(mapData).map(key => mapData[key].daily_doses));
         let maxDoses = Math.max(...Object.keys(mapData).map(key => mapData[key].daily_doses));
+        let minFinalDoses = Math.min(...Object.keys(mapData).map(key => mapData[key].daily_final_doses));
+        let maxFinalDoses = Math.max(...Object.keys(mapData).map(key => mapData[key].daily_final_doses));
+        let minVaccineShipments = Math.min(...Object.keys(mapData).map(key => mapData[key].daily_vaccine_shipments));
+        let maxVaccineShipments = Math.max(...Object.keys(mapData).map(key => mapData[key].daily_vaccine_shipments));
 
         L.geoJson(regionsReq.response, {
             style: (feature) => {
@@ -219,6 +240,36 @@ regionsReq.onload = () => {
                 layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].daily_doses}`)
             }
         }).addTo(map_doses);
+        L.geoJson(regionsReq.response, {
+            style: (feature) => {
+                return {
+                    fillColor: getColorDoses(minFinalDoses, maxFinalDoses, mapData[feature.properties.DatabaseID].daily_final_doses),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.9
+                }
+            },
+            onEachFeature: (feature, layer) => {
+                layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].daily_final_doses}`)
+            }
+        }).addTo(map_final_doses);
+        L.geoJson(regionsReq.response, {
+            style: (feature) => {
+                return {
+                    fillColor: getColorDoses(minVaccineShipments, maxVaccineShipments, mapData[feature.properties.DatabaseID].daily_vaccine_shipments),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.9
+                }
+            },
+            onEachFeature: (feature, layer) => {
+                layer.bindTooltip(`${feature.properties.Regione}: ${mapData[feature.properties.DatabaseID].daily_vaccine_shipments}`)
+            }
+        }).addTo(map_vaccine_shipments);
     };
     mapDataReq.send();
 };

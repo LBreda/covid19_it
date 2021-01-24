@@ -158,6 +158,7 @@ class DataController extends Controller
             $infected = $ill + $datum->dead + $datum->healed;
             $tested = $datum->tested;
             $daily_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_doses, 0);
+            $daily_final_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), 0);
             $daily_vaccine_shipments = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_shipped, 0);
 
             return [
@@ -168,6 +169,7 @@ class DataController extends Controller
                     'tested'                  => round(($tested / $region->population) * 1000, 2),
                     'severity'                => $region->severity,
                     'daily_doses'             => round(($daily_doses / $region->population) * 1000, 2),
+                    'daily_final_doses'       => round(($daily_final_doses / $region->population) * 1000, 2),
                     'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $region->population) * 1000, 2),
                 ],
             ];
