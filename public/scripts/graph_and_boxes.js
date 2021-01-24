@@ -382,7 +382,7 @@ dataReq.onload = () => {
                 {
                     label: daily_vaccinations_lines.dataset.labelVaccinations,
                     data: daily_doses,
-                    backgroundColor: 'rgba(0,0,0,0)',
+                    backgroundColor: '#C71585',
                     borderColor: '#C71585',
                     borderWidth: 1
                 },

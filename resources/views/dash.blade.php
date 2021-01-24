@@ -101,7 +101,7 @@
         </div>
         <div class="col-12 col-lg">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
+                <span class="info-box-icon bg-pink"><i class="fas fa-fw fa-syringe"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.vaccine_doses') }}</span>
                     <span class="info-box-number" id="total-vaccine_doses"></span>
@@ -111,7 +111,7 @@
         </div>
         <div class="col-12 col-lg">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
+                <span class="info-box-icon bg-pink""><i class="fas fa-fw fa-syringe"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.final_vaccine_doses') }}</span>
                     <span class="info-box-number" id="total-final_vaccine_doses"></span>
@@ -121,7 +121,7 @@
         </div>
         <div class="col-12 col-lg">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-shipping-fast"></i></span>
+                <span class="info-box-icon bg-pink""><i class="fas fa-fw fa-shipping-fast"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.vaccine_shipments') }}</span>
                     <span class="info-box-number" id="total-vaccine-shipments"></span>
