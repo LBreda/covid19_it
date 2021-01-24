@@ -418,6 +418,13 @@ dataReq.onload = () => {
                     borderWidth: 1,
                 },
                 {
+                    label: vaccinations_and_shipments_lines.dataset.labelFinalVaccinations,
+                    data: final_doses,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#c7152a',
+                    borderWidth: 1
+                },
+                {
                     label: vaccinations_and_shipments_lines.dataset.labelShipments,
                     data: vaccine_shipments,
                     backgroundColor: 'rgba(0,0,0,0)',
