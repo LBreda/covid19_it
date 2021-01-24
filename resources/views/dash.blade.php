@@ -322,7 +322,7 @@
 
                 <div class="card-body card-chart">
                     <canvas id="daily_vaccinations_lines"
-                            data-label-vaccinations="{{ __('dash.vaccinations') }}"></canvas>
+                            data-label-vaccinations="{{ __('dash.vaccine_doses') }}"></canvas>
                 </div>
             </div>
         </div>
@@ -335,7 +335,7 @@
                 </div>
 
                 <div class="card-body card-chart">
-                    <canvas id="vaccinations_and_shipments_lines" data-label-vaccinations="{{ __('dash.vaccinations') }}"
+                    <canvas id="vaccinations_and_shipments_lines" data-label-vaccinations="{{ __('dash.vaccine_doses') }}"
                             data-label-shipments="{{ __('dash.vaccine_shipments') }}"></canvas>
                 </div>
             </div>
