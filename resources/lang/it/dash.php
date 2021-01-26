@@ -41,6 +41,7 @@ return [
     'vaccine_doses'                => 'Dosi utilizzate',
     'vaccine_shipments'            => 'Dosi consegnate',
     'final_vaccine_doses'          => 'Vaccinazioni complete',
+    'partial_vaccine_doses'        => 'Vaccinazioni parziali',
     'data'                         => 'Dati',
     'data_source'                  => 'Fonti dei dati: :source_vaccini, :source_dpc e :source_immuni.',
     'created_backed'               => 'Creato da :created e sostenuto da :backed.',

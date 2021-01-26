@@ -65,6 +65,7 @@ dataReq.onload = () => {
     let doses = daily_doses.map((datum, i) => daily_doses.slice(0, i + 1).reduce((a, b) => a + b));
     let daily_final_doses = values.map(datum => datum.daily_final_doses);
     let final_doses = daily_final_doses.map((datum, i) => daily_final_doses.slice(0, i + 1).reduce((a, b) => a + b));
+    let partial_doses = daily_final_doses.map((datum, i) => doses[i] - final_doses[i]);
     let daily_vaccine_shipments = values.map(datum => datum.daily_vaccine_shipments);
     let vaccine_shipments = daily_vaccine_shipments.map((datum, i) => daily_vaccine_shipments.slice(0, i + 1).reduce((a, b) => a + b));
     let new_ill = ill.map((item, key) => {
@@ -422,6 +423,13 @@ dataReq.onload = () => {
                     data: final_doses,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: '#c7152a',
+                    borderWidth: 1
+                },
+                {
+                    label: vaccinations_and_shipments_lines.dataset.labelPartialVaccinations,
+                    data: partial_doses,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#432b2c',
                     borderWidth: 1
                 },
                 {

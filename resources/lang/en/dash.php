@@ -41,6 +41,7 @@ return [
     'vaccine_doses'                => 'Used doses',
     'vaccine_shipments'            => 'Shipped doses',
     'final_vaccine_doses'          => 'Complete vaccinations',
+    'partial_vaccine_doses'        => 'Partial vaccinations',
     'data'                         => 'Data',
     'data_source'                  => 'Data sources: :source_vaccini, :source_dpc and :source_immuni.',
     'created_backed'               => 'Created by :created  and backed by :backed.',

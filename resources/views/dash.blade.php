@@ -338,6 +338,7 @@
                     <canvas id="vaccinations_and_shipments_lines"
                             data-label-vaccinations="{{ __('dash.vaccine_doses') }}"
                             data-label-final-vaccinations="{{ __('dash.final_vaccine_doses') }}"
+                            data-label-partial-vaccinations="{{ __('dash.partial_vaccine_doses') }}"
                             data-label-shipments="{{ __('dash.vaccine_shipments') }}"></canvas>
                 </div>
             </div>
