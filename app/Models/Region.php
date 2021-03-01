@@ -16,35 +16,32 @@ use Illuminate\Support\Collection;
  * @property int $code
  * @property float $latitude
  * @property float $longitude
+ * @property int|null $population
  * @property string|null $phone
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Notice[] $notices
- * @property-read int|null $notices_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereLatitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereLongitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereUpdatedAt($value)
- * @mixin \Eloquent
- * @property int|null $population
- * @property mixed|null $geometry
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region whereGeometry($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region wherePopulation($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Datum[] $data
  * @property-read int|null $data_count
- * @property array $severity
- * @method static \Illuminate\Database\Eloquent\Builder|Region whereSeverity($value)
+ * @property-read array $severity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Notice[] $notices
+ * @property-read int|null $notices_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Restriction[] $restrictions
  * @property-read int|null $restrictions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Vaccination[] $vaccinations
  * @property-read int|null $vaccinations_count
+ * @method static Builder|Region newModelQuery()
+ * @method static Builder|Region newQuery()
+ * @method static Builder|Region query()
+ * @method static Builder|Region whereCode($value)
+ * @method static Builder|Region whereCreatedAt($value)
+ * @method static Builder|Region whereId($value)
+ * @method static Builder|Region whereLatitude($value)
+ * @method static Builder|Region whereLongitude($value)
+ * @method static Builder|Region whereName($value)
+ * @method static Builder|Region wherePhone($value)
+ * @method static Builder|Region wherePopulation($value)
+ * @method static Builder|Region whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Region extends Model
 {

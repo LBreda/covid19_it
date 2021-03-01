@@ -11,39 +11,85 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class DataController extends Controller
 {
     private function getDataObject(Region $region = null)
     {
-        $data = Datum::query()->leftJoin('vaccinations', function (JoinClause $join) {
-            $join->on(\DB::raw('DATE(data.date)'), '=', \DB::raw('DATE(vaccinations.date)'));
-            $join->on('data.region_id', '=', 'vaccinations.region_id');
-        });
+        // Infection data
+        $infections = Datum::query();
 
         if ($region) {
-            $data->where('data.region_id', '=', $region->id);
+            $infections->where('data.region_id', '=', $region->id);
         }
 
-        $data = $data->get(['data.*', 'vaccinations.daily_vaccinated', 'vaccinations.daily_shipped'])
-            ->groupBy('date')->mapWithKeys(function (Collection $group) {
-                $dataset = collect([
-                    'hospitalized_home'      => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_home, 0),
-                    'hospitalized_light'     => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_light, 0),
-                    'hospitalized_severe'    => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_severe, 0),
-                    'healed'                 => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->healed, 0),
-                    'dead'                   => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
-                    'tests'                  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
-                    'tested'                 => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
-                    'daily_vaccinated'       => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_vaccinated, 0),
-                    'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
-                ]);
-                return [
-                    $group->first()->date => $dataset,
-                ];
-            });
+        $infections = $infections->select([
+            DB::raw('DATE(`data`.`date`) as `date`'),
+            'hospitalized_home',
+            'hospitalized_home',
+            'hospitalized_light',
+            'hospitalized_severe',
+            'healed',
+            'dead',
+            'tests',
+            'tested',
+        ])->get()->groupBy('date')->mapWithKeys(function (Collection $group) {
+            $dataset = collect([
+                'hospitalized_home'   => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_home, 0),
+                'hospitalized_light'  => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_light, 0),
+                'hospitalized_severe' => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->hospitalized_severe, 0),
+                'healed'              => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->healed, 0),
+                'dead'                => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->dead, 0),
+                'tests'               => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tests, 0),
+                'tested'              => $group->reduce(fn($carry, Datum $datum) => $carry + $datum->tested, 0),
+            ]);
+            return [
+                $group->first()->date => $dataset,
+            ];
+        });
 
-        return $data;
+        // Vaccinations data
+        $vaccinations = Vaccination::query()
+            ->leftJoin('vaccine_suppliers', 'vaccinations.vaccine_supplier_id', '=', 'vaccine_suppliers.id');
+
+        if ($region) {
+            $vaccinations->where('vaccinations.region_id', '=', $region->id);
+        }
+
+        $vaccinations = $vaccinations->select([
+            DB::raw('DATE(`vaccinations`.`date`) as `date`'),
+            'vaccinations.daily_first_doses',
+            'vaccinations.daily_second_doses',
+            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_doses'),
+            'vaccinations.daily_shipped',
+            'vaccine_suppliers.doses_needed'
+        ])->get()->groupBy(fn(Vaccination $e) => $e->date->format('Y-m-d'))->mapWithKeys(function (Collection $group) {
+            $dataset = collect([
+                'daily_doses'             => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_doses, 0),
+                'daily_final_doses'       => $group->reduce(fn($carry, $datum) => $carry + (($datum->doses_needed == 2) ? $datum->daily_second_doses : $datum->daily_first_doses), 0),
+                'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
+            ]);
+            return [
+                $group->first()->date->format('Y-m-d') => $dataset,
+            ];
+        });
+
+        $merged = $infections
+            ->map(fn($item, $key) => isset($vaccinations[$key]) ? $item->merge($vaccinations[$key]) : $item)
+            ->map(fn($item) => $item->union([
+                'hospitalized_home'       => 0,
+                'hospitalized_light'      => 0,
+                'hospitalized_severe'     => 0,
+                'healed'                  => 0,
+                'dead'                    => 0,
+                'tests'                   => 0,
+                'tested'                  => 0,
+                'daily_doses'             => 0,
+                'daily_final_doses'       => 0,
+                'daily_vaccine_shipments' => 0,
+            ]));
+        return $merged;
     }
 
     public function dashboard(Region $region = null)
@@ -111,17 +157,19 @@ class DataController extends Controller
             $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
             $infected = $ill + $datum->dead + $datum->healed;
             $tested = $datum->tested;
-            $daily_vaccinated = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_vaccinated, 0);
+            $daily_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_doses, 0);
+            $daily_final_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), 0);
             $daily_vaccine_shipments = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_shipped, 0);
 
             return [
                 $region->id => [
-                    'ill'                    => round(($ill / $region->population) * 1000, 2),
-                    'dead'                   => round(($datum->dead / $region->population) * 1000, 2),
-                    'infected'               => round(($infected / $region->population) * 1000, 2),
-                    'tested'                 => round(($tested / $region->population) * 1000, 2),
-                    'severity'               => $region->severity,
-                    'daily_vaccinated'       => round(($daily_vaccinated / $region->population) * 1000, 2),
+                    'ill'                     => round(($ill / $region->population) * 1000, 2),
+                    'dead'                    => round(($datum->dead / $region->population) * 1000, 2),
+                    'infected'                => round(($infected / $region->population) * 1000, 2),
+                    'tested'                  => round(($tested / $region->population) * 1000, 2),
+                    'severity'                => $region->severity,
+                    'daily_doses'             => round(($daily_doses / $region->population) * 1000, 2),
+                    'daily_final_doses'       => round(($daily_final_doses / $region->population) * 1000, 2),
                     'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $region->population) * 1000, 2),
                 ],
             ];

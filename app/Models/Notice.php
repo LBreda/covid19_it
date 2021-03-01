@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Notice
  *
@@ -14,15 +15,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Region|null $region
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice whereNotice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice whereRegionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereNotice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereRegionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Notice extends Model

@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-vial"></i></span>
                 <div class="info-box-content">
@@ -99,19 +99,29 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-syringe"></i></span>
+                <span class="info-box-icon bg-pink"><i class="fas fa-fw fa-syringe"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">{{ __('dash.vaccinations') }}</span>
-                    <span class="info-box-number" id="total-vaccinations"></span>
-                    <small><span class="info-box-number" id="diff-vaccinations"></span></small>
+                    <span class="info-box-text">{{ __('dash.vaccine_doses') }}</span>
+                    <span class="info-box-number" id="total-vaccine_doses"></span>
+                    <small><span class="info-box-number" id="diff-vaccine_doses"></span></small>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-12 col-lg">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fas fa-fw fa-shipping-fast"></i></span>
+                <span class="info-box-icon bg-pink""><i class="fas fa-fw fa-syringe"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ __('dash.final_vaccine_doses') }}</span>
+                    <span class="info-box-number" id="total-final_vaccine_doses"></span>
+                    <small><span class="info-box-number" id="diff-final_vaccine_doses"></span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg">
+            <div class="info-box">
+                <span class="info-box-icon bg-pink""><i class="fas fa-fw fa-shipping-fast"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('dash.vaccine_shipments') }}</span>
                     <span class="info-box-number" id="total-vaccine-shipments"></span>
@@ -312,7 +322,7 @@
 
                 <div class="card-body card-chart">
                     <canvas id="daily_vaccinations_lines"
-                            data-label-vaccinations="{{ __('dash.vaccinations') }}"></canvas>
+                            data-label-vaccinations="{{ __('dash.vaccine_doses') }}"></canvas>
                 </div>
             </div>
         </div>
@@ -325,7 +335,10 @@
                 </div>
 
                 <div class="card-body card-chart">
-                    <canvas id="vaccinations_and_shipments_lines" data-label-vaccinations="{{ __('dash.vaccinations') }}"
+                    <canvas id="vaccinations_and_shipments_lines"
+                            data-label-vaccinations="{{ __('dash.vaccine_doses') }}"
+                            data-label-final-vaccinations="{{ __('dash.final_vaccine_doses') }}"
+                            data-label-partial-vaccinations="{{ __('dash.partial_vaccine_doses') }}"
                             data-label-shipments="{{ __('dash.vaccine_shipments') }}"></canvas>
                 </div>
             </div>
@@ -363,8 +376,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
@@ -375,6 +386,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
@@ -388,10 +401,30 @@
             <div class="col-12 col-lg">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('dash.vaccinated_pro_capite') }}</h3>
+                        <h3 class="card-title">{{ __('dash.doses_pro_capite') }}</h3>
                     </div>
                     <div class="card-body card-map">
-                        <div id="map_vaccinated" class="map-container"></div>
+                        <div id="map_doses" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.final_doses_pro_capite') }}</h3>
+                    </div>
+                    <div class="card-body card-map">
+                        <div id="map_final_doses" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('dash.vaccine_shipments_pro_capite') }}</h3>
+                    </div>
+                    <div class="card-body card-map">
+                        <div id="map_vaccine_shipments" class="map-container"></div>
                     </div>
                 </div>
             </div>
