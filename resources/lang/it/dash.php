@@ -50,7 +50,7 @@ return [
     'last_update_vaccinations'   => 'Ultimo aggiornamento vaccinazioni: :date',
     'datetime_format'            => 'd/m/Y H:i',
     'severity_zones'             => [
-        1 => 'Zona gialla',
+        1 => 'Zona bianca',
         2 => 'Zona gialla',
         3 => 'Zona arancione',
         4 => 'Zona rossa',
