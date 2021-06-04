@@ -191,16 +191,39 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card" role="alert">
-                    <div class="card-body text-center">
-                        <a href="https://info.vaccinicovid.gov.it/"><img
-                                src="{{ asset('imgs/vaccinazione_logo.png') }}"
-                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
-                                alt="Campagna di vaccinazione"></a>
+            @if(!$region)
+                <div class="col-md-6">
+                    <div class="card" role="alert">
+                        <div class="card-body text-center">
+                            <a href="https://info.vaccinicovid.gov.it/"><img
+                                    src="{{ asset('imgs/vaccinazione_logo.png') }}"
+                                    style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                    alt="Campagna di vaccinazione"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="col-md-3">
+                    <div class="card" role="alert">
+                        <div class="card-body text-center">
+                            <a href="{{ $region->vaccine_booking_url }}"><img
+                                    src="{{ asset("imgs/vaccinazione_logo_regionale.png") }}"
+                                    style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                    alt="Prenotazione vaccini regione {{ $region->name }}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card" role="alert">
+                        <div class="card-body text-center">
+                            <a href="https://info.vaccinicovid.gov.it/"><img
+                                    src="{{ asset('imgs/vaccinazione_logo.png') }}"
+                                    style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                    alt="Campagna di vaccinazione"></a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     @endif
     @if($region)

@@ -1,22 +1,22 @@
-id,code,name,latitude,longitude,phone,population
-1,1,Piemonte,45.0732745,7.680687483,800 59 54 59,4356406
-2,2,Valle d'Aosta,45.73750286,7.320149366,800 99 66 88,125666
-3,3,Lombardia,45.46679409,9.190347404,800 76 76 76,10060574
-4,4,P.A. Bolzano,46.49933453,11.35662422,800 90 96 99,533050
-5,4,P.A. Trento,46.06893511,11.12123097,800 033 033,542739
-6,5,Veneto,45.43490485,12.33845213,800 500 300,4905854
-7,6,Friuli Venezia Giulia,45.6494354,13.76813649,800 118 800,1215220
-8,7,Liguria,44.41149315,8.9326992,,1550640
-9,8,Emilia Romagna,44.49436681,11.3417208,800 89 45 45,4459477
-10,9,Toscana,43.76923077,11.25588885,,3729641
-11,10,Umbria,43.10675841,12.38824698,,882015
-12,11,Marche,43.61675973,13.5188753,,1525271
-13,12,Lazio,41.89277044,12.48366722,,5879082
-14,13,Abruzzo,42.35122196,13.39843823,800 19 20 20 (24h) - 800 333 444 (8:00 - 20:00),1311580
-15,14,Molise,41.55774754,14.65916051,800 713 931,305617
-16,15,Campania,40.83956555,14.25084984,800 311 377,5801692
-17,16,Puglia,41.12559576,16.86736689,800 45 87 87,4029053
-18,17,Basilicata,40.63947052,15.80514834,055 4385850 (9:00 - 13:00),562869
-19,18,Calabria,38.10922769,15.6434527,800 63 63 63,1947131
-20,19,Sicilia,38.11569725,13.3623567,800 122 121,4999891
-21,20,Sardegna,39.21531192,9.110616306,800 462 340,1639591
+id,code,name,latitude,longitude,phone,population,vaccine_booking_url
+1,1,Piemonte,45.0732745,7.680687483,800 59 54 59,4356406,https://www.ilpiemontetivaccina.it/
+2,2,Valle d'Aosta,45.73750286,7.320149366,800 99 66 88,125666,https://anticovid.regione.vda.it
+3,3,Lombardia,45.46679409,9.190347404,800 76 76 76,10060574,https://prenotazionevaccinicovid.regione.lombardia.it/
+4,4,P.A. Bolzano,46.49933453,11.35662422,800 90 96 99,533050,https://www.vaccinazioneanticovid.it/
+5,4,P.A. Trento,46.06893511,11.12123097,800 033 033,542739,https://cup.apss.tn.it/webportal/vaccinocovid/
+6,5,Veneto,45.43490485,12.33845213,800 500 300,4905854,https://vaccinicovid.regione.veneto.it/
+7,6,Friuli Venezia Giulia,45.6494354,13.76813649,800 118 800,1215220,https://vaccinazioni-anticovid19.sanita.fvg.it/prenotazione/
+8,7,Liguria,44.41149315,8.9326992,,1550640,https://www.regione.liguria.it/homepage/salute-e-sociale/info-vaccini.html
+9,8,Emilia Romagna,44.49436681,11.3417208,800 89 45 45,4459477,https://vaccinocovid.regione.emilia-romagna.it/come-prenotare
+10,9,Toscana,43.76923077,11.25588885,,3729641,https://prenotavaccino.sanita.toscana.it/
+11,10,Umbria,43.10675841,12.38824698,,882015,https://vaccinocovid.regione.umbria.it/
+12,11,Marche,43.61675973,13.5188753,,1525271,https://www.regione.marche.it/Entra-in-Regione/Vaccini-Covid/Prenotazioni
+13,12,Lazio,41.89277044,12.48366722,,5879082,https://prenotavaccino-covid.regione.lazio.it/
+14,13,Abruzzo,42.35122196,13.39843823,800 19 20 20 (24h) - 800 333 444 (8:00 - 20:00),1311580,https://accesso.prenotazioni.vaccinicovid.gov.it/
+15,14,Molise,41.55774754,14.65916051,800 713 931,305617,https://adesionivaccinazionicovid.regione.molise.it/
+16,15,Campania,40.83956555,14.25084984,800 311 377,5801692,https://adesionevaccinazioni.soresa.it/
+17,16,Puglia,41.12559576,16.86736689,800 45 87 87,4029053,https://www.sanita.puglia.it/prenotazione-vaccino-covid19/
+18,17,Basilicata,40.63947052,15.80514834,055 4385850 (9:00 - 13:00),562869,https://prenotazioni.vaccinicovid.gov.it/
+19,18,Calabria,38.10922769,15.6434527,800 63 63 63,1947131,https://prenotazioni.vaccinicovid.gov.it/
+20,19,Sicilia,38.11569725,13.3623567,800 122 121,4999891,https://prenotazioni.vaccinicovid.gov.it/
+21,20,Sardegna,39.21531192,9.110616306,800 462 340,1639591,https://prenotazioni.vaccinicovid.gov.it/
