@@ -181,18 +181,8 @@
     </div>
     @if(App::isLocale('it'))
         <div class="row">
-            <div class="col-md-6">
-                <div class="card" role="alert">
-                    <div class="card-body text-center">
-                        <a href="https://www.immuni.italia.it/download.html"><img
-                                src="{{ asset('imgs/scarica_immuni_logo.svg') }}"
-                                style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
-                                alt="Immuni"></a>
-                    </div>
-                </div>
-            </div>
             @if(!$region)
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card" role="alert">
                         <div class="card-body text-center">
                             <a href="https://info.vaccinicovid.gov.it/"><img
@@ -203,7 +193,7 @@
                     </div>
                 </div>
             @else
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="card" role="alert">
                         <div class="card-body text-center">
                             <a href="{{ $region->vaccine_booking_url }}"><img
@@ -213,7 +203,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="card" role="alert">
                         <div class="card-body text-center">
                             <a href="https://info.vaccinicovid.gov.it/"><img
