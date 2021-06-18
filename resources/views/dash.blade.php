@@ -182,7 +182,7 @@
     @if(App::isLocale('it'))
         <div class="row">
             @if(!$region)
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="card" role="alert">
                         <div class="card-body text-center">
                             <a href="https://info.vaccinicovid.gov.it/"><img
@@ -192,8 +192,28 @@
                         </div>
                     </div>
                 </div>
-            @else
                 <div class="col-md-6">
+                    <div class="card" role="alert">
+                        <div class="card-body text-center">
+                            <a href="https://www.dgc.gov.it"><img
+                                    src="{{ asset("imgs/eu_covid_certificate.png") }}"
+                                    style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                    alt="Certificato COVID-10 digitale UE"></a>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="col-md-4">
+                    <div class="card" role="alert">
+                        <div class="card-body text-center">
+                            <a href="https://info.vaccinicovid.gov.it/"><img
+                                    src="{{ asset('imgs/vaccinazione_logo.png') }}"
+                                    style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
+                                    alt="Campagna di vaccinazione"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="card" role="alert">
                         <div class="card-body text-center">
                             <a href="{{ $region->vaccine_booking_url }}"><img
@@ -203,13 +223,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card" role="alert">
                         <div class="card-body text-center">
-                            <a href="https://info.vaccinicovid.gov.it/"><img
-                                    src="{{ asset('imgs/vaccinazione_logo.png') }}"
+                            <a href="https://www.dgc.gov.it"><img
+                                    src="{{ asset("imgs/eu_covid_certificate.png") }}"
                                     style="height: 3.5em; margin: -10px; display: inline-flex; align-self: baseline"
-                                    alt="Campagna di vaccinazione"></a>
+                                    alt="Certificato COVID-10 digitale UE"></a>
                         </div>
                     </div>
                 </div>
