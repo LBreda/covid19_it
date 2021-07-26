@@ -1,6 +1,7 @@
 // Canvases
 let healed_dead = document.getElementById('healed_dead');
 let ill_box = document.getElementById('ill');
+let infected_hospitalization_box = document.getElementById('infected_hospitalization');
 let ill_by_severity = document.getElementById('ill_by_severity');
 let ill_variations = document.getElementById('ill_variations');
 let ill_weighted_variations = document.getElementById('ill_weighted_variations');
@@ -57,6 +58,9 @@ dataReq.onload = () => {
     let hospitalized_severe = values.map(datum => datum.hospitalized_severe);
     let ill = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe));
     let infected = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe + datum.healed + datum.dead));
+    let infected_hospitalization_light = values.map(datum => Math.round(100 * (datum.hospitalized_light) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 100);
+    let infected_hospitalization_severe = values.map(datum => Math.round(100 * (datum.hospitalized_severe) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 100);
+    let infected_hospitalization_total = values.map(datum => Math.round(100 * (datum.hospitalized_light + datum.hospitalized_severe) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 100);
     let healed = values.map(datum => datum.healed);
     let dead = values.map(datum => datum.dead);
     let tests = values.map(datum => datum.tests);
@@ -149,6 +153,56 @@ dataReq.onload = () => {
                     data: ill,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'red',
+                    borderWidth: 1,
+                    lineTension: 0,
+                    type: 'line'
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            onResize: chartOnResize,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+            legend: {
+                display: (ill_box.parentElement.clientWidth > 800)
+            }
+        }
+    });
+
+    let infected_hospitalization = new Chart(infected_hospitalization_box, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: ill_box.dataset.labelLight,
+                    data: infected_hospitalization_light,
+                    backgroundColor: 'rgba(255, 255, 255, 0)',
+                    borderColor: 'green',
+                    borderWidth: 1,
+                    lineTension: 0,
+                    type: 'line'
+                },
+                {
+                    label: ill_box.dataset.labelSevere,
+                    data: infected_hospitalization_severe,
+                    backgroundColor: 'rgba(255, 255, 255, 0)',
+                    borderColor: 'red',
+                    borderWidth: 1,
+                    lineTension: 0,
+                    type: 'line'
+                },
+                {
+                    label: ill_box.dataset.labelTotal,
+                    data: infected_hospitalization_total,
+                    backgroundColor: 'rgba(255, 255, 255, 0)',
+                    borderColor: 'black',
                     borderWidth: 1,
                     lineTension: 0,
                     type: 'line'

@@ -266,6 +266,22 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
+                    <h3 class="card-title">{{ __('dash.infected_hospitalization') }}</h3>
+                </div>
+
+                <div class="card-body card-chart">
+                    <canvas id="infected_hospitalization"
+                            data-label-light="{{ __('dash.infected_hospitalization_light') }}"
+                            data-label-severe="{{ __('dash.infected_hospitalization_severe') }}"
+                            data-label-total="{{ __('dash.infected_hospitalization_total') }}"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
                     <h3 class="card-title">{{ __('dash.healed_dead') }}</h3>
                     <div class="card-tools">
                         <button class="btn btn-xs btn-default scale-button"
