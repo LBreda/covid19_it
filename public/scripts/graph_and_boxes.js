@@ -181,7 +181,7 @@ dataReq.onload = () => {
             labels: labels,
             datasets: [
                 {
-                    label: ill_box.dataset.labelLight,
+                    label: infected_hospitalization_box.dataset.labelLight,
                     data: infected_hospitalization_light,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'green',
@@ -190,7 +190,7 @@ dataReq.onload = () => {
                     type: 'line'
                 },
                 {
-                    label: ill_box.dataset.labelSevere,
+                    label: infected_hospitalization_box.dataset.labelSevere,
                     data: infected_hospitalization_severe,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'red',
@@ -199,7 +199,7 @@ dataReq.onload = () => {
                     type: 'line'
                 },
                 {
-                    label: ill_box.dataset.labelTotal,
+                    label: infected_hospitalization_box.dataset.labelTotal,
                     data: infected_hospitalization_total,
                     backgroundColor: 'rgba(255, 255, 255, 0)',
                     borderColor: 'black',
