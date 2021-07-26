@@ -58,9 +58,9 @@ dataReq.onload = () => {
     let hospitalized_severe = values.map(datum => datum.hospitalized_severe);
     let ill = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe));
     let infected = values.map(datum => (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe + datum.healed + datum.dead));
-    let infected_hospitalization_light = values.map(datum => Math.round(100 * (datum.hospitalized_light) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 100);
-    let infected_hospitalization_severe = values.map(datum => Math.round(100 * (datum.hospitalized_severe) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 100);
-    let infected_hospitalization_total = values.map(datum => Math.round(100 * (datum.hospitalized_light + datum.hospitalized_severe) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 100);
+    let infected_hospitalization_light = values.map(datum => Math.round(10000 * (datum.hospitalized_light) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 10000);
+    let infected_hospitalization_severe = values.map(datum => Math.round(10000 * (datum.hospitalized_severe) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 10000);
+    let infected_hospitalization_total = values.map(datum => Math.round(10000 * (datum.hospitalized_light + datum.hospitalized_severe) / (datum.hospitalized_home + datum.hospitalized_light + datum.hospitalized_severe)) / 10000);
     let healed = values.map(datum => datum.healed);
     let dead = values.map(datum => datum.dead);
     let tests = values.map(datum => datum.tests);
