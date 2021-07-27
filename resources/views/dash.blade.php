@@ -251,6 +251,17 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill') }}</h3>
                     <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
                     </div>
@@ -267,6 +278,19 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.infected_hospitalization') }}</h3>
+                    <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body card-chart">
@@ -284,6 +308,17 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.healed_dead') }}</h3>
                     <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
                     </div>
@@ -305,6 +340,19 @@
                           title="{{ __('dash.ill_variations_note') }}">
                         <i class="ml-1 fas fa-exclamation-triangle text-warning"></i>
                     </span>
+                    <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body card-chart">
@@ -319,6 +367,17 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill_weighted_variations') }}</h3>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                            <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                        </label>
+                        <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                            <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                        </label>
+                        <label class="btn btn-xs btn-default show-less-button active">
+                            <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                        </label>
+                    </div>
                 </div>
 
                 <div class="card-body card-chart">
@@ -333,6 +392,19 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill_by_severity') }}</h3>
+                    <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body card-chart">
@@ -349,6 +421,17 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.ill_by_severity_lines') }}</h3>
                     <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
                         <button class="btn btn-xs btn-default scale-button"
                                 type="button">{{ __('dash.change_scale') }}</button>
                     </div>
@@ -367,6 +450,19 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.daily_vaccinations') }}</h3>
+                    <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body card-chart">
@@ -381,6 +477,19 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('dash.vaccinations_and_shipments') }}</h3>
+                    <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                            </label>
+                            <label class="btn btn-xs btn-default show-less-button active">
+                                <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body card-chart">
@@ -485,6 +594,19 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{ __('dash.immuni_downloads') }}</h3>
+                        <div class="card-tools">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-xs btn-default show-less-button" data-days="31">
+                                    <input type="radio" name="options">{{ __('dash.show_last_month') }}
+                                </label>
+                                <label class="btn btn-xs btn-default show-less-button" data-days="91">
+                                    <input type="radio" name="options">{{ __('dash.show_last_three_months') }}
+                                </label>
+                                <label class="btn btn-xs btn-default show-less-button active">
+                                    <input type="radio" name="options" checked>{{ __('dash.show_everything') }}
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body card-chart">

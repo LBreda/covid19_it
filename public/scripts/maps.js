@@ -7,7 +7,6 @@ function getColor(dataset, value, colors) {
     let max = Math.max(...dataset);
     let step = Math.round((max - min) * 100 / (colors.length - 1));
     let interval_no = Math.floor((value - min) * 100 / step);
-    console.log(interval_no);
     return colors[interval_no];
 }
 

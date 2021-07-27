@@ -1,3 +1,6 @@
+// Charts array
+let charts = []
+
 // Canvases
 let healed_dead = document.getElementById('healed_dead');
 let ill_box = document.getElementById('ill');
@@ -33,6 +36,23 @@ let switchScale = (chart) => {
     };
     chart.update();
 };
+
+let lastNDays = (chart, days) => {
+    if (days) {
+        if (!chart.canvas.dataset.originalDataDatasets) chart.canvas.dataset.originalDataDatasets = JSON.stringify(chart.data.datasets.map(set => set.data))
+        if (!chart.canvas.dataset.originalDataLabels) chart.canvas.dataset.originalDataLabels = chart.data.labels
+        chart.data.datasets.forEach((dataset, index) => {
+            dataset.data = JSON.parse(chart.canvas.dataset.originalDataDatasets)[index].slice(-days)
+        })
+        chart.data.labels = chart.canvas.dataset.originalDataLabels.split(',').slice(-days)
+    } else {
+        if (chart.canvas.dataset.originalDataDatasets) chart.data.datasets.forEach((dataset, index) => {
+            dataset.data = JSON.parse(chart.canvas.dataset.originalDataDatasets)[index]
+        })
+        if (chart.canvas.dataset.originalDataLabels) chart.data.labels = chart.canvas.dataset.originalDataLabels.split(',')
+    }
+    chart.update()
+}
 
 /**
  *
@@ -174,8 +194,10 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['ill_chart'] = ill_chart;
+    ill_box.dataset.chart = 'ill_chart'
 
-    let infected_hospitalization = new Chart(infected_hospitalization_box, {
+    let infected_hospitalization_chart = new Chart(infected_hospitalization_box, {
         type: 'bar',
         data: {
             labels: labels,
@@ -224,6 +246,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['infected_hospitalization_chart'] = infected_hospitalization_chart;
+    infected_hospitalization_box.dataset.chart = 'infected_hospitalization_chart'
 
     let healed_dead_chart = new Chart(healed_dead, {
         type: 'bar',
@@ -265,6 +289,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['healed_dead_chart'] = healed_dead_chart;
+    healed_dead.dataset.chart = 'healed_dead_chart'
 
     let ill_variations_chart = new Chart(ill_variations, {
         type: 'bar',
@@ -302,6 +328,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['ill_variations_chart'] = ill_variations_chart;
+    ill_variations.dataset.chart = 'ill_variations_chart'
 
     let ill_weighted_variations_chart = new Chart(ill_weighted_variations, {
         type: 'bar',
@@ -332,6 +360,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['ill_weighted_variations_chart'] = ill_weighted_variations_chart;
+    ill_weighted_variations.dataset.chart = 'ill_weighted_variations_chart'
 
     let ill_by_severity_chart = new Chart(ill_by_severity, {
         type: 'bar',
@@ -380,6 +410,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['ill_by_severity_chart'] = ill_by_severity_chart;
+    ill_by_severity.dataset.chart = 'ill_by_severity_chart'
 
     let ill_by_severity_lines_chart = new Chart(ill_by_severity_lines, {
         type: 'line',
@@ -428,6 +460,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['ill_by_severity_lines_chart'] = ill_by_severity_lines_chart;
+    ill_by_severity_lines.dataset.chart = 'ill_by_severity_lines_chart'
 
     let daily_vaccinations_lines_chart = new Chart(daily_vaccinations_lines, {
         type: 'bar',
@@ -459,6 +493,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['daily_vaccinations_lines_chart'] = daily_vaccinations_lines_chart;
+    daily_vaccinations_lines.dataset.chart = 'daily_vaccinations_lines_chart'
 
     let vaccinations_and_shipments_chart = new Chart(vaccinations_and_shipments_lines, {
         type: 'line',
@@ -511,6 +547,8 @@ dataReq.onload = () => {
             }
         }
     });
+    charts['vaccinations_and_shipments_chart'] = vaccinations_and_shipments_chart;
+    vaccinations_and_shipments_lines.dataset.chart = 'vaccinations_and_shipments_chart'
 
     // Switch buttons
     ill_box.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
@@ -522,6 +560,14 @@ dataReq.onload = () => {
     ill_by_severity_lines.closest('.card').getElementsByClassName('scale-button')[0].addEventListener('click', () => {
         switchScale(ill_by_severity_lines_chart);
     });
+
+    [...document.getElementsByClassName('show-less-button')].forEach(button => {
+        button.addEventListener('click', (event) => {
+            let chart = event.target.closest('.card').getElementsByTagName('canvas')[0].dataset.chart;
+            let days = button.dataset.days
+            lastNDays(charts[chart], days)
+        })
+    })
 };
 
 // Gets Immuni downloads data
@@ -572,5 +618,7 @@ if (document.getElementById('js-graph-and-boxes').dataset.immuniDlUrl) {
                 }
             }
         });
+        charts['immuni_downloads_chart'] = immuni_downloads_chart;
+        immuni_downloads_lines.dataset.chart = 'immuni_downloads_chart'
     }
 }
