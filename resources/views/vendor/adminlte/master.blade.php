@@ -101,7 +101,7 @@
               rel="apple-touch-startup-image"/>
         <meta name="msapplication-TileColor" content="#343a40">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/144.png') }}">
-        <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+        <link rel="manifest" href="{{ asset('webmanifest.json') }}">
         <script type="text/javascript">
             // Initialize the service worker
             if ('serviceWorker' in navigator) {
