@@ -68,9 +68,23 @@
         <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicons/96.png') }}">
         <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicons/192.png') }}">
         <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicons/512.png') }}">
-        <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
         <meta name="msapplication-TileColor" content="#343a40">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/144.png') }}">
+        <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+        <script type="text/javascript">
+            // Initialize the service worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/serviceworker.js', {
+                    scope: '.'
+                }).then(function (registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function (err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            }
+        </script>
     @endif
 </head>
 

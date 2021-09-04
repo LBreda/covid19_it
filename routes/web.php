@@ -17,3 +17,4 @@ Route::get('/', 'DataController@dashboard')->name('data.total');
 Route::get('/region/download', 'DataController@downloadData')->name('data.total_download');
 Route::get('/region/{region}/download', 'DataController@downloadData')->name('data.region_download');
 Route::get('/region/{region}', 'DataController@dashboard')->name('data.region');
+Route::get('offline', fn () => view('offline'));
