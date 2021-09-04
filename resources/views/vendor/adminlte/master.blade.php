@@ -69,34 +69,34 @@
         <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicons/96.png') }}">
         <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicons/192.png') }}">
         <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicons/512.png') }}">
-        <link href="{{ asset('splashscreens/iphone5_splash.png") }}"
+        <link href="{{ asset('splashscreens/iphone5_splash.png') }}"
               media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/iphone6_splash.png") }}"
+        <link href="{{ asset('splashscreens/iphone6_splash.png') }}"
               media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/iphoneplus_splash.png") }}"
+        <link href="{{ asset('splashscreens/iphoneplus_splash.png') }}"
               media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/iphonex_splash.png") }}"
+        <link href="{{ asset('splashscreens/iphonex_splash.png') }}"
               media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/iphonexr_splash.png") }}"
+        <link href="{{ asset('splashscreens/iphonexr_splash.png') }}"
               media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/iphonexsmax_splash.png") }}"
+        <link href="{{ asset('splashscreens/iphonexsmax_splash.png') }}"
               media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/ipad_splash.png") }}"
+        <link href="{{ asset('splashscreens/ipad_splash.png') }}"
               media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/ipadpro1_splash.png") }}"
+        <link href="{{ asset('splashscreens/ipadpro1_splash.png') }}"
               media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/ipadpro3_splash.png") }}"
+        <link href="{{ asset('splashscreens/ipadpro3_splash.png') }}"
               media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
-        <link href="{{ asset('splashscreens/ipadpro2_splash.png") }}"
+        <link href="{{ asset('splashscreens/ipadpro2_splash.png') }}"
               media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"/>
         <meta name="msapplication-TileColor" content="#343a40">
