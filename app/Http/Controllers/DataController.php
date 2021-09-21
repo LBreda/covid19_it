@@ -61,13 +61,15 @@ class DataController extends Controller
             DB::raw('DATE(`vaccinations`.`date`) as `date`'),
             'vaccinations.daily_first_doses',
             'vaccinations.daily_second_doses',
-            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0)) as daily_doses'),
+            'vaccinations.daily_first_boosters',
+            DB::raw('(ifnull(vaccinations.daily_first_doses, 0) + ifnull(vaccinations.daily_second_doses, 0) + ifnull(vaccinations.daily_first_boosters, 0)) as daily_doses'),
             'vaccinations.daily_shipped',
             'vaccine_suppliers.doses_needed'
         ])->get()->groupBy(fn(Vaccination $e) => $e->date->format('Y-m-d'))->mapWithKeys(function (Collection $group) {
             $dataset = collect([
                 'daily_doses'             => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_doses, 0),
                 'daily_final_doses'       => $group->reduce(fn($carry, $datum) => $carry + (($datum->doses_needed == 2) ? $datum->daily_second_doses : $datum->daily_first_doses), 0),
+                'daily_first_boosters'    => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_first_boosters, 0),
                 'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
             ]);
             return [
@@ -87,6 +89,7 @@ class DataController extends Controller
                 'tested'                  => 0,
                 'daily_doses'             => 0,
                 'daily_final_doses'       => 0,
+                'daily_first_boosters'    => 0,
                 'daily_vaccine_shipments' => 0,
             ]));
         return $merged;

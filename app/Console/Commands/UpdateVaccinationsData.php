@@ -91,10 +91,11 @@ class UpdateVaccinationsData extends Command
                     return $area->groupBy('fornitore')->map(function (Collection $fornitore) {
                         return $fornitore->reduce(function (array $c, array $d) {
                             return [
-                                'first'  => $c['first'] + $d['prima_dose'],
-                                'second' => $c['second'] + $d['seconda_dose']
+                                'first'         => $c['first'] + $d['prima_dose'],
+                                'second'        => $c['second'] + $d['seconda_dose'],
+                                'first_booster' => $c['first_booster'] + $d['dose_aggiuntiva'],
                             ];
-                        }, ['first' => 0, 'second' => 0]);
+                        }, ['first' => 0, 'second' => 0, 'first_booster' => 0]);
                     });
                 });
             });
@@ -107,13 +108,14 @@ class UpdateVaccinationsData extends Command
             foreach ($regions as $region => $suppliers) {
                 foreach ($suppliers as $supplier => $datum) {
                     (new Vaccination([
-                        'date'                => Carbon::parse($date),
-                        'region_id'           => self::$regions_ids[$region],
-                        'vaccine_supplier_id' => $vaccine_suppliers_ids[$supplier],
-                        'daily_first_doses'   => $datum['first'],
-                        'daily_second_doses'  => $datum['second'],
-                        'updated_at'          => substr($last_update, 0, 20),
-                        'created_at'          => substr($last_update, 0, 20),
+                        'date'                 => Carbon::parse($date),
+                        'region_id'            => self::$regions_ids[$region],
+                        'vaccine_supplier_id'  => $vaccine_suppliers_ids[$supplier],
+                        'daily_first_doses'    => $datum['first'],
+                        'daily_second_doses'   => $datum['second'],
+                        'daily_first_boosters' => $datum['first_booster'],
+                        'updated_at'           => substr($last_update, 0, 20),
+                        'created_at'           => substr($last_update, 0, 20),
                     ]))->save();
                 }
             }

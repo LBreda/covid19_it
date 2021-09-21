@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon $date
  * @property int $daily_first_doses
  * @property int $daily_second_doses
+ * @property int $daily_first_boosters
  * @property int $daily_shipped
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyFirstDoses($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailySecondDoses($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyFirstBoosters($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDailyShipped($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Vaccination whereId($value)

@@ -88,10 +88,13 @@ dataReq.onload = () => {
     let daily_doses = values.map(datum => datum.daily_doses);
     let doses = daily_doses.map((datum, i) => daily_doses.slice(0, i + 1).reduce((a, b) => a + b));
     let daily_final_doses = values.map(datum => datum.daily_final_doses);
+    let daily_first_boosters = values.map(datum => datum.daily_first_boosters);
     let final_doses = daily_final_doses.map((datum, i) => daily_final_doses.slice(0, i + 1).reduce((a, b) => a + b));
-    let partial_doses = daily_final_doses.map((datum, i) => doses[i] - final_doses[i]);
+    let first_boosters = daily_first_boosters.map((datum, i) => daily_first_boosters.slice(0, i + 1).reduce((a, b) => a + b));
+    let partial_doses = daily_final_doses.map((datum, i) => doses[i] - final_doses[i] - first_boosters[i]);
     let daily_vaccine_shipments = values.map(datum => datum.daily_vaccine_shipments);
     let vaccine_shipments = daily_vaccine_shipments.map((datum, i) => daily_vaccine_shipments.slice(0, i + 1).reduce((a, b) => a + b));
+    console.log(daily_first_boosters)
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
     });
@@ -520,6 +523,13 @@ dataReq.onload = () => {
                     data: partial_doses,
                     backgroundColor: 'rgba(0,0,0,0)',
                     borderColor: '#432b2c',
+                    borderWidth: 1
+                },
+                {
+                    label: vaccinations_and_shipments_lines.dataset.labelFirstBoosters,
+                    data: first_boosters,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    borderColor: '#ffa500',
                     borderWidth: 1
                 },
                 {
