@@ -46,6 +46,7 @@ return [
     'vaccine_shipments'               => 'Dosi consegnate',
     'final_vaccine_doses'             => 'Vaccinazioni complete',
     'partial_vaccine_doses'           => 'Vaccinazioni parziali',
+    'first_booster'                   => 'Primi richiami',
     'show_last_month'                 => '1 mese',
     'show_last_three_months'          => '3 mesi',
     'show_everything'                 => 'Tutto',

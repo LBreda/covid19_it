@@ -46,6 +46,7 @@ return [
     'vaccine_shipments'               => 'Shipped doses',
     'final_vaccine_doses'             => 'Complete vaccinations',
     'partial_vaccine_doses'           => 'Partial vaccinations',
+    'first_booster'                   => 'First boosters',
     'show_last_month'                 => '1 month',
     'show_last_three_months'          => '3 months',
     'show_everything'                 => 'Everything',

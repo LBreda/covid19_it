@@ -86,18 +86,12 @@ class UpdateVaccinationsData extends Command
 
         $vaccines = collect($vaccines_raw['data'])
             ->sortBy('data_somministrazione')
-            ->groupBy('data_somministrazione')->map(function (Collection $date) {
-                return $date->groupBy('area')->map(function (Collection $area) {
-                    return $area->groupBy('fornitore')->map(function (Collection $fornitore) {
-                        return $fornitore->reduce(function (array $c, array $d) {
-                            return [
-                                'first'  => $c['first'] + $d['prima_dose'],
-                                'second' => $c['second'] + $d['seconda_dose']
-                            ];
-                        }, ['first' => 0, 'second' => 0]);
-                    });
-                });
-            });
+            ->groupBy('data_somministrazione')
+            ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('fornitore')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
+                'first'         => $c['first'] + $d['prima_dose'],
+                'second'        => $c['second'] + $d['seconda_dose'],
+                'first_booster' => $c['first_booster'] + $d['dose_addizionale_booster'],
+            ], ['first' => 0, 'second' => 0, 'first_booster' => 0]))));
 
         $this->info('Populating the datatables...');
 
@@ -107,13 +101,14 @@ class UpdateVaccinationsData extends Command
             foreach ($regions as $region => $suppliers) {
                 foreach ($suppliers as $supplier => $datum) {
                     (new Vaccination([
-                        'date'                => Carbon::parse($date),
-                        'region_id'           => self::$regions_ids[$region],
-                        'vaccine_supplier_id' => $vaccine_suppliers_ids[$supplier],
-                        'daily_first_doses'   => $datum['first'],
-                        'daily_second_doses'  => $datum['second'],
-                        'updated_at'          => substr($last_update, 0, 20),
-                        'created_at'          => substr($last_update, 0, 20),
+                        'date'                 => Carbon::parse($date),
+                        'region_id'            => self::$regions_ids[$region],
+                        'vaccine_supplier_id'  => $vaccine_suppliers_ids[$supplier],
+                        'daily_first_doses'    => $datum['first'],
+                        'daily_second_doses'   => $datum['second'],
+                        'daily_first_boosters' => $datum['first_booster'],
+                        'updated_at'           => substr($last_update, 0, 20),
+                        'created_at'           => substr($last_update, 0, 20),
                     ]))->save();
                 }
             }
@@ -129,13 +124,8 @@ class UpdateVaccinationsData extends Command
 
         $vaccines_shipments = collect($vaccines_shipments_raw['data'])
             ->sortBy('data_consegna')
-            ->groupBy('data_consegna')->map(function (Collection $date) {
-                return $date->groupBy('area')->map(function (Collection $area) {
-                    return $area->reduce(function (int $c, array $d) {
-                        return $c + $d['numero_dosi'];
-                    }, 0);
-                });
-            });
+            ->groupBy('data_consegna')
+            ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->reduce(fn(int $c, array $d) => $c + $d['numero_dosi'], 0)));
 
         $this->info('Populating the datatables...');
 
