@@ -89,6 +89,7 @@ class DataController extends Controller
                 'tests'                   => 0,
                 'tested'                  => 0,
                 'daily_doses'             => 0,
+                'daily_first_doses'       => 0,
                 'daily_final_doses'       => 0,
                 'daily_first_boosters'    => 0,
                 'daily_vaccine_shipments' => 0,
