@@ -103,7 +103,7 @@ class UpdateVaccinationsData extends Command
                     (new Vaccination([
                         'date'                 => Carbon::parse($date),
                         'region_id'            => self::$regions_ids[$region],
-                        'vaccine_supplier_id'  => $vaccine_suppliers_ids[$supplier],
+                        'vaccine_supplier_id'  => ($supplier != 'ND') ? $vaccine_suppliers_ids[$supplier] : null,
                         'daily_first_doses'    => $datum['first'],
                         'daily_second_doses'   => $datum['second'],
                         'daily_first_boosters' => $datum['first_booster'],
