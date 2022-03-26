@@ -16,7 +16,7 @@ class JsonHelper
             /* Find any character except colons, commas, curly and square brackets surrounded or
              * not by spaces preceded and followed by spaces, colons, commas, curly or square brackets
              * and put quotation marks surrounded by spaces between them
-             * /
+             */
             "/([\s:,\{}\[\]])\s*'([^:,\{}\[\]]*)'\s*([\s:,\{}\[\]])/" => '$1 "$2" $3',
 
             /* Find any left curly brackets surrounded or not by one or more of any character except
