@@ -30,7 +30,7 @@ class JsonHelper
             "/([^\s:,\{}\[\]]+)}/" => '$1 }',
 
             /* JSON.parse() doesn't allow trailing commas, so, remove trailing commas of any right curly brackets */
-            "/(}),\s*/" => '$1',
+            "/(}),(\s*+[^{])/" => '$1$2',
 
             /* Find or not one or more of any character except spaces, colons, commas, curly and square brackets
              * followed by one or more of any character except spaces, colons, commas, curly and square brackets
@@ -51,7 +51,7 @@ class JsonHelper
 
             /* Find or not one or more of any character except spaces, colons, commas, curly and square brackets
              * surrounded by apostrophes followed by one or more spaces and  one or more of any character except
-             * spaces, colons, commas, curly and square brackets and add back slashes to its apostrophes;
+             * spaces, colons, commas, curly and square brackets and add backslashes to its apostrophes;
              */
             "/(')([^\s:,\{}\[\]]+)(')(\s+([^\s:,\{}\[\]]+))/" => '\\$1$2\\$3$4',
 
