@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\JsonHelper;
 use App\Models\Datum;
 use App\Models\ImmuniDownload;
 use App\Models\Region;
@@ -47,7 +48,7 @@ class UpdateImmuniData extends Command
         $this->info('Downloading the Immuni data...');
 
         $response = Http::get('https://raw.githubusercontent.com/immuni-app/immuni-dashboard-data/master/dati/andamento-download.json');
-        $downloads_national = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()));
+        $downloads_national = json_decode(JsonHelper::lint($response->body()));
 
         $this->info('Downloaded.');
 

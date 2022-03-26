@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\JsonHelper;
 use App\Models\Datum;
 use App\Models\ImmuniDownload;
 use App\Models\Region;
@@ -78,7 +79,7 @@ class UpdateVaccinationsData extends Command
 
         $response = Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.json');
         $last_update = json_decode(Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json')->body())->ultimo_aggiornamento;
-        $vaccines_raw = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()), true);
+        $vaccines_raw = json_decode(JsonHelper::lint($response->body()), true);
 
         $this->info('Downloaded.');
 

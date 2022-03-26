@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\JsonHelper;
 use App\Models\Datum;
 use App\Models\Region;
 use Carbon\Carbon;
@@ -46,7 +47,7 @@ class UpdateDpcData extends Command
         $this->info('Downloading the DPC data...');
 
         $response = Http::get('https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json');
-        $data = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response->body()));
+        $data = json_decode(JsonHelper::lint($response->body()));
 
         $this->info('Downloaded.');
 
