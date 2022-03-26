@@ -90,7 +90,7 @@ class UpdateVaccinationsData extends Command
             ->groupBy('data_somministrazione')
             ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('fornitore')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
                 'first'         => $c['first'] + $d['prima_dose'],
-                'second'        => $c['second'] + $d['seconda_dose'],
+                'second'        => $c['second'] + $d['seconda_dose'] + $d['pregressa_infezione'],
                 'first_booster' => $c['first_booster'] + $d['dose_addizionale_booster'],
             ], ['first' => 0, 'second' => 0, 'first_booster' => 0]))));
 
@@ -104,7 +104,7 @@ class UpdateVaccinationsData extends Command
                     (new Vaccination([
                         'date'                 => Carbon::parse($date),
                         'region_id'            => self::$regions_ids[$region],
-                        'vaccine_supplier_id'  => $vaccine_suppliers_ids[$supplier],
+                        'vaccine_supplier_id'  => ($supplier != 'ND') ? $vaccine_suppliers_ids[$supplier] : null,
                         'daily_first_doses'    => $datum['first'],
                         'daily_second_doses'   => $datum['second'],
                         'daily_first_boosters' => $datum['first_booster'],

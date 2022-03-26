@@ -94,7 +94,6 @@ dataReq.onload = () => {
     let partial_doses = daily_final_doses.map((datum, i) => doses[i] - final_doses[i] - first_boosters[i]);
     let daily_vaccine_shipments = values.map(datum => datum.daily_vaccine_shipments);
     let vaccine_shipments = daily_vaccine_shipments.map((datum, i) => daily_vaccine_shipments.slice(0, i + 1).reduce((a, b) => a + b));
-    console.log(daily_first_boosters)
     let new_ill = ill.map((item, key) => {
         return key === 0 ? item : item - ill[key - 1];
     });
