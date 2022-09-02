@@ -8,7 +8,6 @@ use App\Models\Notice;
 use App\Models\Region;
 use App\Models\Vaccination;
 use Carbon\Carbon;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

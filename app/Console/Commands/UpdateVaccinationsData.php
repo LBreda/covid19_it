@@ -2,10 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\JsonHelper;
-use App\Models\Datum;
-use App\Models\ImmuniDownload;
-use App\Models\Region;
 use App\Models\Vaccination;
 use App\Models\VaccineSupplier;
 use Carbon\Carbon;
@@ -13,8 +9,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
-use PhpParser\ErrorHandler\Collecting;
 
 class UpdateVaccinationsData extends Command
 {
