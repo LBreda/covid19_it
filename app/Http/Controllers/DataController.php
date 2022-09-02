@@ -62,6 +62,7 @@ class DataController extends Controller
             'vaccinations.daily_first_doses',
             'vaccinations.daily_second_doses',
             'vaccinations.daily_first_boosters',
+            'vaccinations.daily_second_boosters',
             'vaccinations.daily_shipped',
             'vaccine_suppliers.doses_needed'
         ])->get()->groupBy(fn(Vaccination $e) => $e->date->format('Y-m-d'))->mapWithKeys(function (Collection $group) {
@@ -69,9 +70,10 @@ class DataController extends Controller
                 'daily_first_doses'       => $group->reduce(fn($carry, $datum) => $carry + (($datum->doses_needed == 2) ? $datum->daily_first_doses : 0), 0),
                 'daily_final_doses'       => $group->reduce(fn($carry, $datum) => $carry + (($datum->doses_needed == 2) ? $datum->daily_second_doses : $datum->daily_first_doses), 0),
                 'daily_first_boosters'    => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_first_boosters, 0),
+                'daily_second_boosters'   => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_second_boosters, 0),
                 'daily_vaccine_shipments' => $group->reduce(fn($carry, $datum) => $carry + $datum->daily_shipped, 0),
             ]);
-            $dataset->put('daily_doses', $dataset->get('daily_first_doses') + $dataset->get('daily_final_doses') + $dataset->get('daily_first_boosters'));
+            $dataset->put('daily_doses', $dataset->get('daily_first_doses') + $dataset->get('daily_final_doses') + $dataset->get('daily_first_boosters') + $dataset->get('daily_second_boosters'));
             return [
                 $group->first()->date->format('Y-m-d') => $dataset,
             ];
@@ -91,6 +93,7 @@ class DataController extends Controller
                 'daily_first_doses'       => 0,
                 'daily_final_doses'       => 0,
                 'daily_first_boosters'    => 0,
+                'daily_second_boosters'   => 0,
                 'daily_vaccine_shipments' => 0,
             ]));
         return $merged;

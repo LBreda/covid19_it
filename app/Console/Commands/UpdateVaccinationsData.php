@@ -89,10 +89,11 @@ class UpdateVaccinationsData extends Command
             ->sortBy('data')
             ->groupBy('data')
             ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('forn')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
-                'first'         => $c['first'] + $d['d1'],
-                'second'        => $c['second'] + $d['d2'] + $d['dpi'],
-                'first_booster' => $c['first_booster'] + $d['db1'] + $d['dbi'],
-            ], ['first' => 0, 'second' => 0, 'first_booster' => 0]))));
+                'first'          => $c['first'] + $d['d1'],
+                'second'         => $c['second'] + $d['d2'] + $d['dpi'],
+                'first_booster'  => $c['first_booster'] + $d['db1'] + $d['dbi'],
+                'second_booster' => $c['second_booster'] + $d['db2'],
+            ], ['first' => 0, 'second' => 0, 'first_booster' => 0, 'second_booster' => 0]))));
 
         $this->info('Populating the datatables...');
 
@@ -102,14 +103,15 @@ class UpdateVaccinationsData extends Command
             foreach ($regions as $region => $suppliers) {
                 foreach ($suppliers as $supplier => $datum) {
                     (new Vaccination([
-                        'date'                 => Carbon::parse($date),
-                        'region_id'            => self::$regions_ids[$region],
-                        'vaccine_supplier_id'  => ($supplier != 'ND') ? $vaccine_suppliers_ids[$supplier] : null,
-                        'daily_first_doses'    => $datum['first'],
-                        'daily_second_doses'   => $datum['second'],
-                        'daily_first_boosters' => $datum['first_booster'],
-                        'updated_at'           => substr($last_update, 0, 20),
-                        'created_at'           => substr($last_update, 0, 20),
+                        'date'                  => Carbon::parse($date),
+                        'region_id'             => self::$regions_ids[$region],
+                        'vaccine_supplier_id'   => ($supplier != 'ND') ? $vaccine_suppliers_ids[$supplier] : null,
+                        'daily_first_doses'     => $datum['first'],
+                        'daily_second_doses'    => $datum['second'],
+                        'daily_first_boosters'  => $datum['first_booster'],
+                        'daily_second_boosters' => $datum['second_booster'],
+                        'updated_at'            => substr($last_update, 0, 20),
+                        'created_at'            => substr($last_update, 0, 20),
                     ]))->save();
                 }
             }

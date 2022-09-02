@@ -498,6 +498,7 @@
                             data-label-final-vaccinations="{{ __('dash.final_vaccine_doses') }}"
                             data-label-partial-vaccinations="{{ __('dash.partial_vaccine_doses') }}"
                             data-label-first-boosters="{{ __('dash.first_booster') }}"
+                            data-label-second-boosters="{{ __('dash.second_booster') }}"
                             data-label-shipments="{{ __('dash.vaccine_shipments') }}"></canvas>
                 </div>
             </div>

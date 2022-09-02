@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $daily_first_doses
  * @property int $daily_second_doses
  * @property int $daily_first_boosters
+ * @property int $daily_second_boosters
  * @property int $daily_shipped
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
