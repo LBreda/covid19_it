@@ -89,9 +89,9 @@ class UpdateVaccinationsData extends Command
             ->sortBy('data_somministrazione')
             ->groupBy('data_somministrazione')
             ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('fornitore')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
-                'first'         => $c['first'] + $d['prima_dose'],
-                'second'        => $c['second'] + $d['seconda_dose'] + $d['pregressa_infezione'],
-                'first_booster' => $c['first_booster'] + $d['dose_addizionale_booster'],
+                'first'         => $c['first'] + $d['d1'],
+                'second'        => $c['second'] + $d['d2'] + $d['dpi'],
+                'first_booster' => $c['first_booster'] + $d['db1'] + $d['dbi'],
             ], ['first' => 0, 'second' => 0, 'first_booster' => 0]))));
 
         $this->info('Populating the datatables...');
