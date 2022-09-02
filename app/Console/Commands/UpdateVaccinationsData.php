@@ -79,16 +79,16 @@ class UpdateVaccinationsData extends Command
 
         $response = Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.json');
         $last_update = json_decode(Http::get('https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json')->body())->ultimo_aggiornamento;
-        $vaccines_raw = json_decode(JsonHelper::lint($response->body()), true);
+        $vaccines_raw = json_decode($response->body(), true);
 
         $this->info('Downloaded.');
 
         $this->info('Preparing the dataset...');
 
         $vaccines = collect($vaccines_raw['data'])
-            ->sortBy('data_somministrazione')
-            ->groupBy('data_somministrazione')
-            ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('fornitore')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
+            ->sortBy('data')
+            ->groupBy('data')
+            ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('forn')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
                 'first'         => $c['first'] + $d['d1'],
                 'second'        => $c['second'] + $d['d2'] + $d['dpi'],
                 'first_booster' => $c['first_booster'] + $d['db1'] + $d['dbi'],
