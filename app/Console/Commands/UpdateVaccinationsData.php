@@ -85,7 +85,7 @@ class UpdateVaccinationsData extends Command
             ->map(fn(Collection $date) => $date->groupBy('area')->map(fn(Collection $area) => $area->groupBy('forn')->map(fn(Collection $fornitore) => $fornitore->reduce(fn(array $c, array $d) => [
                 'first'          => $c['first'] + $d['d1'],
                 'second'         => $c['second'] + $d['d2'] + $d['dpi'],
-                'first_booster'  => $c['first_booster'] + $d['db1'] + $d['dbi'],
+                'first_booster'  => $c['first_booster'] + $d['db1'] + ($d['dbi'] ?? 0),
                 'second_booster' => $c['second_booster'] + $d['db2'],
             ], ['first' => 0, 'second' => 0, 'first_booster' => 0, 'second_booster' => 0]))));
 
