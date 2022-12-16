@@ -39,12 +39,14 @@ class UpdateData extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
         $this->call('covid:update-dpc');
         $this->call('covid:update-immuni');
         $this->call('covid:update-vaccinations');
+
+        return 1;
     }
 }

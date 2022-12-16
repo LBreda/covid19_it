@@ -40,7 +40,7 @@ class UpdateDpcData extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -81,5 +81,9 @@ class UpdateDpcData extends Command
                 'tested'              => $datum->casi_testati,
             ]))->save();
         }
+
+        $this->info('DPC data import ended.');
+
+        return 1;
     }
 }

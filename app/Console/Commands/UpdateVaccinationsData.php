@@ -63,7 +63,7 @@ class UpdateVaccinationsData extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -140,5 +140,8 @@ class UpdateVaccinationsData extends Command
             }
         }
 
+        $this->info('Vaccination data import ended.');
+
+        return 1;
     }
 }

@@ -41,7 +41,7 @@ class UpdateImmuniData extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -63,5 +63,9 @@ class UpdateImmuniData extends Command
                 'android_downloads' => $datum->android,
             ]))->save();
         }
+
+        $this->info('Immuni data import ended.');
+
+        return 1;
     }
 }
