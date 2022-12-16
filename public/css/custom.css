@@ -1,3 +1,6 @@
 .btn.active {
     background-color: #e9ecef;
 }
+.preloader {
+    height: 0;
+}
