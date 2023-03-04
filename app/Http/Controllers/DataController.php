@@ -159,12 +159,12 @@ class DataController extends Controller
     public function regionalIncidence()
     {
         $incidence = [];
-        $regions = Region::all();
+        $region_ids = Region::pluck('id');
 
         /** @var Region $region */
-        foreach ($regions as $region) {
+        foreach ($region_ids as $region_id) {
             /** @var Datum $datum */
-            $datum = $region->data()->orderBy('date', 'desc')->limit(1)->first();
+            $datum = Datum::whereRegionId($region_id)->orderBy('date', 'desc')->first();
             $population = $region->population;
             $vaccinations = $region->vaccinations;
             $severity = $region->severity;
@@ -174,7 +174,6 @@ class DataController extends Controller
             $tested = $datum->tested;
             $dead = $datum->dead;
             list($daily_doses, $daily_final_doses, $daily_vaccine_shipments) = $vaccinations->reduce(fn($c, Vaccination $d) => [$c[0] + $d->daily_doses, $c[1] + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), $c[2] + $d->daily_shipped], [0, 0, 0]);
-            echo $region_id . ' ' . memory_get_usage() . "\n";
 
             $incidence[$region_id] = [
                 'ill'                     => round(($ill / $population) * 1000, 2),
