@@ -171,9 +171,7 @@ class DataController extends Controller
             $tested = $datum->tested;
             $dead = $datum->dead;
             unset($datum);
-            $daily_doses = $vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_doses, 0);
-            $daily_final_doses = $vaccinations->reduce(fn($c, Vaccination $d) => $c + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), 0);
-            $daily_vaccine_shipments = $vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_shipped, 0);
+            list($daily_doses, $daily_final_doses, $daily_vaccine_shipments) = $vaccinations->reduce(fn($c, Vaccination $d) => [$c[0] + $d->daily_doses, $c[1] + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), $c[2] + $d->daily_shipped], [0, 0, 0]);
             unset($vaccinations);
 
             return [
