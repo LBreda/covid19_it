@@ -163,12 +163,11 @@ class DataController extends Controller
 
         /** @var Region $region */
         foreach ($region_ids as $region_id) {
-            /** @var Datum $datum */
             $datum = Datum::whereRegionId($region_id)->orderBy('date', 'desc')->first();
+            $region = Region::find($region_id);
             $population = $region->population;
             $vaccinations = $region->vaccinations;
             $severity = $region->severity;
-            $region_id = $region->id;
             $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
             $infected = $ill + $datum->dead + $datum->healed;
             $tested = $datum->tested;
@@ -185,8 +184,6 @@ class DataController extends Controller
                 'daily_final_doses'       => round(($daily_final_doses / $population) * 1000, 2),
                 'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $population) * 1000, 2),
             ];
-
-            $datum = null;
         }
 
         return response()->json($incidence);
