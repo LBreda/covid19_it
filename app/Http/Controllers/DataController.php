@@ -159,7 +159,8 @@ class DataController extends Controller
     public function regionalIncidence()
     {
         $incidence = Region::all()->mapWithKeys(function (Region $region) {
-            $datum = $region->data->sortBy('date')->last();
+            /** @var Datum $datum */
+            $datum = $region->data()->orderBy('date', 'desc')->limit(1)->first();
             $population = $region->population;
             $vaccinations = $region->vaccinations;
             $severity = $region->severity;
