@@ -160,23 +160,31 @@ class DataController extends Controller
     {
         $incidence = Region::all()->mapWithKeys(function (Region $region) {
             $datum = $region->data->sortBy('date')->last();
+            $population = $region->population;
+            $vaccinations = $region->vaccinations;
+            $severity = $region->severity;
+            $region_id = $region->id;
+            unset($region);
             $ill = $datum->hospitalized_home + $datum->hospitalized_light + $datum->hospitalized_severe;
             $infected = $ill + $datum->dead + $datum->healed;
             $tested = $datum->tested;
-            $daily_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_doses, 0);
-            $daily_final_doses = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), 0);
-            $daily_vaccine_shipments = $region->vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_shipped, 0);
+            $dead = $datum->dead;
+            unset($datum);
+            $daily_doses = $vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_doses, 0);
+            $daily_final_doses = $vaccinations->reduce(fn($c, Vaccination $d) => $c + ($d->vaccine_supplier_id ? (($d->vaccine_supplier->doses_needed == 2) ? $d->daily_second_doses : $d->daily_first_doses) : 0), 0);
+            $daily_vaccine_shipments = $vaccinations->reduce(fn($c, Vaccination $d) => $c + $d->daily_shipped, 0);
+            unset($vaccinations);
 
             return [
-                $region->id => [
-                    'ill'                     => round(($ill / $region->population) * 1000, 2),
-                    'dead'                    => round(($datum->dead / $region->population) * 1000, 2),
-                    'infected'                => round(($infected / $region->population) * 1000, 2),
-                    'tested'                  => round(($tested / $region->population) * 1000, 2),
-                    'severity'                => $region->severity,
-                    'daily_doses'             => round(($daily_doses / $region->population) * 1000, 2),
-                    'daily_final_doses'       => round(($daily_final_doses / $region->population) * 1000, 2),
-                    'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $region->population) * 1000, 2),
+                $region_id => [
+                    'ill'                     => round(($ill / $population) * 1000, 2),
+                    'dead'                    => round(($dead / $population) * 1000, 2),
+                    'infected'                => round(($infected / $population) * 1000, 2),
+                    'tested'                  => round(($tested / $population) * 1000, 2),
+                    'severity'                => $severity,
+                    'daily_doses'             => round(($daily_doses / $population) * 1000, 2),
+                    'daily_final_doses'       => round(($daily_final_doses / $population) * 1000, 2),
+                    'daily_vaccine_shipments' => round(($daily_vaccine_shipments / $population) * 1000, 2),
                 ],
             ];
         });
